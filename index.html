@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Google Font für Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="main.css" rel="stylesheet" />
+
+  <title>FrameCreator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
+  <link href="main.css" rel="stylesheet" />
+  <a href="Warenkorb.html">
+    <img src="images/Warenkorp.png" class="cSubmit" alt="Warenkorb">
+  </a>
+  <title>FrameCreator</title>
+
+</head>
+
+<header>
+
+</header>
+
+<body>
+  <span class="Logo"></span>
+  <span class="OverHeadFrameCreator">Frame Creator</span>
+
+  <span class="v186_2480">Home </span>
+  <a href="Zubehoer.html" class="v186_2481">Zubehöhrteile</a>
+  <a href="unsereMöbel.html" class="v186_2482" class="cShowPopup3" id="showPopup3">unsere Möbel
+  <img src="images/Warenkorp.png"  class="cSubmit" >
+</a>
+
+
+          <!--Cube Button-->
+      
+        <div>
+        <span class="v186_2479">Kreiere dein eigenes  Möbelstück:</span>
+        <span class="v186_2503">klicke auf die Linien welche Du erstellen möchtest: </span>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="400" height="230" viewBox="0 0 400 230">
+        <!-- Zeichne den Würfel mit Linien -->
+      
+        <!--Vorderseite-->
+        <line class="cube-line" id="FrontTop" x1="50" y1="50" x2="275" y2="50" />
+        <line class="cube-line" id="FrontMiddleCross" x1="50" y1="75" x2="275" y2="75" />
+        <line class="cube-line" id="FrontMiddleLenght" x1="175" y1="50" x2="175" y2="150" />
+        <line class="cube-line" id="FrontRight" x1="275" y1="50" x2="275" y2="150" />
+        <line class="cube-line" id="FrontBottom" x1="275" y1="150" x2="50" y2="150" />
+        <line class="cube-line" id="FrontLeft" x1="50" y1="150" x2="50" y2="50" />
+
+        <!--Rückseite-->
+        <line class="cube-line" id="BackTop" x1="125" y1="0" x2="325" y2="0" />
+        <line class="cube-line" id="BackMiddleCross" x1="125" y1="25" x2="325" y2="25" />
+        <line class="cube-line" id="BackMiddleLenght" x1="225" y1="0" x2="225" y2="100" />
+        <line class="cube-line" id="BackRight" x1="325" y1="0" x2="325" y2="100" />
+        <line class="cube-line" id="BackBottom" x1="325" y1="100" x2="125" y2="100" />
+        <line class="cube-line" id="BackLeft" x1="125" y1="100" x2="125" y2="0" />
+        <!--Links-->
+        <line class="cube-line" id="LeftTop" x1="50" y1="50" x2="125" y2="0" />
+        <line class="cube-line" id="LeftMiddleCross" x1="50" y1="75" x2="125" y2="25" />
+        <line class="cube-line" id="LeftBottom" x1="50" y1="150" x2="125" y2="100" />
+        <!--Rechts-->
+        <line class="cube-line" id="RightTop" x1="275" y1="50" x2="325" y2="0" />
+        <line class="cube-line" id="RightMiddleCross" x1="275" y1="75" x2="325" y2="25" />
+        <line class="cube-line" id="RightBottom" x1="275" y1="150" x2="325" y2="100" />
+    </svg>
+  </div>
+
+    <button class="cTrash" id="iTrash"></button>
+
+
+
+<!--___________________________________________________________________________________________-->
+<!--EINGABE der Maße + Canvas-->
+
+
+
+
+
+<div id="inputField" class="cInputField">
+  <h1>Gib deine Maße ein:</h1><br><br>
+ 
+ 
+  <div  >
+ <!-- <h3>Grundmaße</h3><br>-->
+  <h3 class="summary" >Grundmaße &nbsp</a><h3><br>
+
+  <h4 class="textInput"> Tiefe &nbsp </h4>
+  <input type="number" name="deepth" class="cInput" value="100" min="100" max="200" id="iDeepth" aria-valuemin="10" aria-valuemax="200"  required><br>
+  
+  <h4 class="textInput"> Höhe &nbsp</h4>
+  <input type="number" name="hight" class="cInput"  value="100" min="100" max="200" id="iHight" aria-valuemin="10"  aria-valuemax="200" required><br>
+  
+  <h4 class="textInput"> Breite  &nbsp</h4>
+  <input type="number" name="width" class="cInput" value="100" min="100" max="100" id="iWidth" aria-valuemin="10"  aria-valuemax="200" required><Br>
+  
+  <h4 class="textInput">Querstrebe</h4>
+  <input type="number" name="middle" class="cInput" value="50" min="0" max="200" aria-valuemin="10"  aria-valuemax="200" id="iMiddle"><br>
+  
+  <h4 class="textInput">Längsstrebe</h4>   
+  <input type="number" name="middle"  class="cInput" value="50" min="0" max="200" aria-valuemin="10"  aria-valuemax="200" id="iMiddleLength"><br><br>
+  
+  <h4 class="textInput"> Material  &nbsp</h4>
+  <input type="number" name="material" class="cInput" value="15" min="10" max="50" step="5" id="iMaterial" aria-valuemin="10"  aria-valuemax="50" required><br><br>  
+
+  <button class="extra" id="iTakeDimension">aktualisieren</button><br>
+
+  </div>
+
+<br>
+
+
+
+
+
+  </div>
+  <br>
+  <br>
+  <div class =cPerspective>
+  <h3> perspektive &nbsp&nbsp</h3>
+  <input class="cInput" type="range" value="40" min="0" max="90" id="iPerspective">
+  </div>
+  <button class="cDifned1" id="iDefined1"></button>
+
+  <button class="cSubmitSub" id="showPopup">Zum Warenkorb hinzufügen</button>
+ 
+ 
+
+  
+  <canvas id="canvas" width="400" height="400"></canvas>
+
+    <!-- Ein Button, der bei Bedarf in der Nähe der Linien angezeigt wird -->
+ <button id="hoverButton" class="cube-button red-button">Add</button>
+
+ <!--___________________POPUP_____________________-->
+
+
+ <div class="overlay" id="popupOverlay">
+ <div class="popup" id="popupContent">
+<button id="closePopup">X</button>
+ <h4 class="PopupHeadline">Warenkorb</h4><br><br>
+ <h4 class="Letter2"> Maße:    </h4>
+ <output id="outDim"></output><br><br>
+
+ <h4 class="Letter2"> Kosten:   </h4>
+ <output id="outCost"></output><br><br>
+
+ <h4 class="Letter2"> Lieferung:   </h4>
+ <output id="outDeliv"></output><br><br>
+ <!--<h4 class="Letter2"> Anzahl Zubehör ges:   </h4>
+ <output id="outExtra"></output>-->
+ <button id="iAdd"> hinzufügen </button>
+
+ <br><br><br><br><br><br>
+ 
+ </div>
+</div>
+
+ <!--___________________POPUP_Beispiele_____________________-->
+ <div class="overlay3" id="popupOverlay3">
+   <div class="popup3" id="popupContent3">
+   <button id="closePopup3">X</button>
+   <h4 class="PopupHeadline">Produktbeispiele</h4><br><br>
+
+   <div class="TextDefined">
+   <h1>Sideboard</h1><br>
+   <h3>Maße: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp (B X T X H)  100cm X 50cm X 140 cm </h3><br>
+   <h3>Zubehör: &nbsp &nbsp &nbsp &nbsp 6 x Befestigung für Tischplatte</h3><br>
+   <h3>Beschreibung:   ...</h3>
+
+
+
+   </div>
+   <br><br><br><br><br><br><br><br><br>
+   </div>
+ </div>
+
+
+
+<script src="FrameCreator.js"></script>
+<script src="popup.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

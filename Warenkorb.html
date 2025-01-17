@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Google Font für Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="main.css" rel="stylesheet" />
+
+  <title>Warenkorb</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link href="main.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<!--_____________________HEAD_________________________________-->
+  <span class="Logo"></span>
+  <a href="index.html" class="v186_2480">Home </a>
+  <a href="Zubehoer.html" class="v186_2481">Zubehöhrteile</a>
+  <a href="unsereMöbel.html" class="v186_2482" class="cShowPopup3">unsere Möbel</a>
+  <img src="images/Warenkorp.png" class="cSubmit" >
+
+  <!--_________________ZUBEHÖRTEILE____________________________-->
+  <div id="myMöbel">
+
+  <h1>Deine Artikel</h1><br> 
+  <button id="clearButton" class="extra">Warenkorb löschen</button>
+
+
+  <h2>Accessories</h2>
+  <output id="outExtra1"> Anzahl: </output><br>
+  <b>Preisgesamt</b>
+  <output id="Price1"> </output><br><br>
+  <output id="outExtra2"> Anzahl: </output><br>
+  <b>Preisgesamt</b>
+  <output id="Price2"> </output><br><br>
+  
+<!--_________________KONFIGURATIONEN___________________________-->
+<!-- Hier wird der Container für die Möbelkonfigurationen dynamisch eingefügt -->
+  <h2>Deine Möbelstücke</h2>
+  <div id="accessories" class="accessories"></div>
+  <b>Total</b>
+  <output id="iTotoal">€</output>
+</div>
+
+
+
+
+<!--________________FORMULAR____________________________________-->
+  <form id="emailForm" class="cForm" method="post">
+    <label for="email">Ihre E-Mail-Adresse:</label><br>
+    <input type="email" id="email" name="email" required><br>
+    <label for="message">Ihre Nachricht:</label><br>
+    <textarea id="message" name="message" required></textarea><br><br><br>
+    <button id="iSubmit" type="submit">Absenden</button>
+  </form>
+
+<!--_____________________AUFRUFE_______________________________-->
+  <script src="Warenkorb.js"></script>
+
+</body>
+</html>
