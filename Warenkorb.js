@@ -16,7 +16,7 @@ const accessories = [
     count: parseFloat(localStorage.getItem("iFix2")) || START_WERT_COUNT,
     dimension: localStorage.getItem("myDropdown2") || START_WERT_DIMENSION,
     price: parseFloat(localStorage.getItem("iPrice2")) || 0,
-      name: "Tischbefestigung"
+    name: "Tischbefestigung"
   }
 ];
 
@@ -31,12 +31,12 @@ const clearButton = document.getElementById("clearButton");
 // Berechnung der Gesamtsumme
 const calculateTotal = () => {
   let total = 0;
-  
+
   // Addiere alle Zubehörpreise
   accessories.forEach(accessory => {
     total += accessory.price;
   });
-  
+
   // Addiere alle Konfigurationen (falls vorhanden)
   const storedConfigurations = JSON.parse(localStorage.getItem("configurations")) || [];
   storedConfigurations.forEach(config => {
@@ -116,11 +116,20 @@ clearButton.addEventListener("click", clearConfigurations);
 document.getElementById("emailForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
+  const name = document.getElementById("name").value;
+  const street = document.getElementById("street").value;
+  const houseNumber = document.getElementById("houseNumber").value;
+  const zip = document.getElementById("zip").value;
+  const city = document.getElementById("city").value;
   const email = document.getElementById("email").value;
   const message = document.getElementById("message").value;
 
   const additionalData = `
-    Zubehör - ${accessories.map(accessory => `${accessory.id}: ${accessory.dimension} mm ${accessory.count}`).join(", ")}
+    Name: ${name}
+    Adresse: ${street} ${houseNumber}, ${zip} ${city}
+    E-Mail: ${email}
+    Nachricht: ${message}
+    Zubehör: ${accessories.map(accessory => `${accessory.name}: ${accessory.dimension} mm, ${accessory.count}x`).join(", ")}
     Konfigurationen: ${JSON.stringify(JSON.parse(localStorage.getItem("configurations")) || [])}
   `;
 

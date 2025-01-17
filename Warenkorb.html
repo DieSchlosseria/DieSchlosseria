@@ -16,12 +16,13 @@
 <body>
 
 <!--_____________________HEAD_________________________________-->
+<div class="cHead">
   <span class="Logo"></span>
   <a href="index.html" class="v186_2480">Home </a>
   <a href="Zubehoer.html" class="v186_2481">Zubehöhrteile</a>
   <a href="unsereMöbel.html" class="v186_2482" class="cShowPopup3">unsere Möbel</a>
   <img src="images/Warenkorp.png" class="cSubmit" >
-
+  </div>
   <!--_________________ZUBEHÖRTEILE____________________________-->
   <div id="myMöbel">
 
@@ -45,17 +46,34 @@
   <output id="iTotoal">€</output>
 </div>
 
-
-
-
 <!--________________FORMULAR____________________________________-->
-  <form id="emailForm" class="cForm" method="post">
-    <label for="email">Ihre E-Mail-Adresse:</label><br>
-    <input type="email" id="email" name="email" required><br>
-    <label for="message">Ihre Nachricht:</label><br>
-    <textarea id="message" name="message" required></textarea><br><br><br>
-    <button id="iSubmit" type="submit">Absenden</button>
-  </form>
+<form id="emailForm" class="cForm" method="post">
+  <label for="name">Ihr Name:</label><br>
+  <input type="text" id="name" name="name" placeholder="Max Mustermann" required><br><br>
+  
+  <label for="street">Straße:</label><br>
+  <input type="text" id="street" name="street" placeholder="Musterstraße" required><br><br>
+  
+  <label for="houseNumber">Hausnummer:</label><br>
+  <input type="text" id="houseNumber" name="houseNumber" placeholder="123" required><br><br>
+  
+  <label for="zip">Postleitzahl:</label><br>
+  <input type="text" id="zip" name="zip" placeholder="12345" required><br><br>
+  
+  <label for="city">Ort:</label><br>
+  <input type="text" id="city" name="city" placeholder="Musterstadt" required><br><br>
+
+  <label for="email">Ihre E-Mail-Adresse:</label><br>
+  <input type="email" id="email" name="email" placeholder="name@domain.com" required><br><br> 
+
+  <label for="message">Ihre Nachricht:</label><br>
+  <textarea id="message" name="message" placeholder="Ihre Nachricht" required></textarea><br><br><br>
+  
+  <button id="iSubmit" type="submit">Absenden</button>
+</form>
+
+
+
 
 <!--_____________________AUFRUFE_______________________________-->
   <script src="Warenkorb.js"></script>

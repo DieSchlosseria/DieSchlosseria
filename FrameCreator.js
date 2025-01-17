@@ -10,7 +10,8 @@ const outCost = document.getElementById("outCost");
 const outDeliv = document.getElementById("outDeliv");
 
 //Produktbeispiele
-const Defined1 = document.getElementById("iDefined1");
+//const Defined1 = document.getElementById("iDefined1");
+
 
 //HooverButton
 let isButtonClicked = false;
@@ -38,10 +39,9 @@ const iTakeDimension = document.getElementById("iTakeDimension");
 
 //Preis
 var Total = 0;
-var PricePerMeter = 3; //Preis pro Meter bei einem 20mm Quadratrohr
-var PricePerPeace = 3; //Für ABschnitt zusammenschweißen usw.
-var PricePauschal = 30; // Versand etc.
-var Fulllength = 1;
+const PricePerMeter = 10; //Preis pro Meter bei einem 20mm Quadratrohr
+const PricePerPeace = 10; //Für ABschnitt zusammenschweißen usw.
+const PriceVersand = 30; // Versand etc.
 
 const add = document.getElementById("iAdd");
 
@@ -100,13 +100,16 @@ clear.addEventListener('click', FuncClear);
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 //________________________________________________Produktbeispiele__________________________________________//
 
-// Produktbeispiel 1
-Defined1.addEventListener('click', function() {
-  productExample(120, 80, 20, 50, 50, 40, 20, 1, 0 , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0);
-});
-// ...usw
 
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
+window.onload = function() {
+// Produktbeispiel 1
+  const Defined1 = localStorage.getItem("iDefined1");
+  if (Defined1 === "true") {
+    productExample(120, 80, 20, 50, 50, 40, 20, 1, 0 , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0);}
+    localStorage.setItem("iDefined1", "false");
+};
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 //______________________________________________________________________________________________//
 
 
@@ -177,7 +180,6 @@ FuncLineDraw("LeftMiddleCross", startXFront  , startYFront - middleHight  , star
 };
 
 
-
 //____________________________POPUP_FENSTER______________________________________
 
 const PopUp = document.getElementById('showPopup');
@@ -196,37 +198,33 @@ if (deepth > 150 || width > 150 || hight > 150 ) {
 }
 
 //__________________Preis_berechnen______________________________
-let trueCount = 0; // Variable zur Zählung der "true"-Werte
 
-for (const key in buttonStates) {
-  if (buttonStates.hasOwnProperty(key) && buttonStates[key] === true) {
-    trueCount++; // Erhöhe die Zählvariable, wenn der Wert "true" ist
-  }
-}
+let trueCount = Object.values(buttonStates).filter(value => value == true).length;
 
-var FullLengthWidth = 0;
-if (buttonStates["FrontTop"]) { FullLengthWidth = FullLengthWidth + width } ; if (buttonStates["BackTop"]) { FullLengthWidth = FullLengthWidth + width }; if (buttonStates["FrontMiddleCross"]) { FullLengthWidth = FullLengthWidth + width };  
-if (buttonStates["BackTop"]) { FullLengthWidth = FullLengthWidth + width } ; if (buttonStates["BackBottom"]) { FullLengthWidth = FullLengthWidth + width }; if (buttonStates["BackMiddleCross"]) { FullLengthWidth = FullLengthWidth + width };  
-
-var FullHight = 0;
-if (buttonStates["FrontLeft"]) { FullHight = FullHight + hight } ; if (buttonStates["FrontRight"]) { FullHight = FullHight + hight }; if (buttonStates["FrontMiddleLength"]) { FullHight = FullHight + hight };  
-if (buttonStates["BackLeft"]) { FullHight = FullHight + hight } ; if (buttonStates["BackRight"]) { FullHight = FullHight + hight }; if (buttonStates["BackMiddleLength"]) { FullHight = FullHight + hight };  
-
-var FullDeepth = 0;
-if (buttonStates["LeftBottom"]) { FullDeepth = FullDeepth + deepth } ; if (buttonStates["LeftTop"]) { FullDeepth = FullDeepth + deepth }; if (buttonStates["LeftMiddleCross"]) { FullDeepth = FullDeepth + deepth }; 
-if (buttonStates["RightBottom"]) { FullDeepth = FullDeepth + deepth } ; if (buttonStates["RightTop"]) { FullDeepth = FullDeepth + deepth };  if (buttonStates["RightMiddleCross"]) { FullDeepth = FullDeepth + deepth };
+// Berechnung der Gesamtwerte für Länge, Höhe und Tiefe
+var FullWidth = calculateTotal(buttonStates, width, ["FrontTop", "FrontBottom", "FrontMiddleCross", "BackTop", "BackBottom", "BackMiddleCross"]);
+var FullHeight = calculateTotal(buttonStates, hight, ["FrontLeft", "FrontRight", "FrontMiddleLength", "BackLeft", "BackRight", "BackMiddleLength"]);
+var FullDepth = calculateTotal(buttonStates, deepth, ["LeftBottom", "LeftTop", "LeftMiddleCross", "RightBottom", "RightTop", "RightMiddleCross"]);
 
 
 
-if (trueCount == 0) {
-  PricePauschal = 0;
-}
 
-Fulllength = (FullLengthWidth + FullHight + FullDeepth)/100 * (material/20); //Für 20mm Quadratrohr kalkuliert
+
+
+var Fulllength = (FullWidth + FullHeight + FullDepth)/100 * (material/20); //Für 20mm Quadratrohr kalkuliert
+
+if (Fulllength > 0) { PricePauschal = PriceVersand;} else {PricePauschal = 0;}
 
 Total = Fulllength * PricePerPeace + trueCount * PricePerPeace + PricePauschal;
 
-
+console.log(FullWidth);
+console.log(FullHeight);
+console.log(FullDepth);
+console.log(Fulllength);
+console.log(trueCount);
+console.log(PricePerPeace);
+console.log(PricePauschal);
+console.log("Button State FrontTop:", buttonStates["FrontTop"]);
 
 
 
@@ -240,11 +238,9 @@ Total = Fulllength * PricePerPeace + trueCount * PricePerPeace + PricePauschal;
 });
 
 
-
 for (const id in buttonStates) {
   if (buttonStates.hasOwnProperty(id)) {
     const status = buttonStates[id];
-    console.log(`ID: ${id}, Status: ${status}`);
   }
 }
 
@@ -293,7 +289,6 @@ localStorage.setItem('configurations', JSON.stringify(configurations));
 //Allgemeine Funktionen
 
 function TakeData() {
-  console.log("TakeData");
   width = parseInt(widthInput.value);
   hight = parseInt(hightInput.value);
   deepth = parseInt(deepthInput.value);
@@ -304,13 +299,11 @@ function TakeData() {
   materialScaled = (Math.ceil(material/5)*5)/10; //in cm und in 5 schritten wandeln
 
   //Limit    
-if (hight >= 200) {hight = 200;};
-if (width >= 200) {width = 200;    };
-if (deepth >= 200) {deepth = 200;};
-if (material >= 50) {material = 50};
-if (material <= 15) {material = 15};
-if (middleLength >= width) {middleLength = width;};
-if (middleHight >= hight) {middleHight = hight;};
+  width = Math.min(width, 200);
+  deepth = Math.min(deepth, 200);
+  material = Math.min(Math.max(material, 15), 30); // Begrenzung zwischen 15 und 30
+  middleLength = Math.min(middleLength, width);
+  middleHight = Math.min(middleHight, hight);
   
 };  
 
@@ -321,8 +314,6 @@ function FuncClear(){
 };
 
 function FuncActInput(){
-  console.log("FuncActInput");
- 
   widthInput.value = width;
   hightInput.value = hight;
   deepthInput.value = deepth;
@@ -416,11 +407,7 @@ function getAndDisplayLocalStorageValue(variableName) {
 
   // Überprüfen, ob der Wert im Local Storage existiert
   if (gespeicherterWert !== null) {
-    console.log(`${variableName}:`, gespeicherterWert);
     return  gespeicherterWert;
-    // Hier können Sie den Wert auf verschiedene Arten in Ihrer Anwendung verwenden
-  } else {
-    console.log(`Kein gespeicherter Wert für ${variableName} gefunden.`);
   }
 }
 // Beim Laden der Seite --> Konfigurationen wiederherstellen
@@ -432,17 +419,14 @@ window.addEventListener('load', () => {
   if (storedConfigurations) {
     configurations = JSON.parse(storedConfigurations);
     currentIndex = configurations.length; // Setzen Sie den Index auf die nächste verfügbare Position
-    console.log('Gespeicherte Konfigurationen geladen:', configurations);
-  } else {
-    console.log('Keine gespeicherten Konfigurationen gefunden.');
   }
 
 });
 
+
 function FuncLineDraw(Button, moveToX, moveToY , lineToX, lineToY  ){
 
   if (( buttonStates[Button]) ) {
-  console.log("lineDraw")
  //Vorne oben
  ctx.beginPath();
  ctx.moveTo(moveToX , moveToY);
@@ -450,6 +434,7 @@ function FuncLineDraw(Button, moveToX, moveToY , lineToX, lineToY  ){
  ctx.stroke(); 
  }
  };
+
 
  // Produktbeispiele bzw konfiguration vorbestimmen
 function productExample(tHight, tWidth, tDeepth, tMiddleHight, tMiddleLength, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
@@ -486,4 +471,13 @@ function productExample(tHight, tWidth, tDeepth, tMiddleHight, tMiddleLength, tP
   FuncActInput();
 
 }
+
+
+
+
+// Funktion zur Berechnung der Gesamtwerte
+function calculateTotal(buttonStates, dimensions, keys) {
+  return keys.reduce((total, key) => total + (buttonStates[key] ? dimensions : 0), 0);
+}
+
 
