@@ -40,7 +40,8 @@ h4{
   font-size: 8px;
   display:inline;
   left: 0px;
-  text-align: left;
+  text-align: center;
+
 }
 
 input{
@@ -487,14 +488,16 @@ overflow: hidden;
         width: 400px;
         height: 700px;
         background: rgba(255,255,255);
-
         position: absolute;
         top: 144px;
         left: 1150px;
-        overflow: scroll;
+        overflow: hidden;
         margin: 5px 5px 5px 5px;
         padding: 5px 5px 5px 5px;
 
+   
+        align-items: center; 
+        gap: 10px;
       }
 
       summary {
@@ -696,6 +699,8 @@ overflow: hidden;
       border-color: black;
       border-radius:  5px 5px 5px 5px;
   }
+
+
 
 
   textarea{
@@ -973,7 +978,7 @@ form {
 
 #myMöbel {
   background-color:rgb(211, 211, 211);
-  overflow-y: scroll ;
+
   width: 400px;
   height:auto;
   border: 10px;
@@ -999,12 +1004,33 @@ form {
 }
 
 .cForm {
+  background-color:rgb(211, 211, 211);
+  padding: 10px 10px 10px 10px;
   position: absolute ;
   float: right ;
   font-size: 16px;
   left: 500px ;
   top: 250px ;
+
+  border-color: black;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 1%;
 }
+
+
+
+input[type="text"], input[type="email"], textarea {
+  width: 100%; /* Breite, z.B. 100% des Containers */
+  max-width: 500px; /* Maximale Breite */
+  height: 40px; /* Höhe des Eingabefeldes */
+  padding: 10px; /* Innenabstand für besseren Komfort */
+  font-size: 16px; /* Schriftgröße */
+  border: 1px solid #ccc; /* Rahmenfarbe */
+  border-radius: 5px; /* Abgerundete Ecken */
+  box-sizing: border-box; /* Box-Modell für korrekte Brechnung */
+}
+
 
 
 /*____________________________________Produktbeispiele________________________________*/

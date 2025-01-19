@@ -32,8 +32,8 @@ const widthInput = document.getElementById("iWidth");
 const hightInput = document.getElementById("iHight");
 const deepthInput = document.getElementById("iDeepth");
 const MaterialInput = document.getElementById("iMaterial");
-const MiddleInput = document.getElementById("iMiddle");
-const MiddleLengthInput = document.getElementById("iMiddleLength");
+const MiddleInput = document.getElementById("iMiddleLengthV");
+const MiddleLengthInput = document.getElementById("iMiddleLengthH");
 const perspectiveInput = document.getElementById("iPerspective");
 const iTakeDimension = document.getElementById("iTakeDimension");
 
@@ -69,6 +69,8 @@ inputField.addEventListener("keydown", function(event) {
     TakeData();
   }
 });
+
+MaterialInput.addEventListener("click", TakeData);
 
 perspectiveInput.addEventListener("input", TakeData);
 
@@ -120,7 +122,50 @@ function value(){
 
 draw();
 
+
+
+// Elemente ein/ausblenden
+displayed(["FrontMiddleLenght", "BackMiddleLenght"], "iMiddleH");
+displayed(["FrontMiddleLenght", "BackMiddleLenght"], "iMiddleLengthH");
+displayed(["FrontMiddleCross", "BackMiddleCross"], "iMiddleV");
+displayed(["FrontMiddleCross", "BackMiddleCross"], "iMiddleLengthV");
+displayed( ["LeftTop", "RightBottom", "RightTop",  "LeftBottom", "RightMiddleCross", "LeftMiddleCross"], "iPerspective");
+displayed( ["LeftTop", "RightBottom", "RightTop",  "LeftBottom", "RightMiddleCross", "LeftMiddleCross"], "iTextPerspective");
+
+
+function displayed(ButtonList, id) {
+  // Hole das Element anhand der ID
+  var element = document.getElementById(id);
+
+  // Überprüfe, ob das Element gefunden wurde
+  if (!element) {
+      console.error("Element mit ID " + id + " nicht gefunden.");
+      return;
+  }
+
+  // Prüfen, ob einer der Buttons aktiv ist (true)
+  let showElement = false;
+  for (let button of ButtonList) {
+      if (buttonStates[button]) {
+          showElement = true;
+          break; // Wenn einer wahr ist, abbrechen und das Element anzeigen
+      }
+  }
+
+  // Blende das Element ein oder aus
+  if (showElement) {
+      element.style.display = "inline"; // Element anzeigen
+      console.log("Ein");
+  } else {
+      element.style.display = "none"; // Element ausblenden
+      console.log("Aus");
+  }
+}
+
 };
+
+
+
 
 
 
@@ -130,7 +175,7 @@ ctx.fillStyle = 'lightgrey';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 let offseet1 = (1 - Math.sin(perspective * (Math.PI / 180))) * deepth;
-let offseet2 = ( Math.sin(perspective * (Math.PI / 180))) * deepth;
+let offseet2 = (  Math.sin(perspective * (Math.PI / 180))) * deepth;
 //let offseet2 = deepth/2 *      perspective/90 ; //Y-Position
 
 ctx.strokeStyle = 'black';
@@ -143,6 +188,9 @@ ctx.lineWidth = materialScaled;
 let startXFront = (canvas.width/2)  - (width/2) - (offseet1/2);
 let startXBack = startXFront + width;
 let startYFront = (canvas.height/2) + (hight/2) +  (offseet2/2);
+
+console.log(canvas.width);
+console.log(canvas.height)
 
 //__________________________Front____________________________
 FuncLineDraw("FrontTop",startXFront, startYFront - hight, startXFront + width, startYFront - hight);
@@ -479,5 +527,9 @@ function productExample(tHight, tWidth, tDeepth, tMiddleHight, tMiddleLength, tP
 function calculateTotal(buttonStates, dimensions, keys) {
   return keys.reduce((total, key) => total + (buttonStates[key] ? dimensions : 0), 0);
 }
+
+
+
+
 
 

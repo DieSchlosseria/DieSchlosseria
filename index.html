@@ -89,25 +89,33 @@
  
   <div  >
  <!-- <h3>Grundmaße</h3><br>-->
-  <h3 class="summary" >Grundmaße &nbsp</a><h3><br>
-
-  <h4 class="textInput"> Tiefe &nbsp </h4>
-  <input type="number" name="deepth" class="cInput" value="100" min="100" max="200" id="iDeepth" aria-valuemin="10" aria-valuemax="200"  required><br>
+  <!-- <h3 class="summary" >Grundmaße &nbsp</a><h3><br> -->
   
-  <h4 class="textInput"> Höhe &nbsp</h4>
+
+    <!--________________________________TEST_________________________________________-->
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <label for="iMaterial" style="margin: 0; font-weight: bold;">Material (mm)</label>
+      <input type="range" name="material" class="cInput" value="15" min="10" max="50" step="5" id="iMaterial" oninput="materialOutput.value = this.value">
+      <output name="materialOutput" id="materialOutput" style="margin-left: 5px;">15</output> mm
+    </div>
+
+
+
+  <h4 class="textInput"> Höhe (mm)  &nbsp</h4>
   <input type="number" name="hight" class="cInput"  value="100" min="100" max="200" id="iHight" aria-valuemin="10"  aria-valuemax="200" required><br>
   
-  <h4 class="textInput"> Breite  &nbsp</h4>
+  <h4 class="textInput"> Breite (mm) &nbsp</h4>
   <input type="number" name="width" class="cInput" value="100" min="100" max="100" id="iWidth" aria-valuemin="10"  aria-valuemax="200" required><Br>
+
+  <h4 class="textInput">Tiefe (mm) &nbsp </h4>
+  <input type="number" name="deepth" class="cInput" value="100" min="100" max="200" id="iDeepth" aria-valuemin="10" aria-valuemax="200"  required><br>
+    
+  <h4 class="textInput" id="iMiddleV" >Mitte v (mm) &nbsp</h4>
+  <input type="number" name="middle" class="cInput" id="iMiddleLengthV" value="50" min="0" max="200" aria-valuemin="10"  aria-valuemax="200" id="iMiddle"><br>
   
-  <h4 class="textInput">Querstrebe</h4>
-  <input type="number" name="middle" class="cInput" value="50" min="0" max="200" aria-valuemin="10"  aria-valuemax="200" id="iMiddle"><br>
+  <h4 class="textInput" id="iMiddleH">Mitte h (mm)</h4>
+  <input type="number" name="middle" class="cInput" id="iMiddleLengthH" value="50" min="0" max="200" aria-valuemin="10" aria-valuemax="200"><br><br>
   
-  <h4 class="textInput">Längsstrebe</h4>   
-  <input type="number" name="middle"  class="cInput" value="50" min="0" max="200" aria-valuemin="10"  aria-valuemax="200" id="iMiddleLength"><br><br>
-  
-  <h4 class="textInput"> Material  &nbsp</h4>
-  <input type="number" name="material" class="cInput" value="15" min="10" max="50" step="5" id="iMaterial" aria-valuemin="10"  aria-valuemax="50" required><br><br>  
 
   <button class="extra" id="iTakeDimension">aktualisieren</button><br>
 
@@ -122,16 +130,13 @@
   </div>
   <br>
   <br>
-  <div class =cPerspective>
+  <div class =cPerspective id="iTextPerspective">
   <h3> perspektive &nbsp&nbsp</h3>
   <input class="cInput" type="range" value="40" min="0" max="90" id="iPerspective">
   </div>
   <button class="cSubmitSub" id="showPopup">Zum Warenkorb hinzufügen</button>
  
- 
-
-  
-  <canvas id="canvas" width="400" height="400"></canvas>
+  <canvas id="canvas" width="607" height="328"></canvas>
 
     <!-- Ein Button, der bei Bedarf in der Nähe der Linien angezeigt wird -->
  <button id="hoverButton" class="cube-button red-button">Add</button>

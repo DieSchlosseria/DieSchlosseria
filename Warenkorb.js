@@ -7,25 +7,23 @@ const accessories = [
   {
     id: "iFix1",
     count: parseFloat(localStorage.getItem("iFix1")) || START_WERT_COUNT,
-    dimension: localStorage.getItem("myDropdown") || START_WERT_DIMENSION,
+    dimension: localStorage.getItem("myDropdown1") || START_WERT_DIMENSION,
     price: parseFloat(localStorage.getItem("iPrice1")) || 0,
-    name: "Wandbefestigung"
+    name: "Wandbefestigung",
   },
   {
     id: "iFix2",
     count: parseFloat(localStorage.getItem("iFix2")) || START_WERT_COUNT,
     dimension: localStorage.getItem("myDropdown2") || START_WERT_DIMENSION,
     price: parseFloat(localStorage.getItem("iPrice2")) || 0,
-    name: "Tischbefestigung"
-  }
+    name: "Tischbefestigung",
+  },
 ];
 
 // Anzeige-Elemente
 const OutExtra1 = document.getElementById("outExtra1");
 const OutExtra2 = document.getElementById("outExtra2");
 const OutTotal = document.getElementById("iTotoal");
-const OutFix1 = document.getElementById("Price1");
-const OutFix2 = document.getElementById("Price2");
 const clearButton = document.getElementById("clearButton");
 
 // Berechnung der Gesamtsumme
@@ -33,13 +31,13 @@ const calculateTotal = () => {
   let total = 0;
 
   // Addiere alle Zubehörpreise
-  accessories.forEach(accessory => {
+  accessories.forEach((accessory) => {
     total += accessory.price;
   });
 
   // Addiere alle Konfigurationen (falls vorhanden)
   const storedConfigurations = JSON.parse(localStorage.getItem("configurations")) || [];
-  storedConfigurations.forEach(config => {
+  storedConfigurations.forEach((config) => {
     total += parseFloat(config.total) || 0;
   });
 
@@ -48,17 +46,28 @@ const calculateTotal = () => {
 
 // DOM-Inhalte initialisieren
 const initializeDOM = () => {
-  // Zubehörpreise und Details anzeigen
-  accessories.forEach(accessory => {
-    const outPrice = document.getElementById(`Price${accessory.id.charAt(4)}`);
-    outPrice.textContent = accessory.price.toFixed(2) + " €";
+  accessories.forEach((accessory) => {
+    const index = accessory.id.replace("iFix", ""); // Extrahiere die Nummer der ID
 
-    const outExtra = document.getElementById(`outExtra${accessory.id.charAt(4)}`);
-    outExtra.textContent = `${accessory.name} ${accessory.dimension} mm x ${accessory.count}`;
+    const outPrice = document.getElementById(`Price${index}`);
+    if (outPrice) {
+      outPrice.textContent = accessory.price.toFixed(2) + " €";
+    } else {
+      console.error(`Element Price${index} nicht gefunden!`);
+    }
+
+    const outExtra = document.getElementById(`outExtra${index}`);
+    if (outExtra) {
+      outExtra.textContent = `${accessory.name} ${accessory.dimension} mm x ${accessory.count}`;
+    } else {
+      console.error(`Element outExtra${index} nicht gefunden!`);
+    }
   });
 
   // Gesamtsumme berechnen und anzeigen
-  OutTotal.textContent = calculateTotal().toFixed(2) + " €";
+  if (OutTotal) {
+    OutTotal.textContent = calculateTotal().toFixed(2) + " €";
+  }
 };
 
 // Konfigurationen anzeigen
@@ -77,7 +86,7 @@ const displayConfigurations = () => {
         Breite: ${config.width},<br>
         Tiefe: ${config.deepth},<br>
         Höhe: ${config.hight},<br>
-        Preis: ${parseFloat(config.total).toFixed(2)} €
+        Preis: ${parseFloat(config.total).toFixed(2)} €<br>
       `;
       container.appendChild(paragraph);
     });
@@ -91,18 +100,20 @@ const displayConfigurations = () => {
 
 // Zubehördaten speichern
 const saveAccessoryData = () => {
-  accessories.forEach(accessory => {
-    localStorage.setItem(accessory.id, accessory.count);
-    localStorage.setItem(`myDropdown${accessory.id.charAt(4)}`, accessory.dimension);
-    localStorage.setItem(`iPrice${accessory.id.charAt(4)}`, accessory.price);
+  accessories.forEach(({ id, count, dimension, price }) => {
+    const index = id.replace("iFix", ""); // Extrahiere die ID-Nummer
+    localStorage.setItem(id, count);
+    localStorage.setItem(`myDropdown${index}`, dimension);
+    localStorage.setItem(`iPrice${index}`, price.toString());
   });
 };
 
 // Löschen der Konfigurationen
 const clearConfigurations = () => {
   localStorage.removeItem("configurations");
-  accessories.forEach(accessory => {
-    localStorage.setItem(`iPrice${accessory.id.charAt(4)}`, "0");
+  accessories.forEach(({ id }) => {
+    const index = id.replace("iFix", "");
+    localStorage.setItem(`iPrice${index}`, "0");
   });
 
   alert("Kompletter Warenkorb wurde erfolgreich gelöscht.");
@@ -110,7 +121,9 @@ const clearConfigurations = () => {
 };
 
 // Event-Listener für den Löschen-Button
-clearButton.addEventListener("click", clearConfigurations);
+if (clearButton) {
+  clearButton.addEventListener("click", clearConfigurations);
+}
 
 // Formularverarbeitung (für E-Mail und Konfigurationen)
 document.getElementById("emailForm").addEventListener("submit", function (e) {
@@ -129,7 +142,12 @@ document.getElementById("emailForm").addEventListener("submit", function (e) {
     Adresse: ${street} ${houseNumber}, ${zip} ${city}
     E-Mail: ${email}
     Nachricht: ${message}
-    Zubehör: ${accessories.map(accessory => `${accessory.name}: ${accessory.dimension} mm, ${accessory.count}x`).join(", ")}
+    Zubehör: ${accessories
+      .map(
+        (accessory) =>
+          `${accessory.name}: ${accessory.dimension} mm, ${accessory.count}x`
+      )
+      .join(", ")}
     Konfigurationen: ${JSON.stringify(JSON.parse(localStorage.getItem("configurations")) || [])}
   `;
 
