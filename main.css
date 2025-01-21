@@ -1,11 +1,13 @@
 
 /*_______________________DIESER_ABSCHNITT_IST_FÜR_DEN_Framecreator_wichtig_____________________________*/
 
-html, body{     /*Scrollen verhindern --> sonst problem mit dem Hover? */
+html{     /*Scrollen verhindern --> sonst problem mit dem Hover? */
   margin:0;
   padding:0;
   height:100%;
+  font-family: Montserrat;
   }
+
 
 /*____________________________________allgemein_____________________________________*/
 
@@ -88,6 +90,7 @@ body {
 /*___________________________________Wichtig für FrameCreator __________________________________*/
     
 
+/*_______________cube-Button________________________*/
             .cube-button {
                 background: none;
                 border: none;
@@ -155,6 +158,8 @@ svg{
   overflow: hidden;
 
 }
+
+/*_____________CANVAS_________________*/
 canvas{
 padding: 0px 0px 0px 0px;
 margin: 0px 0px 0px 0px;
@@ -169,6 +174,22 @@ top: 282px;
 left: 481px;
 overflow: hidden;
 }
+
+/*_________alg_FrameCreator__________*/
+      /*inputField*/
+      .cInputField{
+        width: 400px;
+        height: 700px;
+        background: rgba(255,255,255);
+        position: absolute;
+        top: 144px;
+        left: 1150px;
+        overflow: hidden;
+        margin: 5px 5px 5px 5px;
+        padding: 5px 5px 5px 5px;
+        align-items: center; 
+        gap: 10px;
+      }
 
 .cTrash{
   width: 60px;
@@ -191,7 +212,6 @@ overflow: hidden;
   position: absolute;
   top: 144px;
   left: 481px;
-  font-family: Montserrat;
   font-weight: Light;
   font-size: 64px;
   opacity: 1;
@@ -244,7 +264,7 @@ overflow: hidden;
     position: absolute;
     top: 200px;
     left: 122px;
-    font-family: Montserrat;
+
     font-weight: Light;
     font-size: 24px;
     opacity: 1;
@@ -257,7 +277,6 @@ overflow: hidden;
     display: inline;
     top: 46px;
     left: 850px;
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 24px;
     opacity: 1;
@@ -269,7 +288,6 @@ overflow: hidden;
     position: absolute;
     top: 46px;
     left: 1197px;
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 24px;
     opacity: 1;
@@ -281,7 +299,6 @@ overflow: hidden;
     position: absolute;
     top: 46px;
     left: 971px;
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 24px;
     opacity: 1;
@@ -310,7 +327,6 @@ overflow: hidden;
     position: absolute;
     top: 270px;
     left: 122px;
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 16px;
     opacity: 1;
@@ -322,7 +338,6 @@ overflow: hidden;
     position: absolute;
     top: 500px;
     left: 142px;
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 20px;
     opacity: 1;
@@ -373,7 +388,6 @@ overflow: hidden;
     position: absolute;
     top: 686px;
     left: 142px;
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 12px;
     opacity: 1;
@@ -385,7 +399,6 @@ overflow: hidden;
     position: absolute;
     top: 738px;
     left: 142px;
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 12px;
     opacity: 1;
@@ -397,7 +410,6 @@ overflow: hidden;
     position: absolute;
     top: 798px;
     left: 142px;
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 12px;
     opacity: 1;
@@ -409,7 +421,6 @@ overflow: hidden;
     position: absolute;
     top: 858px;
     left: 142px;
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 12px;
     opacity: 1;
@@ -445,7 +456,6 @@ overflow: hidden;
     position: absolute;
     top: 31px;
     left: 15px;
-    font-family: Montserrat;
     font-weight: Black;
     font-size: 20px;
     opacity: 1;
@@ -483,22 +493,7 @@ overflow: hidden;
     color: #fff;
   }
 
-      /*inputField*/
-      .cInputField{
-        width: 400px;
-        height: 700px;
-        background: rgba(255,255,255);
-        position: absolute;
-        top: 144px;
-        left: 1150px;
-        overflow: hidden;
-        margin: 5px 5px 5px 5px;
-        padding: 5px 5px 5px 5px;
 
-   
-        align-items: center; 
-        gap: 10px;
-      }
 
       summary {
         font-size: 20px; 
@@ -526,7 +521,6 @@ overflow: hidden;
   .textDeep{
     width: 83px;
     color: rgba(0,0,0,1);
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 12px;
     opacity: 1;
@@ -536,7 +530,6 @@ overflow: hidden;
   .textInput{
     width: 83px;
     color: rgba(0,0,0,1);
-    font-family: Montserrat;
     font-weight: Light;
     font-size: 12px;
     opacity: 1;
@@ -553,13 +546,6 @@ overflow: hidden;
     top: 40px;
     left: 1400px;
     overflow: hidden;
-  }
-
-  .cPerspective{
-   top: 100px;
-    left: 40px;
-
-
   }
 
 
@@ -594,20 +580,6 @@ overflow: hidden;
   }
 
 
-  .cPerspective{
-    width: 83px;
-    color: rgba(0,0,0,1);
-    position: sticky;
-    left: 200;
-    top: 200;
-    font-family: Montserrat;
-    font-weight: Light;
-    font-size: 12px;
-    text-align: left;
-    margin-left: 10px;
-    padding-left: 10px;
-
-  }
 
 
   /*_________________FÜR_POPUP_Formular______________________*/
@@ -639,7 +611,6 @@ overflow: hidden;
     }
     .PopupHeadline {
       color: #000;
-      font-family: Montserrat;
       font-size: 40px;
       font-style: normal;
       font-weight: 900;
@@ -648,7 +619,6 @@ overflow: hidden;
 
     .Letter2 {
       color: #000;
-      font-family: Montserrat;
       font-size: 20px;
       font-style: normal;
       font-weight: 900;
@@ -657,7 +627,6 @@ overflow: hidden;
 
     .Letter3{
       color: #000;
-      font-family: Montserrat;
       font-size: 15px;
       font-style: normal;
       font-weight: 900;
@@ -677,7 +646,6 @@ overflow: hidden;
      button{
       color: #000000a8;
    
-      font-family: Montserrat;
       font-size: 17px;
       font-style:inherit;
       font-weight: 900;
@@ -688,7 +656,6 @@ overflow: hidden;
 
      input[type="email"] {
       width: 350px ;
-      font-family: Montserrat;
       background-color: gray;
       font-size: 17px;
       font-style: italic;
@@ -705,7 +672,6 @@ overflow: hidden;
 
   textarea{
       width: 350px ;
-      font-family: Montserrat;
       background-color: gray;
       font-size: 17px;
       font-style: italic;
@@ -719,7 +685,6 @@ overflow: hidden;
   #closePopup {
 
     color: #000000a8;
-    font-family: Montserrat;
     font-size: 20px;
     font-style:inherit;
     font-weight: 900;
@@ -764,7 +729,6 @@ overflow: hidden;
     #closePopup1 {
 
       color: #000000a8;
-      font-family: Montserrat;
       font-size: 20px;
       font-style:inherit;
       font-weight: 900;
@@ -779,7 +743,6 @@ overflow: hidden;
 
   .Fix {
     color: #000;
-    font-family: Montserrat;
     font-size: 20px;
     font-style: normal;
     font-weight: 900;
@@ -788,7 +751,6 @@ overflow: hidden;
 
   .Stk {
     color: #000;
-    font-family: Montserrat;
     font-size: 15px;
     font-style: normal;
     font-weight: 900;
@@ -834,7 +796,6 @@ overflow: hidden;
 #closePopup3 {
 
   color: #000000a8;
-  font-family: Montserrat;
   font-size: 20px;
   font-style:inherit;
   font-weight: 900;
@@ -870,7 +831,6 @@ cursor:grab;
 .textInputFix{
   width: 83px;
   color: rgba(0,0,0,1);
-  font-family: Montserrat;
   font-weight: Light;
   font-size: 12px;
   opacity: 1;
@@ -907,7 +867,6 @@ display: none;
 
 form {
   color: #000;
-  font-family: Montserrat;
   font-size: 15px;
   font-style: normal;
   font-weight: 900;

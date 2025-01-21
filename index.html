@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
   <link href="main.css" rel="stylesheet" />
   <a href="Warenkorb.html">
-    <img src="images/Warenkorp.png" class="cSubmit" alt="Warenkorb">
+  <img src="images/Warenkorp.png" class="cSubmit" alt="Warenkorb">
   </a>
   <title>FrameCreator</title>
 
@@ -29,10 +29,8 @@
   <span class="OverHead">Frame Creator</span>
 
   <span class="v186_2480">Home </span>
-  <a href="Zubehoer.html" class="v186_2481">Zubehöhrteile</a>
-  <a href="unsereMöbel.html" class="v186_2482" class="cShowPopup3" id="showPopup3">unsere Möbel
-  <img src="images/Warenkorp.png"  class="cSubmit" >
-</a>
+  <a href="Zubehoer.html" class="v186_2481">Accessoires</a>
+  <a href="unsereMöbel.html" class="v186_2482" class="cShowPopup3" id="showPopup3">unsere Möbel</a>
 </div>
 
           <!--Cube Button-->
@@ -83,57 +81,75 @@
 
 
 
-<div id="inputField" class="cInputField">
+<div class="cInputField">
   <h1>Gib deine Maße ein:</h1><br><br>
  
- 
   <div  >
- <!-- <h3>Grundmaße</h3><br>-->
-  <!-- <h3 class="summary" >Grundmaße &nbsp</a><h3><br> -->
+
+    <!--__________________________Eingabefelder_Maße_________________________________________-->
+    <!--TEST-->
+    <!--evtl besser styles direkt in html code?-->
+
+<!--Materialstärke-->
+<div style="display: flex; align-items: center; gap: 5px; margin: 5px 0; font-weight: bold;">
+  <label for="iMaterial" style="width: 100px;">Material</label>
+  <input type="range" name="material" class="cInput" value="15" min="10" max="50" step="5" id="iMaterial" style="flex: 1;">
+  <output name="materialOutput" id="materialOutput" style="width: 50px; text-align: right;">15</output>
+  <span>mm</span>
+</div>
+
+<!--Höhe-->
+<div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;">
+  <label for="iHight" style="width: 100px;">Höhe</label>
+  <input type="range" name="hight" class="cInput" value="100" min="10" max="200" step="10" id="iHight" style="flex: 1;">
+  <output name="hightOutput" id="hightOutput" style="width: 50px; text-align: right;">100</output>
+  <span>cm</span>
+</div>
+
+<!--Breite-->
+<div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;">
+  <label for="iWidth" style="width: 100px;">Breite</label>
+  <input type="range" name="width" class="cInput" value="100" min="10" max="200" step="5" id="iWidth" style="flex: 1;">
+  <output name="widthOutput" id="widthOutput" style="width: 50px; text-align: right;">100</output>
+  <span>cm</span>
+</div>
+
+<!--Tiefe-->
+<div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;" >
+  <label for="iDeepth" style="width: 100px;">Tiefe</label>
+  <input type="range" name="deepth" class="cInput" value="100" min="10" max="200" step="5" id="iDeepth" style="flex: 1;">
+  <output name="deepthOutput" id="deepthOutput" style="width: 50px; text-align: right;">100</output>
+  <span>cm</span>
+</div>
+
+<!--Mitte V-->
+<div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;" id="displayV">
+  <label for="iMiddleV" style="width: 100px;">Mitte v</label>
+  <input type="range" name="middleV" class="cInput" value="50" min="10" max="200" step="5" id="iMiddleV" style="flex: 1;">
+  <output name="middleVOutput" id="middleVOutput" style="width: 50px; text-align: right;">100</output>
+  <span>cm</span>
+</div>
+
+<!--Mitte H-->
+<div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;" id="displayH">
+  <label for="iMiddleH" style="width: 100px;">Mitte h</label>
+  <input type="range" name="middleH" class="cInput" value="50" min="10" max="200" step="5" id="iMiddleH" style="flex: 1;">
+  <output name="middleHOutput" id="middleHOutput" style="width: 50px; text-align: right;">100</output>
+  <span>cm</span>
+</div>
+</div><br>
+</div><br><br>
+
+
+<!--perspective-->
+<div class="cPerspBox" id="iPerspBox" style="display: flex; flex-direction: column; align-items: flex-start; margin-left: 20px; width: 200px;">
+  <label for="iPerspective" style="width: 100%;">perspektive</label>
+  <input class="cInput" type="range" value="40" min="0" max="90" id="iPerspective" style="width: 100%;">
+</div>
   
-
-    <!--________________________________TEST_________________________________________-->
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <label for="iMaterial" style="margin: 0; font-weight: bold;">Material (mm)</label>
-      <input type="range" name="material" class="cInput" value="15" min="10" max="50" step="5" id="iMaterial" oninput="materialOutput.value = this.value">
-      <output name="materialOutput" id="materialOutput" style="margin-left: 5px;">15</output> mm
-    </div>
-
-
-
-  <h4 class="textInput"> Höhe (mm)  &nbsp</h4>
-  <input type="number" name="hight" class="cInput"  value="100" min="100" max="200" id="iHight" aria-valuemin="10"  aria-valuemax="200" required><br>
   
-  <h4 class="textInput"> Breite (mm) &nbsp</h4>
-  <input type="number" name="width" class="cInput" value="100" min="100" max="100" id="iWidth" aria-valuemin="10"  aria-valuemax="200" required><Br>
-
-  <h4 class="textInput">Tiefe (mm) &nbsp </h4>
-  <input type="number" name="deepth" class="cInput" value="100" min="100" max="200" id="iDeepth" aria-valuemin="10" aria-valuemax="200"  required><br>
-    
-  <h4 class="textInput" id="iMiddleV" >Mitte v (mm) &nbsp</h4>
-  <input type="number" name="middle" class="cInput" id="iMiddleLengthV" value="50" min="0" max="200" aria-valuemin="10"  aria-valuemax="200" id="iMiddle"><br>
   
-  <h4 class="textInput" id="iMiddleH">Mitte h (mm)</h4>
-  <input type="number" name="middle" class="cInput" id="iMiddleLengthH" value="50" min="0" max="200" aria-valuemin="10" aria-valuemax="200"><br><br>
   
-
-  <button class="extra" id="iTakeDimension">aktualisieren</button><br>
-
-  </div>
-
-<br>
-
-
-
-
-
-  </div>
-  <br>
-  <br>
-  <div class =cPerspective id="iTextPerspective">
-  <h3> perspektive &nbsp&nbsp</h3>
-  <input class="cInput" type="range" value="40" min="0" max="90" id="iPerspective">
-  </div>
   <button class="cSubmitSub" id="showPopup">Zum Warenkorb hinzufügen</button>
  
   <canvas id="canvas" width="607" height="328"></canvas>
@@ -164,26 +180,6 @@
  
  </div>
 </div>
-
- <!--___________________POPUP_Beispiele_____________________-->
- <div class="overlay3" id="popupOverlay3">
-   <div class="popup3" id="popupContent3">
-   <button id="closePopup3">X</button>
-   <h4 class="PopupHeadline">Produktbeispiele</h4><br><br>
-
-   <div class="TextDefined">
-   <h1>Sideboard</h1><br>
-   <h3>Maße: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp (B X T X H)  100cm X 50cm X 140 cm </h3><br>
-   <h3>Zubehör: &nbsp &nbsp &nbsp &nbsp 6 x Befestigung für Tischplatte</h3><br>
-   <h3>Beschreibung:   ...</h3>
-
-
-
-   </div>
-   <br><br><br><br><br><br><br><br><br>
-   </div>
- </div>
-
 
 
 <script src="FrameCreator.js"></script>

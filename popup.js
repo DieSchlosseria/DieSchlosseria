@@ -6,12 +6,12 @@ const popups = [
     closeButtonId: 'closePopup',
     closeActionId: 'iAdd',
   },
-  {
-    showButtonId: 'showPopup3',
-    overlayId: 'popupOverlay3',
-    closeButtonId: 'closePopup3',
-    closeActionId: 'iDefined1',
-  },
+  //!!!!  {                                  //hier kann man zusätzliches Popup machen --> ID muss eingetragen werden usw. --> wie bei erstem
+  //!!!!  showButtonId: 'showPopup3',
+  //!!!!  overlayId: 'popupOverlay3',
+  //!!!!  closeButtonId: 'closePopup3',
+  //!!!!  closeActionId: 'iDefined1',
+  //!!!!  },
 ];
 
 // Funktion zur Anzeige und Schließung von Popups

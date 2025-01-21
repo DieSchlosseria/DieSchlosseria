@@ -9,8 +9,6 @@ const outDim = document.getElementById("outDim");
 const outCost = document.getElementById("outCost");
 const outDeliv = document.getElementById("outDeliv");
 
-//Produktbeispiele
-//const Defined1 = document.getElementById("iDefined1");
 
 //HooverButton
 let isButtonClicked = false;
@@ -21,20 +19,26 @@ const buttonStates = {};
 var width = 100;
 var hight = 100;
 var deepth = 100;
-var middleHight = 50;
-var middleLength = 50;
+var middleH = 50;
+var middleV = 50;
 var perspective =40;
 var material = 15;
 let materialScaled = 1.5;
-
+//Input (Slider)
 const widthInput = document.getElementById("iWidth");
 const hightInput = document.getElementById("iHight");
 const deepthInput = document.getElementById("iDeepth");
 const MaterialInput = document.getElementById("iMaterial");
-const MiddleInput = document.getElementById("iMiddleLengthV");
-const MiddleLengthInput = document.getElementById("iMiddleLengthH");
+const MiddleInput = document.getElementById("iMiddleH");
+const MiddleLengthInput = document.getElementById("iMiddleV");
 const perspectiveInput = document.getElementById("iPerspective");
-const iTakeDimension = document.getElementById("iTakeDimension");
+//InOutput (anzeige aktuelle Werte)
+const materialOutput = document.getElementById("materialOutput");
+const hightOutput = document.getElementById("hightOutput");
+const widthOutput = document.getElementById("widthOutput");
+const deepthOutput = document.getElementById("deepthOutput");
+const middleVOutput = document.getElementById("middleVOutput");
+const middleHOutput = document.getElementById("middleHOutput");
 
 //Preis
 var Total = 0;
@@ -44,32 +48,17 @@ const PriceVersand = 30; // Versand etc.
 
 const add = document.getElementById("iAdd");
 
-
-
-
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //__________________EINGABE_____________________
-//Eingaben der Länge/Breite/usw
-//nur bei Änderung werte übernehmen --> sonst funktioniert das nicht mehr mit den Produktbeispielen
 
-//___________________DATEN_Übernehmen________________________________
-//(Akutalisieren)
-//Wert aus Variable holen --> wenn im Bereich mit der ID = inputField gedröckt wird führe TakeData aus
+//___________________DATEN_Übernehmen_von_Slider____________________
 
-//Daten übernehmen
-iTakeDimension.addEventListener("click", TakeData);
-//Daten in Inputwerte aktualisieren
-iTakeDimension.addEventListener("click", FuncActInput);
-
-var inputField = document.getElementById("inputField");
-
-inputField.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    TakeData();
-  }
-});
-
-MaterialInput.addEventListener("click", TakeData);
+MaterialInput.addEventListener("input", TakeData);
+hightInput.addEventListener("input", TakeData);
+widthInput.addEventListener("input", TakeData);
+deepthInput.addEventListener("input", TakeData);
+MiddleInput.addEventListener("input", TakeData);
+MiddleLengthInput.addEventListener("input", TakeData);
 
 perspectiveInput.addEventListener("input", TakeData);
 
@@ -106,9 +95,21 @@ window.onload = function() {
 // Produktbeispiel 1
   const Defined1 = localStorage.getItem("iDefined1");
   if (Defined1 === "true") {
-    productExample(120, 80, 20, 50, 50, 40, 20, 1, 0 , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0);}
+    productExample(120, 110, 50, 50, 50, 40, 20, 1, 0 , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0);}
     localStorage.setItem("iDefined1", "false");
+
+    // Produktbeispiel 
+   const Defined2 = localStorage.getItem("iDefined2");
+   if (Defined2 === "true") {
+   productExample(120, 60, 50, 50, 50, 40, 15, 1, 1 , 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);}
+   localStorage.setItem("iDefined2", "false"); 
 };
+
+
+
+
+
+
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
 //______________________________________________________________________________________________//
@@ -122,15 +123,11 @@ function value(){
 draw();
 
 // Elemente ein/ausblenden
-displayed(["FrontMiddleLenght", "BackMiddleLenght"], "iMiddleH");
-displayed(["FrontMiddleLenght", "BackMiddleLenght"], "iMiddleLengthH");
-displayed(["FrontMiddleCross", "BackMiddleCross"], "iMiddleV");
-displayed(["FrontMiddleCross", "BackMiddleCross"], "iMiddleLengthV");
-displayed( ["LeftTop", "RightBottom", "RightTop",  "LeftBottom", "RightMiddleCross", "LeftMiddleCross"], "iPerspective");
-displayed( ["LeftTop", "RightBottom", "RightTop",  "LeftBottom", "RightMiddleCross", "LeftMiddleCross"], "iTextPerspective");
+displayed(["FrontMiddleLenght", "BackMiddleLenght"], "displayV", "flex");
+displayed(["FrontMiddleCross", "BackMiddleCross"], "displayH", "flex");
+displayed( ["LeftTop", "RightBottom", "RightTop",  "LeftBottom", "RightMiddleCross", "LeftMiddleCross"], "iPerspBox", "flex");
 
-
-function displayed(ButtonList, id) {
+function displayed(ButtonList, id, show) {
   // Hole das Element anhand der ID
   var element = document.getElementById(id);
 
@@ -151,19 +148,13 @@ function displayed(ButtonList, id) {
 
   // Blende das Element ein oder aus
   if (showElement) {
-      element.style.display = "inline"; // Element anzeigen
-      console.log("Ein");
+      element.style.display = show; // Element anzeigen
   } else {
       element.style.display = "none"; // Element ausblenden
-      console.log("Aus");
   }
 }
 
 };
-
-
-
-
 
 
 function draw(){
@@ -186,32 +177,29 @@ let startXFront = (canvas.width/2)  - (width/2) - (offseet1/2);
 let startXBack = startXFront + width;
 let startYFront = (canvas.height/2) + (hight/2) +  (offseet2/2);
 
-console.log(canvas.width);
-console.log(canvas.height)
-
 //__________________________Front____________________________
 FuncLineDraw("FrontTop",startXFront, startYFront - hight, startXFront + width, startYFront - hight);
 FuncLineDraw("FrontLeft",startXFront, startYFront, startXFront, startYFront - hight);
-FuncLineDraw("FrontMiddleCross",startXFront,  startYFront - middleHight ,  startXFront + width, startYFront - middleHight);
+FuncLineDraw("FrontMiddleCross",startXFront,  startYFront - middleH ,  startXFront + width, startYFront - middleH);
 FuncLineDraw("FrontRight", startXFront  + width , startYFront   ,  startXFront + width, startYFront - hight  );
 FuncLineDraw("FrontBottom", startXFront  ,startYFront    , startXFront + width, startYFront  );
-FuncLineDraw("FrontMiddleLenght",startXFront + middleLength   , startYFront   ,  startXFront + middleLength   , startYFront - hight  );
+FuncLineDraw("FrontMiddleLenght",startXFront + middleV   , startYFront   ,  startXFront + middleV   , startYFront - hight  );
 
 //__________________________Back____________________________
 FuncLineDraw("BackLeft",startXFront + offseet1 ,startYFront - offseet2 , startXFront + offseet1 , startYFront - hight - offseet2);
 FuncLineDraw("BackTop",startXFront + offseet1 ,  startYFront - hight - offseet2 , startXFront + offseet1 + width , startYFront - hight - offseet2);
 FuncLineDraw("BackRight", startXFront + offseet1 + width, startYFront - offseet2 , startXFront + offseet1 + width ,startYFront - hight - offseet2 );
 FuncLineDraw("BackBottom",startXFront + offseet1 , startYFront - offseet2 ,startXFront + offseet1 + width , startYFront -offseet2);
-FuncLineDraw("BackMiddleCross",startXFront + offseet1 ,startYFront - middleHight - offseet2  ,startXFront + width + offseet1  ,startYFront - middleHight - offseet2 );
-FuncLineDraw("BackMiddleLenght", startXFront  + offseet1 + middleLength , startYFront- offseet2 ,  startXFront  + offseet1 + middleLength   , startYFront - hight - offseet2 );
+FuncLineDraw("BackMiddleCross",startXFront + offseet1 ,startYFront - middleH - offseet2  ,startXFront + width + offseet1  ,startYFront - middleH - offseet2 );
+FuncLineDraw("BackMiddleLenght", startXFront  + offseet1 + middleV , startYFront- offseet2 ,  startXFront  + offseet1 + middleV   , startYFront - hight - offseet2 );
 
 //__________________________Seite____________________________
 FuncLineDraw("LeftTop", startXFront  , startYFront - hight  , startXFront + offseet1 ,  startYFront  -  hight - offseet2 );
 FuncLineDraw("RightBottom", startXBack  , startYFront  ,  startXBack + offseet1 , startYFront - offseet2 );
 FuncLineDraw("RightTop", startXBack  , startYFront -hight  , startXBack + offseet1  , startYFront  - offseet2 - hight );
 FuncLineDraw("LeftBottom", startXFront  , startYFront  ,startXFront + offseet1  , startYFront - offseet2 );
-FuncLineDraw("RightMiddleCross", startXBack  , startYFront - middleHight  ,  startXBack + offseet1 , startYFront  - offseet2 - middleHight ); 
-FuncLineDraw("LeftMiddleCross", startXFront  , startYFront - middleHight  , startXFront + offseet1  , startYFront  -  middleHight -offseet2 );
+FuncLineDraw("RightMiddleCross", startXBack  , startYFront - middleH  ,  startXBack + offseet1 , startYFront  - offseet2 - middleH ); 
+FuncLineDraw("LeftMiddleCross", startXFront  , startYFront - middleH  , startXFront + offseet1  , startYFront  -  middleH -offseet2 );
 
 //______________________________TEST_______________________________
 
@@ -261,17 +249,6 @@ var Fulllength = (FullWidth + FullHeight + FullDepth)/100 * (material/20); //Fü
 if (Fulllength > 0) { PricePauschal = PriceVersand;} else {PricePauschal = 0;}
 
 Total = Fulllength * PricePerPeace + trueCount * PricePerPeace + PricePauschal;
-
-console.log(FullWidth);
-console.log(FullHeight);
-console.log(FullDepth);
-console.log(Fulllength);
-console.log(trueCount);
-console.log(PricePerPeace);
-console.log(PricePauschal);
-console.log("Button State FrontTop:", buttonStates["FrontTop"]);
-
-
 
 //_________________AUSGABEWERTE____________________
 
@@ -338,8 +315,8 @@ function TakeData() {
   hight = parseInt(hightInput.value);
   deepth = parseInt(deepthInput.value);
   material = parseInt(MaterialInput.value);
-  middleHight = parseInt(MiddleInput.value);
-  middleLength = parseInt(MiddleLengthInput.value);
+  middleH = parseInt(MiddleInput.value);
+  middleV = parseInt(MiddleLengthInput.value);
   perspective = parseInt(perspectiveInput.value);
   materialScaled = (Math.ceil(material/5)*5)/10; //in cm und in 5 schritten wandeln
 
@@ -347,9 +324,10 @@ function TakeData() {
   width = Math.min(width, 200);
   deepth = Math.min(deepth, 200);
   material = Math.min(Math.max(material, 15), 30); // Begrenzung zwischen 15 und 30
-  middleLength = Math.min(middleLength, width);
-  middleHight = Math.min(middleHight, hight);
-  
+  middleV = Math.min(middleV, width);
+  middleH = Math.min(middleH, hight);
+
+  FuncActInput();  
 };  
 
 function FuncClear(){
@@ -358,17 +336,23 @@ function FuncClear(){
 
 };
 
-function FuncActInput(){
+function FuncActInput(){ //Ein-Ausgänge setzen
   widthInput.value = width;
   hightInput.value = hight;
   deepthInput.value = deepth;
   MaterialInput.value = materialScaled * 10;
-  MiddleInput.vlaue = middleHight;
-  MiddleLengthInput.value = middleLength;
-  MiddleInput.value = middleHight;
+  MiddleLengthInput.value = middleV;
+  MiddleInput.value = middleH;
   perspectiveInput.value = perspective;
 
+  materialOutput.value = materialScaled * 10; 
+  hightOutput.value = hight;
+  widthOutput.value = width;
+  deepthOutput.value = deepth;
+  middleVOutput.value = middleV;
+  middleHOutput.value = middleH;
 };
+
 
 function funcHooverButton(){
   const button = document.getElementById("hoverButton");
@@ -461,6 +445,7 @@ function getAndDisplayLocalStorageValue(variableName) {
 window.addEventListener('load', () => {
   // Laden der gespeicherten Konfigurationen aus dem Local Storage
   const storedConfigurations = localStorage.getItem('configurations');
+  FuncActInput();
 
   // Überprüfen, ob gespeicherte Konfigurationen vorhanden sind
   if (storedConfigurations) {
@@ -484,7 +469,7 @@ function FuncLineDraw(Button, moveToX, moveToY , lineToX, lineToY  ){
 
 
  // Produktbeispiele bzw konfiguration vorbestimmen
-function productExample(tHight, tWidth, tDeepth, tMiddleHight, tMiddleLength, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
+function productExample(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
 
   // Strebenzustände setzen
   buttonStates["FrontTop"] = tFrontTop;
@@ -510,17 +495,14 @@ function productExample(tHight, tWidth, tDeepth, tMiddleHight, tMiddleLength, tP
   hight = tHight;
   width = tWidth;
   deepth = tDeepth;
-  middleHight = tMiddleHight;
-  middleLength = tMiddleLength;
+  middleH = tmiddleH;
+  middleV = tmiddleV;
   perspective= tPerspective;
   materialScaled = (Math.ceil(tMaterial / 5) * 5) / 10; // in cm und in 5 Schritten wandeln;
-
+  
   FuncActInput();
 
 }
-
-
-
 
 // Funktion zur Berechnung der Gesamtwerte
 function calculateTotal(buttonStates, dimensions, keys) {
