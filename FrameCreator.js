@@ -12,7 +12,6 @@ const outDeliv = document.getElementById("outDeliv");
 //Produktbeispiele
 //const Defined1 = document.getElementById("iDefined1");
 
-
 //HooverButton
 let isButtonClicked = false;
 let hideTimeout; // Timeout-Variable hinzugefügt
@@ -121,8 +120,6 @@ setInterval(value, 200);
 function value(){
 
 draw();
-
-
 
 // Elemente ein/ausblenden
 displayed(["FrontMiddleLenght", "BackMiddleLenght"], "iMiddleH");
@@ -458,6 +455,8 @@ function getAndDisplayLocalStorageValue(variableName) {
     return  gespeicherterWert;
   }
 }
+
+
 // Beim Laden der Seite --> Konfigurationen wiederherstellen
 window.addEventListener('load', () => {
   // Laden der gespeicherten Konfigurationen aus dem Local Storage
