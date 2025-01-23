@@ -9,7 +9,6 @@ const outDim = document.getElementById("outDim");
 const outCost = document.getElementById("outCost");
 const outDeliv = document.getElementById("outDeliv");
 
-
 //HooverButton
 let isButtonClicked = false;
 let hideTimeout; // Timeout-Variable hinzugefügt
@@ -45,7 +44,6 @@ var Total = 0;
 const PricePerMeter = 10; //Preis pro Meter bei einem 20mm Quadratrohr
 const PricePerPeace = 10; //Für ABschnitt zusammenschweißen usw.
 const PriceVersand = 30; // Versand etc.
-
 const add = document.getElementById("iAdd");
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -78,7 +76,7 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
-//________________________________________________Alles loeschen__________________________________________//
+//____________________________________Alles loeschen__________________________________________//
 
 //Streben löschen
 
@@ -88,7 +86,7 @@ clear.addEventListener('click', FuncClear);
 
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//
-//________________________________________________Produktbeispiele__________________________________________//
+//_____________________________________Produktbeispiele__________________________________________//
 
 
 window.onload = function() {
@@ -104,10 +102,6 @@ window.onload = function() {
    productExample(120, 60, 50, 50, 50, 40, 15, 1, 1 , 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);}
    localStorage.setItem("iDefined2", "false"); 
 };
-
-
-
-
 
 
 
@@ -239,14 +233,10 @@ var FullWidth = calculateTotal(buttonStates, width, ["FrontTop", "FrontBottom", 
 var FullHeight = calculateTotal(buttonStates, hight, ["FrontLeft", "FrontRight", "FrontMiddleLength", "BackLeft", "BackRight", "BackMiddleLength"]);
 var FullDepth = calculateTotal(buttonStates, deepth, ["LeftBottom", "LeftTop", "LeftMiddleCross", "RightBottom", "RightTop", "RightMiddleCross"]);
 
-
-
-
-
-
 var Fulllength = (FullWidth + FullHeight + FullDepth)/100 * (material/20); //Für 20mm Quadratrohr kalkuliert
-
 if (Fulllength > 0) { PricePauschal = PriceVersand;} else {PricePauschal = 0;}
+
+
 
 Total = Fulllength * PricePerPeace + trueCount * PricePerPeace + PricePauschal;
 
@@ -286,7 +276,7 @@ add.addEventListener('click', () => {
 
   // Create an object with the current configuration
   const currentConfig = {
-      bitmuster: outputText,
+      bitmuster: outputText, ///eventuell 
       dicke: materialScaled * 10,
       width: width,
       deepth: deepth,
@@ -379,22 +369,15 @@ function funcHooverButton(){
     button.style.top = y - 5 + "px";
   }
 
-
-  
   svg.addEventListener("mousemove", function (e) {
-      
-   const mouseX = e.clientX;
+
+    const mouseX = e.clientX;
     const mouseY = e.clientY;
-  
     const svgRect = svg.getBoundingClientRect(); // Das SVG-Element Rechteck erhalten
-  
-   const relativeX = mouseX - svgRect.left; // Relative X-Position innerhalb des SVG
+    const relativeX = mouseX - svgRect.left; // Relative X-Position innerhalb des SVG
     const relativeY = mouseY - svgRect.top; // Relative Y-Position innerhalb des SVG
-  
-  
     let closestLine = null;
     let closestDistance = Number.MAX_SAFE_INTEGER;
-  
     const lines = document.querySelectorAll(".cube-line");
   
     lines.forEach((line) => {
@@ -429,6 +412,8 @@ function funcHooverButton(){
     }
   });
   };
+
+
  //____________________________LOCAL_STORAGE_____________________________________
 function getAndDisplayLocalStorageValue(variableName) {
   // Laden des gespeicherten Werts
@@ -457,7 +442,6 @@ window.addEventListener('load', () => {
 
 
 function FuncLineDraw(Button, moveToX, moveToY , lineToX, lineToY  ){
-
   if (( buttonStates[Button]) ) {
  //Vorne oben
  ctx.beginPath();
@@ -470,7 +454,6 @@ function FuncLineDraw(Button, moveToX, moveToY , lineToX, lineToY  ){
 
  // Produktbeispiele bzw konfiguration vorbestimmen
 function productExample(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
-
   // Strebenzustände setzen
   buttonStates["FrontTop"] = tFrontTop;
   buttonStates["FrontBottom"] = tFrontBottom;
@@ -490,7 +473,6 @@ function productExample(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspectiv
   buttonStates["BackMiddleLenght"] = tBackMiddleLength;
   buttonStates["RightMiddleCross"] = tRightMiddleCross;
   buttonStates["LeftMiddleCross"] = tLeftMiddleCross;
-
   // Dimensionen setzen
   hight = tHight;
   width = tWidth;
@@ -499,9 +481,7 @@ function productExample(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspectiv
   middleV = tmiddleV;
   perspective= tPerspective;
   materialScaled = (Math.ceil(tMaterial / 5) * 5) / 10; // in cm und in 5 Schritten wandeln;
-  
   FuncActInput();
-
 }
 
 // Funktion zur Berechnung der Gesamtwerte

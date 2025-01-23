@@ -1,6 +1,6 @@
-var ids = ["iDefined1", "iDefined2", "iDefined3"];  //füge jeweils die ID des neuen Produktbeispiel hinzu
+var Ids = ["iDefined1", "iDefined2", "iDefined3"];  
 
-ids.forEach(function(id) {
+Ids.forEach(function(id) {
     var element = document.getElementById(id);
     if (element) {
         element.addEventListener("click", function() {

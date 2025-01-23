@@ -1,17 +1,16 @@
 // Konstanten
-const START_WERT_COUNT = "0";
-const START_WERT_DIMENSION = "20";
+const START_WERT_COUNT = "0"; //Startwert Anzahl
+const START_WERT_DIMENSION = "20"; //Startwert Dimension
 
-// Zubehör-Daten mit individuellen Preisen
+// Zubehör-Daten mit individuellen Preisen --> hier zusätzliches Zubehör hinzufügen
 const accessoires = [
   {
     countId: "iFix1",
-    dimensionId: "myDropdown",
+    dimensionId: "myDropdown1",
     addId: "iFixAdd1",
     priceId: "iPrice1",
     unitPrice: 5  // Individueller Preis für iFix1
   },
-
   {
     countId: "iFix2",
     dimensionId: "myDropdown2",
