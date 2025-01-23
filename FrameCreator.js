@@ -305,6 +305,8 @@ console.log(configurations);
 
 localStorage.setItem('configurations', JSON.stringify(configurations));
   // ... the rest of your existing code
+
+  alert("erfolgreich zum Warenkorb hinzugefügt.");  
 });
 //_________________________________________________________________________________---
 

@@ -666,7 +666,7 @@ overflow: hidden;
   text-align: center; 
 
   border: 8px 8px 8px 8px;
-  cursor: grab; /* Zeigt den Klick-Indikator */
+  cursor: pointer; 
 }
 
 .popup {
@@ -975,11 +975,13 @@ input[type="text"], input[type="email"], textarea {
   float: left;
   margin: 5px 10px 10px 10px;
   padding-left: 10px 10px 10px 10px;
-  border-width: 5px;
+  border-style: solid;
+  border-color: black;
+  border-width: 4px;
 }
 
 .cDifned1:hover {
   border-style: solid;
   border-color: black;
-  border-width: 5px;
+  border-width: 7px;
 }
