@@ -79,18 +79,7 @@ input{
 
 
 
-.extra{
-  width: 214px;
-  height: 40px;
-  position:sticky;
-  left: 50px;
-  background: rgba(217,217,217,1);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  overflow: hidden;
-}
+
 
 /*___________________________________Wichtig für FrameCreator __________________________________*/
     
@@ -897,6 +886,19 @@ form {
 /*___________________________________Warenkorb__________________________________*/
 
 /* Zubehör und Konfigurationen */
+
+.extra{
+  width: 214px;
+  height: 40px;
+  position:relative;
+  left: 0px;
+  background: rgba(217,217,217,1);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+}
 
 #myMöbel {
   background-color:rgb(211, 211, 211);
