@@ -7,7 +7,7 @@
 
 body {
   height:100%;
-  font-family: 'Montserrat', sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .cHead {
@@ -23,6 +23,11 @@ img.cSubmit {
 
 b{
 margin-bottom: 100px;
+}
+
+p{
+margin-top: 0px;
+
 }
 
 h3{
@@ -53,6 +58,9 @@ input{
   left: 0px;
   text-align: block;
 }
+
+
+
 
 .Logo {
   width: 150px;
@@ -164,7 +172,9 @@ text-align: left;
 display: block;
 width: 607px;
 height: 328px;
-background: rgba(217,217,217,1);
+
+
+background: whitesmoke;
 opacity: 1;
 position: absolute;
 top: 282px;
@@ -177,16 +187,23 @@ overflow: hidden;
       .cInputField{
         width: 400px;
         height: 700px;
-        background: rgba(255,255,255);
         position: absolute;
         top: 144px;
         left: 1150px;
         overflow: hidden;
-        margin: 5px 5px 5px 5px;
         padding: 5px 5px 5px 5px;
         align-items: center; 
-        gap: 10px;
+        gap: 10px;       
+        color: rgba(0,0,0,1);
+        top: 270px;
+        font-weight: Light;
+        font-size: 16px;
+        opacity: 1;
+        text-align: left;
+     
       }
+
+
 
 .cTrash{
   width: 60px;
@@ -256,7 +273,9 @@ overflow: hidden;
     font-size: 24px;
     opacity: 1;
     text-align: left;
+    font-weight: 700;
   }
+  
   .v186_2480 {
     width: 91px;
     color: rgba(0,0,0,1);
@@ -318,6 +337,7 @@ overflow: hidden;
     font-size: 16px;
     opacity: 1;
     text-align: left;
+    font-weight: 700;
   }
   .v186_2504 {
     width: 210px;
@@ -502,7 +522,7 @@ overflow: hidden;
         opacity: 1;
         overflow: hidden;
         font-size: 15px;
-        margin: 5px 5px 5px 5px;
+      
       }
   
   .textDeep{
@@ -514,14 +534,6 @@ overflow: hidden;
     text-align: left;
   }
 
-  .textInput{
-    width: 83px;
-    color: rgba(0,0,0,1);
-    font-weight: Light;
-    font-size: 12px;
-    opacity: 1;
-    text-align: left;
-  }
 
   .cSubmit{
 
@@ -627,19 +639,7 @@ overflow: hidden;
       border: 8px 8px 8px 8px;
      }
 
-     input[type="email"] {
-      width: 350px ;
-      background-color: gray;
-      font-size: 17px;
-      font-style: italic;
-      font-weight: 900;
-      line-height: normal;
-      text-align: left; 
-      border: 8px 8px 8px 8px;
-      border-color: black;
-      border-radius:  5px 5px 5px 5px;
-  }
-
+  
 
 
 
@@ -692,27 +692,6 @@ overflow: hidden;
   border: 8px 8px 8px 8px;
 }
 
-
-
-/*________________________für_Popup_Zubehör_____________________*/
-
-
-
-  .Fix {
-    color: #000;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 900;
-    line-height: normal;
-  }
-
-  .Stk {
-    color: #000;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 900;
-    line-height: normal;
-  }
 
   /*________________________für_Popup_Beispiele_____________________*/
 
@@ -781,8 +760,6 @@ cursor:grab;
   opacity: 1;
   overflow: hidden;
   font-size: 15px;
-  margin: 5px 5px 5px 5px;
-
 }
 
 .textInputFix{
@@ -836,6 +813,55 @@ form {
 
 /*___________________________________ZUBEHÖR_____________________________________*/
 
+.dropdown {
+  background-color: whitesmoke;
+  width: 100%; /* Breite, z.B. 100% des Containers */
+  max-width: 500px; /* Maximale Breite */
+  height: 40px; /* Höhe des Eingabefeldes */
+  margin-top: 5px;
+  padding: 10px; /* Innenabstand für besseren Komfort */
+  font-size: 16px; /* Schriftgröße */
+  border: 2px solid black; /* Rahmenfarbe */
+  border-radius: 5px; /* Abgerundete Ecken */
+  box-sizing: border-box; /* Box-Modell für korrekte Brechnung */
+  }
+
+
+  input[type="number"] {
+    background-color: whitesmoke;
+    width: 100%; /* Breite, z.B. 100% des Containers */
+    max-width: 500px; /* Maximale Breite */
+    height: 40px; /* Höhe des Eingabefeldes */
+    margin-top: 5px;
+    padding: 10px; /* Innenabstand für besseren Komfort */
+    font-size: 16px; /* Schriftgröße */
+    border: 2px solid black; /* Rahmenfarbe */
+    border-radius: 5px; /* Abgerundete Ecken */
+    box-sizing: border-box; /* Box-Modell für korrekte Brechnung */
+  }
+
+  .cAdd{
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    overflow: hidden;
+
+    width: 100%; /* Breite, z.B. 100% des Containers */
+    max-width: 500px; /* Maximale Breite */
+    height: 40px; /* Höhe des Eingabefeldes */
+    margin-top: 5px;
+    padding: 10px; /* Innenabstand für besseren Komfort */
+    font-size: 16px; /* Schriftgröße */
+    border: 2px solid black; /* Rahmenfarbe */
+    border-radius: 5px; /* Abgerundete Ecken */
+    box-sizing: border-box; /* Box-Modell für korrekte Brechnung */
+  }
+
+
+  
+
 .cFix {
   margin-left: 0px;
   width: 164px;
@@ -852,40 +878,15 @@ form {
   display: block;
   float: left;
   top: 200px;
-  height: 500px;
+  height: 600px;
   position: fixed;
   }
 
-.imgFix1{
-    margin-left: 0px;
-    text-align: right;
-    float: right;
-    box-sizing: border-box;
-    position: absolute;
-    left: 180px;
-  }
 
-  /* Styles für das Dropdown-Menü */
-  .cdropdown {
-    margin-left: 0px;
-    inline-size: 0px;
-    background: rgba(217,217,217,1);
-    font-size: 15px;
-    margin: 0px 0px 0px 0px;
-  }
 
-.dropdown {
-    margin-left: 0px;
-    width: 164px;
-    height: 40px;
-    position:sticky;
-    left: 100px;
-    background: rgba(217,217,217,1);
-    opacity: 1;
-    overflow: hidden;
-    font-size: 15px;
-    margin: 5px 5px 5px 5px;
-  }
+
+
+
 
 
 /*___________________________________Warenkorb__________________________________*/
@@ -894,7 +895,6 @@ form {
 
 #myMöbel {
   background-color:rgb(211, 211, 211);
-
   width: 400px;
   height:auto;
   border: 10px;
@@ -902,10 +902,26 @@ form {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   color: #333;
+  top: 260px ;
   border-color: black;
   border-width: 5px;
   border-style: solid;
-  border-radius: 1%;
+  border-radius: 5px;
+}
+
+.cForm {
+  background-color:rgb(211, 211, 211);
+  padding: 10px 10px 10px 10px;
+  position: absolute ;
+  float: right ;
+  font-size: 16px;
+  left: 500px ;
+  top: 260px ;
+
+  border-color: black;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 5px;
 }
 
 .configurations-container {
@@ -919,20 +935,7 @@ form {
   font-weight:bold;
 }
 
-.cForm {
-  background-color:rgb(211, 211, 211);
-  padding: 10px 10px 10px 10px;
-  position: absolute ;
-  float: right ;
-  font-size: 16px;
-  left: 500px ;
-  top: 250px ;
 
-  border-color: black;
-  border-width: 5px;
-  border-style: solid;
-  border-radius: 1%;
-}
 
 
 

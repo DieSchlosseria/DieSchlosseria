@@ -1,96 +1,82 @@
-// Konstanten
-const START_WERT_COUNT = "0"; //Startwert Anzahl
-const START_WERT_DIMENSION = "20"; //Startwert Dimension
+document.addEventListener("DOMContentLoaded", function() {
+  // Zubehörpreise pro Dimension (in €)
+  const accessoryPrices = {
+    15: 10, // Preis für 15mm
+    20: 15, // Preis für 20mm
+    25: 20, // Preis für 25mm
+  };
 
-// Zubehör-Daten mit individuellen Preisen --> hier zusätzliches Zubehör hinzufügen
-const accessoires = [
-  {
-    countId: "iFix1",
-    dimensionId: "myDropdown1",
-    addId: "iFixAdd1",
-    priceId: "iPrice1",
-    unitPrice: 5  // Individueller Preis für iFix1
-  },
-  {
-    countId: "iFix2",
-    dimensionId: "myDropdown2",
-    addId: "iFixAdd2",
-    priceId: "iPrice2",
-    unitPrice: 7  // Individueller Preis für iFix2
+  // Accessoires-Daten
+  const accessories = [
+    {
+      id: "1",
+      name: "Tischbefestigung",
+      quantityId: "iFix1",
+      dropdownId: "myDropdown1",
+      outputId: "iPrice1",
+    },
+    {
+      id: "2",
+      name: "Decken/Wandbefestigung",
+      quantityId: "iFix2",
+      dropdownId: "myDropdown2",
+      outputId: "iPrice2",
+    },
+  ];
+
+  // Funktion zur Berechnung des Gesamtpreises
+  function calculatePrice(quantity, dimension) {
+    const pricePerItem = accessoryPrices[dimension] || 0;
+    return quantity * pricePerItem;
   }
-];
 
-// Wiederherstellen gespeicherter Werte bei Seitenneuladen
-accessoires.forEach(function(accessoire) {
-  restoreValues(accessoire);
+  // Funktion zur Aktualisierung der Preis-Anzeige
+  function updatePriceDisplay(accessory) {
+    const quantity = parseInt(document.getElementById(accessory.quantityId).value) || 0;
+    const dimension = parseInt(document.getElementById(accessory.dropdownId).value) || 20;
+    const totalPrice = calculatePrice(quantity, dimension);
+
+    // Preis anzeigen
+    document.getElementById(accessory.outputId).textContent = `${totalPrice} €`;
+
+    // Accessoire im Local Storage speichern
+    saveToLocalStorage(accessory.id, {
+      name: accessory.name,
+      quantity,
+      dimension,
+      totalPrice,
+    });
+  }
+
+  // Funktion zum Speichern aller Accessoires im Local Storage
+  function saveToLocalStorage(accessoryId, data) {
+    let savedData = JSON.parse(localStorage.getItem("accessories")) || {};
+    savedData[accessoryId] = data;
+    localStorage.setItem("accessories", JSON.stringify(savedData));
+  }
+
+  // Funktion zum Laden der Accessoires aus Local Storage
+  function loadFromLocalStorage() {
+    const savedData = JSON.parse(localStorage.getItem("accessories")) || {};
+
+    accessories.forEach((accessory) => {
+      const savedAccessory = savedData[accessory.id];
+      if (savedAccessory) {
+        document.getElementById(accessory.quantityId).value = savedAccessory.quantity;
+        document.getElementById(accessory.dropdownId).value = savedAccessory.dimension;
+        document.getElementById(accessory.outputId).textContent = `${savedAccessory.totalPrice} €`;
+      }
+    });
+  }
+
+  // Event-Listener für Add-Buttons hinzufügen
+  accessories.forEach((accessory) => {
+    const addButton = document.getElementById(`iFixAdd${accessory.id}`);
+    if (addButton) {
+      addButton.addEventListener("click", () => updatePriceDisplay(accessory));
+    }
+  });
+
+  // Daten beim Laden der Seite aus Local Storage laden
+  loadFromLocalStorage();
 });
-
-// Zubehör wegspeichern
-accessoires.forEach(function(accessoire) {
-  saveValues(accessoire);
-});
-
-
-
-//LIB
-function saveValues(accessoire) {
-  const { countId, dimensionId, addId, priceId, unitPrice } = accessoire;
-
-  const Fix = document.getElementById(countId);
-  const Drop = document.getElementById(dimensionId);
-  const Add = document.getElementById(addId);
-  const PriceElement = document.getElementById(priceId);
-
-  // Lokale Speicherung und Initialisierung
-  const savedCount = localStorage.getItem(countId) || START_WERT_COUNT;
-  const savedDimension = localStorage.getItem(dimensionId) || START_WERT_DIMENSION;
-
-  Fix.value = savedCount;
-  Drop.value = savedDimension;
-  updatePrice(Fix, PriceElement, unitPrice);
-
-  // Event-Listener für Änderungen
-  Fix.addEventListener("change", function () {
-    updatePrice(Fix, PriceElement, unitPrice);
-    localStorage.setItem(countId, Fix.value); // Count speichern
-  });
-
-  Drop.addEventListener("change", function () {
-    localStorage.setItem(dimensionId, Drop.value); // Dimension speichern
-  });
-
-  Add.addEventListener("click", function () {
-    localStorage.setItem(countId, Fix.value);
-    localStorage.setItem(dimensionId, Drop.value);
-    localStorage.setItem(priceId, PriceElement.value); // Preis speichern
-  });
-}
-
-function restoreValues(accessoire) {
-  const { countId, dimensionId, priceId } = accessoire;
-  
-  const savedCount = localStorage.getItem(countId);
-  const savedDimension = localStorage.getItem(dimensionId);
-  const savedPrice = localStorage.getItem(priceId);
-
-  if (savedCount !== null) document.getElementById(countId).value = savedCount;
-  if (savedDimension !== null) document.getElementById(dimensionId).value = savedDimension;
-  if (savedPrice !== null) document.getElementById(priceId).value = savedPrice;
-}
-
-// Preis für jedes Zubehör berechnen
-function updatePrice(Fix, PriceElement, unitPrice) {
-  const count = parseFloat(Fix.value) || 0;
-  PriceElement.value = unitPrice * count;
-}
-
-// Die Dropdown-Werte aktualisieren
-function handleDropdownChange(tIdDrop) {
-  const dropdown = document.getElementById(tIdDrop);
-  return dropdown.value;
-}
-
-// Die aktuelle Seite ermitteln
-function getCurrentPage() {
-  return window.location.href.split('/').pop();
-}
