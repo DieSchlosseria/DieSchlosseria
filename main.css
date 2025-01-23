@@ -638,6 +638,10 @@ overflow: hidden;
       line-height: normal;
       text-align: center; 
       border: 8px 8px 8px 8px;
+
+
+
+
      }
 
   
@@ -878,7 +882,7 @@ form {
   left: 20px;
   display: block;
   float: left;
-  top: 200px;
+  top: 250px;
   height: 600px;
   position: fixed;
   }
@@ -898,6 +902,7 @@ form {
   background-color:rgb(211, 211, 211);
   width: 420px;
   height:auto;
+  min-height: 650px;
   border: 10px;
   padding: 10px 10px 10px 10px;
   font-family: 'Montserrat', sans-serif;
@@ -918,7 +923,8 @@ form {
   font-size: 16px;
   left: 500px ;
   top: 260px ;
-
+  min-width: 420px;
+  min-height: 650px;
   border-color: black;
   border-width: 5px;
   border-style: solid;
