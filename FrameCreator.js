@@ -93,13 +93,13 @@ clear.addEventListener('click', FuncClear);
 
 window.onload = function() {
 // Produktbeispiel 1
-  const Defined1 = localStorage.getItem("iDefined1");
+  const Defined1 = localStorage.getItem("iDefined1j");
   if (Defined1 === "true") {
     productExample(120, 110, 50, 50, 50, 40, 20, 1, 0 , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0);}
     localStorage.setItem("iDefined1", "false");
 
     // Produktbeispiel 
-   const Defined2 = localStorage.getItem("iDefined2");
+   const Defined2 = localStorage.getItem("iDefined2j");
    if (Defined2 === "true") {
    productExample(120, 60, 50, 50, 50, 40, 15, 1, 1 , 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);}
    localStorage.setItem("iDefined2", "false"); 
