@@ -51,32 +51,20 @@ function popup() {
 }
 
 function initializeIds() {
-  Ids.forEach((defined) => {
-    const idJ = defined.IdJ;
-    const idN = defined.IdN;
-    const elementJ = document.getElementById(idJ);
-    const elementN = document.getElementById(idN);
-
-    if (elementJ) {
-      elementJ.addEventListener("click", function() {
-        localStorage.setItem(idJ, "true");
-        window.location.href = 'index.html';
-      });
-    } else {
-      console.warn(`Element mit ID ${idJ} nicht gefunden.`);
-    }
-
-    if (elementN) {
-      elementN.addEventListener("click", function() {
-        localStorage.setItem(idN, "true");
-        window.location.href = 'index.html';
-      });
-    } else {
-      console.warn(`Element mit ID ${idN} nicht gefunden.`);
-    }
-    
 
 
+  Ids.forEach(({ IdJ, IdN }) => {
+    [IdJ, IdN].forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.addEventListener("click", () => {
+          localStorage.setItem(id, "true");
+          window.location.href = 'index.html';
+        });
+      } else {
+        console.warn(`Element mit ID ${id} nicht gefunden.`);
+      }
+    });
   });
 }
 

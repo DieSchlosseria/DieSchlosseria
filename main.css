@@ -902,12 +902,13 @@ form {
 
 #myMöbel {
   background-color:rgb(211, 211, 211);
-  width: 420px;
+
   height:auto;
+  min-width: 420px;
   min-height: 650px;
   border: 10px;
   padding: 10px 10px 10px 10px;
-  font-family: 'Montserrat', sans-serif;
+
   font-size: 16px;
   color: #333;
   top: 260px ;

@@ -17,9 +17,7 @@ const calculateTotal = () => {
   // Addiere alle Zubehörpreise
   Object.keys(savedData).forEach((id) => {
     const accessory = savedData[id];
-
     total += accessory.totalPrice;
-
   });
 
   // Addiere alle Konfigurationen (falls vorhanden)
@@ -35,7 +33,10 @@ const calculateTotal = () => {
 const initializeDOM = () => {
 
   Object.keys(savedData).forEach((id) => { 
+
+      if (savedData[id].quantity > 0) {
     outExtra1.innerHTML  += savedData[id].quantity + " x "  + savedData[id].name + " " + savedData[id].dimension + "mm"    +  " Total " + savedData[id].totalPrice + "€" + "<br>"  ;
+  }
   });
 
   // Gesamtsumme berechnen und anzeigen
@@ -72,12 +73,11 @@ const displayConfigurations = () => {
   }
 };
 
-
 // Löschen der Konfigurationen
 const clearConfigurations = () => {
   localStorage.removeItem("configurations");
   clearAccesoryData();
-  outExtra = alert("Kompletter Warenkorb wurde erfolgreich gelöscht.");
+  alert("Kompletter Warenkorb wurde erfolgreich gelöscht.");
   location.reload(); // Seite neu laden
 };
 
@@ -108,8 +108,6 @@ const configurationsData = JSON.stringify(
   JSON.parse(localStorage.getItem("configurations")) || []
 );
 
-
-
 const additionalData = `
   Name: ${name}
   Adresse: ${street} ${houseNumber}, ${zip} ${city}
@@ -138,8 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeDOM();
   displayConfigurations();
 });
-
-
 
 //clearAccesoryData
 function clearAccesoryData() {
