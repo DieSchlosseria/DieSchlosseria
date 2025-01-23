@@ -1,16 +1,15 @@
+
 // VARIABLEN
 const popups = [
   {
     showButtonId: 'showPopup',
     overlayId: 'popupOverlay',
     closeButtonId: 'closePopup',
-    closeActionId: 'iDefined1n', // ID des Nein-Buttons
   },
   {
     showButtonId: 'showPopup1',
     overlayId: 'popupOverlay1',
     closeButtonId: 'closePopup1',
-    closeActionId: 'iDefined2n', // ID des Nein-Buttons
   },
 ];
 
@@ -25,15 +24,13 @@ const Ids = [
   }
 ];
 
-// Funktion zur Initialisierung der Popups
 function popup() {
   const togglePopup = (popup) => {
     const showButton = document.getElementById(popup.showButtonId);
     const overlay = document.getElementById(popup.overlayId);
     const closeButton = document.getElementById(popup.closeButtonId);
-    const closeAction = document.getElementById(popup.closeActionId);
 
-    if (showButton && overlay && closeButton && closeAction) {
+    if (showButton && overlay && closeButton) {
       // Öffnen des Popups
       showButton.addEventListener('click', () => {
         overlay.style.display = 'block';
@@ -44,10 +41,6 @@ function popup() {
         overlay.style.display = 'none';
       });
 
-      // Schließen mit der "Nein"-Aktion
-      closeAction.addEventListener('click', () => {
-        overlay.style.display = 'none';
-      });
     } else {
       console.warn(`Fehlende Elemente für Popup:`, popup);
     }
@@ -57,20 +50,33 @@ function popup() {
   popups.forEach(togglePopup);
 }
 
-// Funktion zur Initialisierung der Klick-Events für die IDs
 function initializeIds() {
   Ids.forEach((defined) => {
     const idJ = defined.IdJ;
-    const element = document.getElementById(idJ);
+    const idN = defined.IdN;
+    const elementJ = document.getElementById(idJ);
+    const elementN = document.getElementById(idN);
 
-    if (element) {
-      element.addEventListener("click", function() {
+    if (elementJ) {
+      elementJ.addEventListener("click", function() {
         localStorage.setItem(idJ, "true");
         window.location.href = 'index.html';
       });
     } else {
       console.warn(`Element mit ID ${idJ} nicht gefunden.`);
     }
+
+    if (elementN) {
+      elementN.addEventListener("click", function() {
+        localStorage.setItem(idN, "true");
+        window.location.href = 'index.html';
+      });
+    } else {
+      console.warn(`Element mit ID ${idN} nicht gefunden.`);
+    }
+    
+
+
   });
 }
 

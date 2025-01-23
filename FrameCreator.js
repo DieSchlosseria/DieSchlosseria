@@ -93,16 +93,23 @@ clear.addEventListener('click', FuncClear);
 
 window.onload = function() {
 // Produktbeispiel 1
-  const Defined1 = localStorage.getItem("iDefined1j");
-  if (Defined1 === "true") {
+  const Defined1j = localStorage.getItem("iDefined1j");
+  const Defined1n = localStorage.getItem("iDefined1n");
+
+
+  if (Defined1j === "true" || Defined1n === "true") {
     productExample(120, 110, 50, 50, 50, 40, 20, 1, 0 , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0);}
     localStorage.setItem("iDefined1j", "false");
+    localStorage.setItem("iDefined1n", "false");
 
     // Produktbeispiel 
-   const Defined2 = localStorage.getItem("iDefined2j");
-   if (Defined2 === "true") {
+   const Defined2j = localStorage.getItem("iDefined2j");
+   const Defined2n = localStorage.getItem("iDefined2n");
+
+   if (Defined2j === "true" || Defined2n === "true") {
    productExample(120, 60, 50, 50, 50, 40, 15, 1, 1 , 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);}
    localStorage.setItem("iDefined2j", "false"); 
+   localStorage.setItem("iDefined2n", "false");
 };
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//

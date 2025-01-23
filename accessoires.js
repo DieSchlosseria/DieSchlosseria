@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
   // Zubehörpreise pro Dimension (in €)
-  const accessoryPrices = {
-    15: 10, // Preis für 15mm
-    20: 15, // Preis für 20mm
-    25: 20, // Preis für 25mm
+  const accessoryPrices = { //besser für jedes accessoires separat!!!
+    15: 4, // Preis für 15mm
+    20: 5, // Preis für 20mm
+    25: 6, // Preis für 25mm
+    30: 7, // usw...
   };
 
   // Accessoires-Daten

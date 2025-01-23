@@ -35,7 +35,7 @@ const calculateTotal = () => {
 const initializeDOM = () => {
 
   Object.keys(savedData).forEach((id) => { 
-    outExtra1.innerHTML  += savedData[id].quantity + " x "  + savedData[id].name + " Total " + savedData[id].totalPrice + "€" + "<br>"  ;
+    outExtra1.innerHTML  += savedData[id].quantity + " x "  + savedData[id].name + " " + savedData[id].dimension + "mm"    +  " Total " + savedData[id].totalPrice + "€" + "<br>"  ;
   });
 
   // Gesamtsumme berechnen und anzeigen
