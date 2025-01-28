@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <!-- Google Font für Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link href="main.css" rel="stylesheet" />
-
+   <!-- Google Font für Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="main.css" rel="stylesheet" />
   <title>FrameCreator</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
-  <link href="main.css" rel="stylesheet" />
+  <link id="stylesheet" href="main.css" rel="stylesheet" />
   <a href="Warenkorb.html">
-  <img src="images/Warenkorp.png" class="cSubmit" alt="Warenkorb">
+  <img src="images/Warenkorp.png" class="cWare" alt="Warenkorb">
   </a>
-
 </head>
 
 <header>
@@ -39,10 +36,9 @@
         <span class="v186_2503">1. klicke auf die Linien welche Du erstellen möchtest: </span>
 
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
         <svg xmlns="http://www.w3.org/2000/svg" width="400" height="230" viewBox="0 0 400 230">
+     
         <!-- Zeichne den Würfel mit Linien -->
-      
         <!--Vorderseite-->
         <line class="cube-line" id="FrontTop" x1="50" y1="50" x2="275" y2="50" />
         <line class="cube-line" id="FrontMiddleCross" x1="50" y1="75" x2="275" y2="75" />
@@ -92,7 +88,7 @@
 <!--Materialstärke-->
 <div style="display: flex; align-items: center; gap: 5px; margin: 5px 0; font-weight: bold;">
   <label for="iMaterial" style="width: 100px;">Material</label>
-  <input type="range" name="material" class="cInput" value="15" min="10" max="50" step="5" id="iMaterial" style="flex: 1;">
+  <input type="range" name="material" class="cInput" min="10" max="50" step="5" id="iMaterial" style="flex: 1;">
   <output name="materialOutput" id="materialOutput" style="width: 50px; text-align: right;">15</output>
   <span>mm</span>
 </div>
@@ -100,7 +96,7 @@
 <!--Höhe-->
 <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;">
   <label for="iHight" style="width: 100px;">Höhe</label>
-  <input type="range" name="hight" class="cInput" value="100" min="10" max="200" step="10" id="iHight" style="flex: 1;">
+  <input type="range" name="hight" class="cInput"  min="10" max="200" step="10" id="iHight" style="flex: 1;">
   <output name="hightOutput" id="hightOutput" style="width: 50px; text-align: right;">100</output>
   <span>cm</span>
 </div>
@@ -108,7 +104,7 @@
 <!--Breite-->
 <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;">
   <label for="iWidth" style="width: 100px;">Breite</label>
-  <input type="range" name="width" class="cInput" value="100" min="10" max="200" step="5" id="iWidth" style="flex: 1;">
+  <input type="range" name="width" class="cInput"  min="10" max="200" step="5" id="iWidth" style="flex: 1;">
   <output name="widthOutput" id="widthOutput" style="width: 50px; text-align: right;">100</output>
   <span>cm</span>
 </div>
@@ -116,7 +112,7 @@
 <!--Tiefe-->
 <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;" >
   <label for="iDeepth" style="width: 100px;">Tiefe</label>
-  <input type="range" name="deepth" class="cInput" value="100" min="10" max="200" step="5" id="iDeepth" style="flex: 1;">
+  <input type="range" name="deepth" class="cInput" min="10" max="200" step="5" id="iDeepth" style="flex: 1;">
   <output name="deepthOutput" id="deepthOutput" style="width: 50px; text-align: right;">100</output>
   <span>cm</span>
 </div>
@@ -124,7 +120,7 @@
 <!--Mitte V-->
 <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;" id="displayV">
   <label for="iMiddleV" style="width: 100px;">Mitte v</label>
-  <input type="range" name="middleV" class="cInput" value="50" min="10" max="200" step="5" id="iMiddleV" style="flex: 1;">
+  <input type="range" name="middleV" class="cInput" min="10" max="200" step="5" id="iMiddleV" style="flex: 1;">
   <output name="middleVOutput" id="middleVOutput" style="width: 50px; text-align: right;">100</output>
   <span>cm</span>
 </div>
@@ -132,10 +128,10 @@
 <!--Mitte H-->
 <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;" id="displayH">
   <label for="iMiddleH" style="width: 100px;">Mitte h</label>
-  <input type="range" name="middleH" class="cInput" value="50" min="10" max="200" step="5" id="iMiddleH" style="flex: 1;">
+  <input type="range" name="middleH" class="cInput" min="10" max="200" step="5" id="iMiddleH" style="flex: 1;">
   <output name="middleHOutput" id="middleHOutput" style="width: 50px; text-align: right;">100</output>
   <span>cm</span>
-</div>
+</div><br>
 </div><br>
 </div><br><br>
 
@@ -143,7 +139,7 @@
 <!--perspective-->
 <div class="cPerspBox" id="iPerspBox" style="display: flex; flex-direction: column; align-items: flex-start; margin-left: 20px; width: 200px;">
   <label for="iPerspective" style="width: 100%;">Perspektive</label>
-  <input class="cInput" type="range" value="40" min="0" max="90" id="iPerspective" style="width: 100%;">
+  <input class="cInput" type="range" min="0" max="90" id="iPerspective" style="width: 100%;">
 </div>
   
   
@@ -179,7 +175,7 @@
 
 
 <script src="FrameCreator.js"></script>
-<script src="popup.js"></script>
+<script src="popupCreator.js"></script>
 
 
 

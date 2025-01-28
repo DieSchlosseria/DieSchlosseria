@@ -8,9 +8,24 @@
 body {
   height:100%;
   font-family: Roboto, sans-serif;
+  display: flex;
 }
 
+.cHoover{
+position: absolute;
+  left: 100px;
+
+}
+
+.cPerspBox{
+position: absolute;
+left: 100px;
+top: 620px; 
+}
+
+
 .cHead {
+  width: 1000px;
   height: 250px; /* Setzt die Höhe des Elements auf 100% der Ansichtshöhe (Viewport-Höhe) */
   display: flex; /* Optional: für Flexbox-Layout, um die inneren Elemente auszurichten */
   justify-content: space-between; /* Optional: für gleichmäßige Verteilung der Elemente */
@@ -22,12 +37,15 @@ img.cSubmit {
 }
 
 b{
-margin-bottom: 100px;
+margin-bottom: 10px;
 }
 
 p{
 margin-top: 0px;
 
+}
+h1{
+margin-bottom: 10px;
 }
 
 h3{
@@ -62,6 +80,7 @@ input{
 
 
 
+
 .Logo {
   width: 150px;
   height: 133px;
@@ -73,13 +92,86 @@ input{
   position: absolute;
   top: 20px;
   left: 95px;
-  overflow: hidden;
   border: 0px 0px 0px 0px;
 }
 
 
 
 
+.cInput {
+  width: 164px;
+  height: 40px;
+  position: sticky;
+  left: 100px;
+  background: rgba(217,217,217,1);
+  opacity: 1;
+  overflow: hidden;
+  font-size: 15px;
+
+}
+
+
+
+
+/*********** Baseline, reset styles ***********/
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 25rem;
+}
+
+/* Removes default focus */
+input[type="range"]:focus {
+  outline: none;
+}
+
+/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: #c9c9c9;
+  border-radius: 0.5rem;
+  height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: -4px; /* Centers thumb on the track */
+  background-color: #808080;
+  border-radius: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  outline: 3px solid #808080;
+  outline-offset: 0.125rem;
+}
+
+/*********** Firefox styles ***********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+  background-color: #c9c9c9;
+  border-radius: 0.5rem;
+  height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+  background-color: #808080;
+  border: none; /*Removes extra border that FF applies*/
+  border-radius: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+input[type="range"]:focus::-moz-range-thumb{
+  outline: 3px solid #808080;
+  outline-offset: 0.125rem;
+}
 
 /*___________________________________Wichtig für FrameCreator __________________________________*/
     
@@ -117,20 +209,24 @@ input{
             .cube-line {
                 stroke: rgba(0, 0, 0, 0.241);
                 stroke-width: 2;
+                  --default-line-color: #808080; /* Grau als Standardfarbe */
                 transition: stroke-width 0.2s;
                 padding: 0px 0px 0px 0px;
                 margin: 0px 0px 0px 0px;
                 left: 0px;
                 position: fixed;
-            }
+                stroke-dasharray: none;    /* Definiert die gestrichelte Linie: 5px Strich, 5px Lücke */
+        
+              }
     
             .cube-line.hovered {
-                stroke: rgb(0, 0, 0);
+        
                 stroke-width: 4;
                 padding: 0px 0px 0px 0px;
                 margin: 0px 0px 0px 0px;
                 left: 0px;
                 position: fixed;
+                stroke-dasharray: 10, 1;    /* Definiert die gestrichelte Linie: 5px Strich, 5px Lücke */
             }
 
 .hoverButton{
@@ -192,24 +288,6 @@ overflow: hidden;
      
       }
 
-
-
-.cTrash{
-  width: 60px;
-  height: 60px;
-  background: url("images/trash.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 0.5;
-  position: absolute;
-  top: 510px;
-  left: 48px;
-  border: none;
-  cursor: pointer;
-  color: black;
-}
-
 .OverHead {
   width: 502px;
   color: rgba(0,0,0,1);
@@ -257,7 +335,7 @@ overflow: hidden;
     color: rgba(0,0,0,1);
     position: absolute;
     top: 200px;
-    left: 122px;
+    left: 100px;
 
     font-weight: Light;
     font-size: 24px;
@@ -321,8 +399,8 @@ overflow: hidden;
     width: 273px;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 270px;
-    left: 122px;
+    top: 300px;
+    left: 100px;
     font-weight: Light;
     font-size: 16px;
     opacity: 1;
@@ -503,17 +581,7 @@ overflow: hidden;
 
       
     
-      .cInput {
-        width: 164px;
-        height: 40px;
-        position:sticky;
-        left: 100px;
-        background: rgba(217,217,217,1);
-        opacity: 1;
-        overflow: hidden;
-        font-size: 15px;
-      
-      }
+
   
   .textDeep{
     width: 83px;
@@ -526,7 +594,6 @@ overflow: hidden;
 
 
   .cSubmit{
-
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -535,6 +602,52 @@ overflow: hidden;
     top: 40px;
     left: 1400px;
     overflow: hidden;
+  }
+
+  .cWare{
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 0.5;
+    position: absolute;
+    top: 40px;
+    left: 1400px;
+    overflow: hidden;
+  }
+
+  .cWareAct, .cWare:hover{
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 40px;
+    left: 1400px;
+    overflow: hidden;
+  }
+
+  .cTrash{
+    width: 60px;
+    height: 60px;
+    background: url("images/trash.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 0.5;
+    position: absolute;
+    top: 550px;
+    left: 100px;
+    border: none;
+    cursor: pointer;
+    color: black;
+  }
+
+  .cTrash:hover{
+    opacity: 1.0;
   }
 
 
@@ -554,19 +667,7 @@ overflow: hidden;
 
 
 
-  .example{
-    width: 90px;
-    height: 80px;
-    background: rgba(217,217,217,1);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 620px;
-    left: 1020px;
-    overflow: hidden;
-  }
+
 
 
 
@@ -575,7 +676,7 @@ overflow: hidden;
 
           .overlay {
           display: none;
-          position: fixed;
+          position: absolute;
           top: 0;
           left: 0;
           width: 100%;
@@ -679,6 +780,7 @@ overflow: hidden;
   transform: translate(-50%, -50%);
   background: #D9D9D9;
   padding: 20px;
+  color: black;
   border: 1px solid #000;
   z-index: 999;
   border-radius: 5px;
@@ -689,26 +791,13 @@ overflow: hidden;
 
   /*________________________für_Popup_Beispiele_____________________*/
 
-  .overlay3 {
-    position: absolute;
-    
-    display: none;
-   
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    overflow: scroll;
 
-
-}
 
 /*Inhalt*/
 .popup3 {
   position: absolute;
   top: 60%;
-
+color: gray;
   left: 50%;
   width: 800px;
   height: 1200px;
@@ -738,10 +827,6 @@ overflow: hidden;
   cursor: grab;
 }
 
-.cShowPopup3{
-cursor:grab;
-
-}
 
 
 
@@ -752,7 +837,6 @@ cursor:grab;
   position:sticky;
   background: rgba(217,217,217,1);
   opacity: 1;
-  overflow: hidden;
   font-size: 15px;
 }
 
@@ -863,7 +947,6 @@ form {
   background: rgba(217,217,217,1);
   opacity: 1;
   font-size: 15px;
-  overflow: hidden;
 }
 
 .cZubehoer1{
@@ -872,8 +955,9 @@ form {
   display: block;
   float: left;
   top: 250px;
-  height: 600px;
-  position: fixed;
+  max-width: 250px;
+  height: auto;
+  position: absolute;
   }
 
 
@@ -901,14 +985,14 @@ form {
 }
 
 #myMöbel {
+  position: absolute;
   background-color:rgb(211, 211, 211);
-
   height:auto;
   min-width: 420px;
   min-height: 650px;
   border: 10px;
   padding: 10px 10px 10px 10px;
-
+  left:40px;
   font-size: 16px;
   color: #333;
   top: 260px ;
@@ -965,6 +1049,9 @@ input[type="text"], input[type="email"], textarea {
 /*____________________________________Produktbeispiele________________________________*/
 
 .cDifned1{
+  position: absolute;
+  top: 300px;
+  left: 0px;
   width:250px;
   height:400px;
   cursor: pointer;
@@ -972,8 +1059,6 @@ input[type="text"], input[type="email"], textarea {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  border: none;
-  float: left;
   margin: 5px 10px 10px 10px;
   padding-left: 10px 10px 10px 10px;
   border-style: solid;
@@ -986,3 +1071,5 @@ input[type="text"], input[type="email"], textarea {
   border-color: black;
   border-width: 7px;
 }
+
+

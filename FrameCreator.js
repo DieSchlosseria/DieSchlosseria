@@ -4,7 +4,7 @@ let configurations = [];
 let currentIndex = 0
 let outputText = "";
 
-// Das Output-Element auswählen
+// Das Output-Element auswählen --> für Popup
 const outDim = document.getElementById("outDim");
 const outCost = document.getElementById("outCost");
 const outDeliv = document.getElementById("outDeliv");
@@ -15,16 +15,16 @@ let hideTimeout; // Timeout-Variable hinzugefügt
 const buttonStates = {};
 
 //Eingabe Maße
-var width = 100;
-var hight = 100;
-var deepth = 100;
-var middleH = 50;
-var middleV = 50;
-var perspective =40;
-var material = 15;
-let materialScaled = 1.5;
+var width = width ?? 100;;
+var hight = hight ?? 100;
+var deepth = deepth ?? 100;
+var middleH = middleH ?? 50;
+var middleV = middleV ?? 50;
+var perspective = perspective ?? 40;
+var material = material ?? 15;
+var materialScaled = materialScaled ?? 1.5;
 
-//Input (Slider)
+//Input Value
 const widthInput = document.getElementById("iWidth");
 const hightInput = document.getElementById("iHight");
 const deepthInput = document.getElementById("iDeepth");
@@ -52,21 +52,17 @@ let takenWidth;
 let takenHight;
 let takenDeepth;
 
-//Eingabe Slider
-MaterialInput.addEventListener("input", TakeData);
-hightInput.addEventListener("input", TakeData);
-widthInput.addEventListener("input", TakeData);
-deepthInput.addEventListener("input", TakeData);
-MiddleInput.addEventListener("input", TakeData);
-MiddleLengthInput.addEventListener("input", TakeData);
-perspectiveInput.addEventListener("input", TakeData);
 
-//Konfiguration Produktbeispiele  //siehe funktion productexamples
-const productConfigurations = [
-  { ids: ["iDefined1j", "iDefined1n"], parameters: [120, 110, 50, 50, 50, 40, 20, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0] },
-  { ids: ["iDefined2j", "iDefined2n"], parameters: [120, 60, 50, 50, 50, 40, 15, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
-];
-//Funktionen
+
+//Eingabe Slider --> führt Input aus
+MaterialInput.addEventListener("input", getData);
+hightInput.addEventListener("input", getData);
+widthInput.addEventListener("input", getData);
+deepthInput.addEventListener("input", getData);
+MiddleInput.addEventListener("input", getData);
+MiddleLengthInput.addEventListener("input", getData);
+perspectiveInput.addEventListener("input", getData);
+
 
 //Ein/Ausblenden
 function displayed(ButtonList, id, show) {
@@ -96,8 +92,38 @@ function displayed(ButtonList, id, show) {
   }
 }
 
+function updateInput(id, input, min, max) {
+  let value = parseInt(input.value);
+  value = Math.max(min, Math.min(value, max)); // Begrenze auf min/max
+  localStorage.setItem(id, value);
+  return value;
+  };
+
 //Linien in Canvas zeichnen
 function draw(){
+createLine("FrontTop");
+createLine("FrontBottom");
+createLine("FrontLeft");
+createLine("FrontRight");
+createLine("FrontMiddleCross");
+createLine("FrontMiddleLenght");
+createLine("BackLeft");
+createLine("BackTop");
+createLine("BackRight");
+createLine("BackBottom");
+createLine("FrontBottom");
+createLine("BackMiddleCross");
+createLine("BackMiddleLenght");
+createLine("LeftTop");
+createLine("RightBottom");
+createLine("RightTop");
+createLine("LeftBottom");
+createLine("RightMiddleCross");
+createLine("LeftMiddleCross");
+
+
+
+
 
   ctx.fillStyle = 'hsl(0, 0%, 90%)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -142,92 +168,126 @@ function draw(){
   FuncLineDraw("LeftMiddleCross", startXFront  , startYFront - middleH  , startXFront + offseet1  , startYFront  -  middleH -offseet2 );
   
   //______________________________TEST_______________________________
-  
+   
       let trueCount = 0; // Variable zur Zählung der "true"-Werte
       
       for (const key in buttonStates) {
         if (buttonStates.hasOwnProperty(key) && buttonStates[key] === true) {
           trueCount++; // Erhöhe die Zählvariable, wenn der Wert "true" ist
         }
-      }    
+      }   
+
+
+
+
+
+
 }
   
-//Werte übernehmen  
-  function TakeData() {
-    width = parseInt(widthInput.value);
-    hight = parseInt(hightInput.value);
-    deepth = parseInt(deepthInput.value);
-    material = parseInt(MaterialInput.value);
-    middleH = parseInt(MiddleInput.value);
-    middleV = parseInt(MiddleLengthInput.value);
-    perspective = parseInt(perspectiveInput.value);
-    materialScaled = (Math.ceil(material/5)*5)/10; //in cm und in 5 schritten wandeln
-  
-    //Limit    
-    width = Math.min(width, 200);
-    deepth = Math.min(deepth, 200);
-    material = Math.min(Math.max(material, 15), 30); // Begrenzung zwischen 15 und 30
-    middleV = Math.min(middleV, width);
-    middleH = Math.min(middleH, hight);
-  
-    FuncActInput();  
+//Werte von Inputfeld übernehmen Limitieren und in localStorage  
+function getData() {
+
+width = updateInput("iWidth", widthInput, 10, 200);
+hight = updateInput("iHight", hightInput, 10, 200);
+deepth =  updateInput("iDeepth", deepthInput, 10, 200);
+var limitMiddleH = hight; 
+var limitMiddleV = width;
+middleH = updateInput("iMiddleH",MiddleInput, 10, limitMiddleH);
+middleV = updateInput("iMiddleV",MiddleLengthInput, 10, limitMiddleV);
+perspective = updateInput("iPerspective",perspectiveInput, 10, 50);
+material = updateInput("iMaterial", MaterialInput, 15, 50)
+materialScaled = (Math.ceil(material/5)*5)/10; //in cm und in 5 schritten wandeln   
+
+ActInput();  
 }
 
-//Design löschen
-  function FuncClear(){
+function setButtons(){
+  // Speichere das aktualisierte buttonStates-Objekt in localStorage
+    localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
+}
 
-    productExample(100, 100, 100, 50, 50, 40, 20,  0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-  
+function getButtons(){
+
+// Lade den gespeicherten Zustand aus localStorage und weise ihn direkt buttonStates zu
+  const savedStates = JSON.parse(localStorage.getItem("buttonStates")) || {}; // Hole die gespeicherten Daten oder setze auf {} als Fallback
+// Kopiere die gespeicherten Zustände in das bereits vorhandene buttonStates-Objekt
+  Object.assign(buttonStates, savedStates);
+
+  console.log(buttonStates); // Test
+
+}
+
+
+function setData(){
+//Inputwerte aktualisieren
+widthInput.value = localStorage.getItem("iWidth");
+localStorage.setItem("iWidth", width);
+
+hightInput.value = localStorage.getItem("iHight");
+localStorage.setItem("iHight", hight);
+
+deepthInput.value = localStorage.getItem("iDeepth");
+localStorage.setItem("iDeepth", deepth);
+
+MaterialInput.value = localStorage.getItem("iMaterial");
+localStorage.setItem("iMaterial", material);
+
+MiddleInput.value = localStorage.getItem("iMiddleH");
+localStorage.setItem("iMiddleH", middleH);
+
+MiddleLengthInput.value = localStorage.getItem("iMiddleV");
+localStorage.setItem("iMiddleV", middleV);
+
+perspectiveInput.value = localStorage.getItem("iPerspective");
+localStorage.setItem("iPerspective", perspective);
 }
 
 //Ein/Ausgabe aktualisieren
-  function FuncActInput(){ //Ein-Ausgänge setzen
-    widthInput.value = width;
-    hightInput.value = hight;
-    deepthInput.value = deepth;
-    MaterialInput.value = materialScaled * 10;
-    MiddleLengthInput.value = middleV;
-    MiddleInput.value = middleH;
-    perspectiveInput.value = perspective;
+function ActInput(){ //Ein-Ausgänge aktualisieren
+
+  widthInput.value = width;
+  hightInput.value = hight;
+  deepthInput.value = deepth;
+  MaterialInput.value = materialScaled * 10;
+  MiddleLengthInput.value = middleV;
+  MiddleInput.value = middleH;
+  perspectiveInput.value = perspective;
+
+  materialOutput.value = materialScaled * 10; 
+  hightOutput.value = hight;
+  widthOutput.value = width;
+  deepthOutput.value = deepth;
+  middleVOutput.value = middleV;
+  middleHOutput.value = middleH;
+}
+
+//Design löschen
+function FuncClear(){
+
+  PreConfigDesign(100, 100, 100, 50, 50, 40, 20,  0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   
-    materialOutput.value = materialScaled * 10; 
-    hightOutput.value = hight;
-    widthOutput.value = width;
-    deepthOutput.value = deepth;
-    middleVOutput.value = middleV;
-    middleHOutput.value = middleH;
 }
 
 //Für Hoover Würfel
 function funcHooverButton(){
   const button = document.getElementById("hoverButton");
-  const svg = document.querySelector("svg");
-               
+  const svg = document.querySelector("svg");             
+  // Event-Listener für Klick
   button.addEventListener("click", function () {
-                             
-  const lineId = button.getAttribute("data-line-id");
-          
-  isButtonClicked = false;
-  
-  // Toggle den Status der button
-                  if (buttonStates[lineId]) {
-                   buttonStates[lineId] = false; // Button is no longer pressed
-                  } else {
-                buttonStates[lineId] = true; // Button is pressed
-                  }
-  
-              });
-      
+    const lineId = button.getAttribute("data-line-id");
+ // Toggle den Status des Buttons
+    buttonStates[lineId] = !buttonStates[lineId]; // Invertiere den aktuellen Status
+setButtons();
+  });
+
    // Funktion zum Aktualisieren der Button-Position
   function updateButtonPosition(x, y) {
     button.style.left = x - 5 + "px";
     button.style.top = y - 5 + "px";
   }
 
-
-  
   svg.addEventListener("mousemove", function (e) {
-      
+    
    const mouseX = e.clientX;
     const mouseY = e.clientY;
   
@@ -265,11 +325,13 @@ function funcHooverButton(){
       button.style.display = "block";
       updateButtonPosition(mouseX, mouseY); // Button-Position aktualisieren
       button.setAttribute("data-line-id", closestLine.id);
+    
       isButtonClicked = false;
       clearTimeout(hideTimeout);
     } else {
       hideTimeout = setTimeout(() => {
         button.style.display = "none";
+      
       }, 200);
     }
   });
@@ -288,7 +350,7 @@ function FuncLineDraw(Button, moveToX, moveToY , lineToX, lineToY  ){
 }
 
 // Produktbeispiele bzw konfiguration vorbestimmen
- function productExample(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
+ function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
 
   // Strebenzustände setzen
   buttonStates["FrontTop"] = tFrontTop;
@@ -319,7 +381,9 @@ function FuncLineDraw(Button, moveToX, moveToY , lineToX, lineToY  ){
   perspective= tPerspective;
   materialScaled = (Math.ceil(tMaterial / 5) * 5) / 10; // in cm und in 5 Schritten wandeln;
   
-  FuncActInput();
+setData();
+ActInput();  
+setButtons();
 
 }
 
@@ -338,7 +402,6 @@ function setValueToZero(ButtonList, dimension) {
   return 0; // Gibt 0 zurück, wenn keiner der Taster gedrückt ist
 }
 
-
 //______________________AUSFÜHREN_____________________
 
 funcHooverButton();
@@ -353,16 +416,12 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 var clear = document.getElementById("iTrash");
 clear.addEventListener('click', FuncClear);
 
-//Produktbeispiele
+//Seite neu laden
 window.onload = function() {
-  productConfigurations.forEach(config => {
-    const isActive = config.ids.some(id => localStorage.getItem(id) === "true");
-    if (isActive) {
-      productExample(...config.parameters);
-      config.ids.forEach(id => localStorage.setItem(id, "false"));
-    }
-  });
-};
+  getButtons();
+  setData();
+  getData();
+  };
 
 //Zyklischer ablauf
 setInterval(value, 200);
@@ -374,7 +433,6 @@ draw();
 displayed(["FrontMiddleLenght", "BackMiddleLenght"], "displayV", "flex");
 displayed(["FrontMiddleCross", "BackMiddleCross"], "displayH", "flex");
 displayed( ["LeftTop", "RightBottom", "RightTop",  "LeftBottom", "RightMiddleCross", "LeftMiddleCross"], "iPerspBox", "flex");
-
 };
 
 //____________________________POPUP_FENSTER______________________________________
@@ -388,7 +446,7 @@ var element;
 PopUp.addEventListener('click', () => {
  takenWidth = setValueToZero(["FrontTop", "FrontBottom", "FrontMiddleCross", "BackTop", "BackBottom", "BackMiddleCross"], width);
  takenHight = setValueToZero(["FrontLeft", "FrontRight", "FrontMiddleLength", "BackLeft", "BackRight", "BackMiddleLength"], hight);
- takenDeepth = setValueToZero(["LeftBottom", "LeftTop", "LeftMiddleCross", "RightBottom", "RightTop", "RightMiddleCross"], hight);
+ takenDeepth = setValueToZero(["LeftBottom", "LeftTop", "LeftMiddleCross", "RightBottom", "RightTop", "RightMiddleCross"], deepth);
 
  //Lieferung 
 if (takenDeepth > 150 || takenWidth > 150 || takenHight > 150 ) {
@@ -405,9 +463,7 @@ var FullWidth = calculateTotal(buttonStates, takenWidth, ["FrontTop", "FrontBott
 var FullHeight = calculateTotal(buttonStates, takenHight, ["FrontLeft", "FrontRight", "FrontMiddleLength", "BackLeft", "BackRight", "BackMiddleLength"]);
 var FullDepth = calculateTotal(buttonStates, takenDeepth, ["LeftBottom", "LeftTop", "LeftMiddleCross", "RightBottom", "RightTop", "RightMiddleCross"]);
 var Fulllength = (FullWidth + FullHeight + FullDepth)/100 * (material/20); //Für 20mm Quadratrohr kalkuliert
-
 if (Fulllength > 0) { PricePauschal = PriceVersand;} else {PricePauschal = 0;};
-
 Total = Fulllength * PricePerPeace + trueCount * PricePerPeace + PricePauschal;
 
 //_________________AUSGABEWERTE____________________
@@ -423,8 +479,6 @@ for (const id in buttonStates) {
     const status = buttonStates[id];
   }
 };
-
-
 
 //_________________________________FORMULAR_SENDEN____________________________________
 
@@ -464,7 +518,7 @@ localStorage.setItem('configurations', JSON.stringify(configurations));
 window.addEventListener('load', () => {
   // Laden der gespeicherten Konfigurationen aus dem Local Storage
   const storedConfigurations = localStorage.getItem('configurations');
-  FuncActInput();
+  ActInput();
 
   // Überprüfen, ob gespeicherte Konfigurationen vorhanden sind
   if (storedConfigurations) {
@@ -473,6 +527,37 @@ window.addEventListener('load', () => {
   }
 
 });
+
+
+function createLine(Line) {
+  const tLine = document.getElementById(Line);
+
+  // Funktion zum Aktualisieren der Linie je nach Button-Status
+  if (buttonStates[Line]) {
+    tLine.style.stroke = "black";
+    tLine.style.strokeDasharray ="none"
+    tLine.parentNode.appendChild(tLine); // Linie nach vorne bringen
+  } else {
+    tLine.style.stroke = "lightgray";
+    tLine.style.strokeDasharray ="10, 1"
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

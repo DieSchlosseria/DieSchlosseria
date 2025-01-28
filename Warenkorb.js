@@ -1,6 +1,24 @@
+// Zubehörpreise pro Artikel und Dimension
+const accessoryPrices = {
+  "Tischbefestigung": {
+    15: 4,
+    20: 5,
+    25: 6,
+    30: 7
+  },
+  "Decken/Wandbefestigung": {
+    15: 5,
+    20: 6,
+    25: 7,
+    30: 8
+  }
+};
+
 // Globale Konfigurationen und Variablen
 const START_WERT_COUNT = 0;
 const START_WERT_DIMENSION = 20;
+
+// Accessory data --> muss aktuell in accessoires.js und Warenkorb.js geändert werden --> besser machen. --> über localStorage?? 
 var outExtra1 = document.getElementById("outExtra1");
 
 // Lade die Zubehör-Daten aus dem Local Storage
@@ -14,16 +32,16 @@ const clearButton = document.getElementById("clearButton");
 const calculateTotal = () => {
   let total = 0;
 
-  // Addiere alle Zubehörpreise
-  Object.keys(savedData).forEach((id) => {
-    const accessory = savedData[id];
-    total += accessory.totalPrice;
-  });
-
   // Addiere alle Konfigurationen (falls vorhanden)
   const storedConfigurations = JSON.parse(localStorage.getItem("configurations")) || [];
   storedConfigurations.forEach((config) => {
     total += parseFloat(config.total) || 0;
+  });
+
+  // Addiere alle Zubehörpreise
+  Object.keys(savedData).forEach((id) => {
+    const accessory = savedData[id];
+    total += parseFloat(accessory.totalPrice) || 0;
   });
 
   return total;
@@ -31,12 +49,12 @@ const calculateTotal = () => {
 
 // DOM-Inhalte initialisieren    
 const initializeDOM = () => {
+  actAccessoires(); // Totalpreis jedes einzelnen Accessoires berechnen
 
   Object.keys(savedData).forEach((id) => { 
-
-      if (savedData[id].quantity > 0) {
-    outExtra1.innerHTML  += savedData[id].quantity + " x "  + savedData[id].name + " " + savedData[id].dimension + "mm"    +  " Total " + savedData[id].totalPrice + "€" + "<br>"  ;
-  }
+    if (savedData[id].quantity > 0) {
+      outExtra1.innerHTML += savedData[id].quantity + " x "  + savedData[id].name + " " + savedData[id].dimension + "mm" + " Total " + savedData[id].totalPrice + "€" + "<br>";
+    }
   });
 
   // Gesamtsumme berechnen und anzeigen
@@ -101,21 +119,20 @@ document.getElementById("emailForm").addEventListener("submit", function (e) {
   const accessoriesData = Object.keys(savedData).map((id) => {
     const accessory = savedData[id];
     return `${accessory.quantity} x ${accessory.name} (Total: ${accessory.totalPrice || 0}€)`;
-  })
-  .join(", ");
+  }).join(", ");
 
-const configurationsData = JSON.stringify(
-  JSON.parse(localStorage.getItem("configurations")) || []
-);
+  const configurationsData = JSON.stringify(
+    JSON.parse(localStorage.getItem("configurations")) || []
+  );
 
-const additionalData = `
-  Name: ${name}
-  Adresse: ${street} ${houseNumber}, ${zip} ${city}
-  E-Mail: ${email}
-  Nachricht: ${message}
-  Zubehör: ${accessoriesData}
-  Konfigurationen: ${configurationsData}
-`;
+  const additionalData = `
+    Name: ${name}
+    Adresse: ${street} ${houseNumber}, ${zip} ${city}
+    E-Mail: ${email}
+    Nachricht: ${message}
+    Zubehör: ${accessoriesData}
+    Konfigurationen: ${configurationsData}
+  `;
 
   const additionalDataField = document.createElement("input");
   additionalDataField.type = "hidden";
@@ -137,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
   displayConfigurations();
 });
 
-//clearAccesoryData
+// clearAccesoryData
 function clearAccesoryData() {
   Object.keys(savedData).forEach((id) => {
     const accessory = savedData[id];
@@ -146,5 +163,20 @@ function clearAccesoryData() {
   });
 
   localStorage.setItem("accessories", JSON.stringify(savedData));
+}
 
+// Berechne den Preis jedes Zubehörs basierend auf Name und Dimension
+function calculateAccessoryTotalPrice(accessory) {
+  const pricePerItem = accessoryPrices[accessory.name]?.[accessory.dimension] || 0;
+  return pricePerItem * accessory.quantity;
+}
+
+// Berechne die Preise für alle Accessoires
+function actAccessoires() {  
+  Object.keys(savedData).forEach((id) => {
+    const accessory = savedData[id];
+    accessory.totalPrice = calculateAccessoryTotalPrice(accessory);
+  });
+
+  localStorage.setItem("accessories", JSON.stringify(savedData));
 }

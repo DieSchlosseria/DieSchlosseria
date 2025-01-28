@@ -1,13 +1,21 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // Zubehörpreise pro Dimension (in €)
-  const accessoryPrices = { //besser für jedes accessoires separat!!!
-    15: 4, // Preis für 15mm
-    20: 5, // Preis für 20mm
-    25: 6, // Preis für 25mm
-    30: 7, // usw...
+  // Prices for each accessory dimension (in €)
+  const accessoryPrices = {
+    "Tischbefestigung": {
+      15: 4,
+      20: 5,
+      25: 6,
+      30: 7
+    },
+    "Decken/Wandbefestigung": {
+      15: 5,
+      20: 6,
+      25: 7,
+      30: 8
+    }
   };
 
-  // Accessoires-Daten
+  // Accessory data
   const accessories = [
     {
       id: "1",
@@ -22,25 +30,25 @@ document.addEventListener("DOMContentLoaded", function() {
       quantityId: "iFix2",
       dropdownId: "myDropdown2",
       outputId: "iPrice2",
-    },
+    }
   ];
 
-  // Funktion zur Berechnung des Gesamtpreises
-  function calculatePrice(quantity, dimension) {
-    const pricePerItem = accessoryPrices[dimension] || 0;
+  // Function to calculate the total price
+  function calculatePrice(quantity, dimension, accessoryName) {
+    const pricePerItem = accessoryPrices[accessoryName][dimension] || 0;
     return quantity * pricePerItem;
   }
 
-  // Funktion zur Aktualisierung der Preis-Anzeige
+  // Function to update the price display
   function updatePriceDisplay(accessory) {
     const quantity = parseInt(document.getElementById(accessory.quantityId).value) || 0;
     const dimension = parseInt(document.getElementById(accessory.dropdownId).value) || 20;
-    const totalPrice = calculatePrice(quantity, dimension);
+    const totalPrice = calculatePrice(quantity, dimension, accessory.name);
 
-    // Preis anzeigen
+    // Display price
     document.getElementById(accessory.outputId).textContent = `${totalPrice} €`;
 
-    // Accessoire im Local Storage speichern
+    // Save accessory data to Local Storage
     saveToLocalStorage(accessory.id, {
       name: accessory.name,
       quantity,
@@ -49,14 +57,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Funktion zum Speichern aller Accessoires im Local Storage
+  // Function to save all accessories to Local Storage
   function saveToLocalStorage(accessoryId, data) {
     let savedData = JSON.parse(localStorage.getItem("accessories")) || {};
     savedData[accessoryId] = data;
     localStorage.setItem("accessories", JSON.stringify(savedData));
   }
 
-  // Funktion zum Laden der Accessoires aus Local Storage
+  // Function to load accessories from Local Storage
   function loadFromLocalStorage() {
     const savedData = JSON.parse(localStorage.getItem("accessories")) || {};
 
@@ -70,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Event-Listener für Add-Buttons hinzufügen
+  // Add event listeners for Add-Buttons
   accessories.forEach((accessory) => {
     const addButton = document.getElementById(`iFixAdd${accessory.id}`);
     if (addButton) {
@@ -78,6 +86,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // Daten beim Laden der Seite aus Local Storage laden
+  // Load data from Local Storage when the page is loaded
   loadFromLocalStorage();
 });
+
+
+
+
+
+
+
+
+
+
