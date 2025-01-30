@@ -15,12 +15,12 @@ let hideTimeout; // Timeout-Variable hinzugefügt
 const buttonStates = {};
 
 //Eingabe Maße
-var width = width ?? 100;;
+var width = width ?? 150;;
 var hight = hight ?? 100;
 var deepth = deepth ?? 100;
-var middleH = middleH ?? 50;
-var middleV = middleV ?? 50;
-var perspective = perspective ?? 40;
+var middleH = middleH ?? 80;
+var middleV = middleV ?? 115;
+var perspective = perspective ?? 25;
 var material = material ?? 15;
 var materialScaled = materialScaled ?? 1.5;
 
@@ -52,8 +52,6 @@ let takenWidth;
 let takenHight;
 let takenDeepth;
 
-
-
 //Eingabe Slider --> führt Input aus
 MaterialInput.addEventListener("input", getData);
 hightInput.addEventListener("input", getData);
@@ -62,7 +60,6 @@ deepthInput.addEventListener("input", getData);
 MiddleInput.addEventListener("input", getData);
 MiddleLengthInput.addEventListener("input", getData);
 perspectiveInput.addEventListener("input", getData);
-
 
 //Ein/Ausblenden
 function displayed(ButtonList, id, show) {
@@ -101,86 +98,15 @@ function updateInput(id, input, min, max) {
 
 //Linien in Canvas zeichnen
 function draw(){
-createLine("FrontTop");
-createLine("FrontBottom");
-createLine("FrontLeft");
-createLine("FrontRight");
-createLine("FrontMiddleCross");
-createLine("FrontMiddleLenght");
-createLine("BackLeft");
-createLine("BackTop");
-createLine("BackRight");
-createLine("BackBottom");
-createLine("FrontBottom");
-createLine("BackMiddleCross");
-createLine("BackMiddleLenght");
-createLine("LeftTop");
-createLine("RightBottom");
-createLine("RightTop");
-createLine("LeftBottom");
-createLine("RightMiddleCross");
-createLine("LeftMiddleCross");
 
-
-
-
-
-  ctx.fillStyle = 'hsl(0, 0%, 90%)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-  let offseet1 = (1 - Math.sin(perspective * (Math.PI / 180))) * deepth;
-  let offseet2 = (  Math.sin(perspective * (Math.PI / 180))) * deepth;
-  //let offseet2 = deepth/2 *      perspective/90 ; //Y-Position
-  
-  ctx.strokeStyle = 'black';
-  ctx.shadowColor = 'whitesmoke';
-  ctx.shadowBlur = 1;
-  ctx.lineJoin = "round";
-  ctx.lineWidth = materialScaled;
-  //__________________________Zeichnen____________________________
-  
-  let startXFront = (canvas.width/2)  - (width/2) - (offseet1/2);
-  let startXBack = startXFront + width;
-  let startYFront = (canvas.height/2) + (hight/2) +  (offseet2/2);
-  
-  //__________________________Front____________________________
-  FuncLineDraw("FrontTop",startXFront, startYFront - hight, startXFront + width, startYFront - hight);
-  FuncLineDraw("FrontLeft",startXFront, startYFront, startXFront, startYFront - hight);
-  FuncLineDraw("FrontMiddleCross",startXFront,  startYFront - middleH ,  startXFront + width, startYFront - middleH);
-  FuncLineDraw("FrontRight", startXFront  + width , startYFront   ,  startXFront + width, startYFront - hight  );
-  FuncLineDraw("FrontBottom", startXFront  ,startYFront    , startXFront + width, startYFront  );
-  FuncLineDraw("FrontMiddleLenght",startXFront + middleV   , startYFront   ,  startXFront + middleV   , startYFront - hight  );
-  
-  //__________________________Back____________________________
-  FuncLineDraw("BackLeft",startXFront + offseet1 ,startYFront - offseet2 , startXFront + offseet1 , startYFront - hight - offseet2);
-  FuncLineDraw("BackTop",startXFront + offseet1 ,  startYFront - hight - offseet2 , startXFront + offseet1 + width , startYFront - hight - offseet2);
-  FuncLineDraw("BackRight", startXFront + offseet1 + width, startYFront - offseet2 , startXFront + offseet1 + width ,startYFront - hight - offseet2 );
-  FuncLineDraw("BackBottom",startXFront + offseet1 , startYFront - offseet2 ,startXFront + offseet1 + width , startYFront -offseet2);
-  FuncLineDraw("BackMiddleCross",startXFront + offseet1 ,startYFront - middleH - offseet2  ,startXFront + width + offseet1  ,startYFront - middleH - offseet2 );
-  FuncLineDraw("BackMiddleLenght", startXFront  + offseet1 + middleV , startYFront- offseet2 ,  startXFront  + offseet1 + middleV   , startYFront - hight - offseet2 );
-  
-  //__________________________Seite____________________________
-  FuncLineDraw("LeftTop", startXFront  , startYFront - hight  , startXFront + offseet1 ,  startYFront  -  hight - offseet2 );
-  FuncLineDraw("RightBottom", startXBack  , startYFront  ,  startXBack + offseet1 , startYFront - offseet2 );
-  FuncLineDraw("RightTop", startXBack  , startYFront -hight  , startXBack + offseet1  , startYFront  - offseet2 - hight );
-  FuncLineDraw("LeftBottom", startXFront  , startYFront  ,startXFront + offseet1  , startYFront - offseet2 );
-  FuncLineDraw("RightMiddleCross", startXBack  , startYFront - middleH  ,  startXBack + offseet1 , startYFront  - offseet2 - middleH ); 
-  FuncLineDraw("LeftMiddleCross", startXFront  , startYFront - middleH  , startXFront + offseet1  , startYFront  -  middleH -offseet2 );
-  
-  //______________________________TEST_______________________________
-   
-      let trueCount = 0; // Variable zur Zählung der "true"-Werte
+//______________________________TEST_______________________________
+let trueCount = 0; // Variable zur Zählung der "true"-Werte
       
       for (const key in buttonStates) {
         if (buttonStates.hasOwnProperty(key) && buttonStates[key] === true) {
           trueCount++; // Erhöhe die Zählvariable, wenn der Wert "true" ist
         }
       }   
-
-
-
-
-
 
 }
   
@@ -213,10 +139,8 @@ function getButtons(){
 // Kopiere die gespeicherten Zustände in das bereits vorhandene buttonStates-Objekt
   Object.assign(buttonStates, savedStates);
 
-  console.log(buttonStates); // Test
 
 }
-
 
 function setData(){
 //Inputwerte aktualisieren
@@ -264,7 +188,7 @@ function ActInput(){ //Ein-Ausgänge aktualisieren
 //Design löschen
 function FuncClear(){
 
-  PreConfigDesign(100, 100, 100, 50, 50, 40, 20,  0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  PreConfigDesign(100, 150, 100, 80, 65, 26, 40,  0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   
 }
 
@@ -337,18 +261,6 @@ setButtons();
   });
 }
 
-//Linien zeichnen 
-function FuncLineDraw(Button, moveToX, moveToY , lineToX, lineToY  ){
-
-    if (( buttonStates[Button]) ) {
-   //Vorne oben
-   ctx.beginPath();
-   ctx.moveTo(moveToX , moveToY);
-   ctx.lineTo( lineToX, lineToY);
-   ctx.stroke(); 
-   }
-}
-
 // Produktbeispiele bzw konfiguration vorbestimmen
  function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
 
@@ -406,12 +318,6 @@ function setValueToZero(ButtonList, dimension) {
 
 funcHooverButton();
 
-//Canvas definieren
-let canvas = document.getElementById('canvas');
-let ctx = canvas.getContext('2d');
-ctx.fillStyle = 'whitesmoke';
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-
 //alle werte zurücksetzen
 var clear = document.getElementById("iTrash");
 clear.addEventListener('click', FuncClear);
@@ -427,12 +333,10 @@ window.onload = function() {
 setInterval(value, 200);
 
 function value(){
-draw();
-
 // Elemente ein/ausblenden
 displayed(["FrontMiddleLenght", "BackMiddleLenght"], "displayV", "flex");
 displayed(["FrontMiddleCross", "BackMiddleCross"], "displayH", "flex");
-displayed( ["LeftTop", "RightBottom", "RightTop",  "LeftBottom", "RightMiddleCross", "LeftMiddleCross"], "iPerspBox", "flex");
+//displayed( ["LeftTop", "RightBottom", "RightTop",  "LeftBottom", "RightMiddleCross", "LeftMiddleCross"], "iPerspBox", "flex");
 };
 
 //____________________________POPUP_FENSTER______________________________________
@@ -529,19 +433,6 @@ window.addEventListener('load', () => {
 });
 
 
-function createLine(Line) {
-  const tLine = document.getElementById(Line);
-
-  // Funktion zum Aktualisieren der Linie je nach Button-Status
-  if (buttonStates[Line]) {
-    tLine.style.stroke = "black";
-    tLine.style.strokeDasharray ="none"
-    tLine.parentNode.appendChild(tLine); // Linie nach vorne bringen
-  } else {
-    tLine.style.stroke = "lightgray";
-    tLine.style.strokeDasharray ="10, 1"
-  }
-}
 
 
 

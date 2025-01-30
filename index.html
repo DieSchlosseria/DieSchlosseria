@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
-  <link id="stylesheet" href="main.css" rel="stylesheet" />
+  <link id="iSstylesheet" href="main.css" rel="stylesheet" />
   <a href="Warenkorb.html">
   <img src="images/Warenkorp.png" class="cWare" alt="Warenkorb">
   </a>
@@ -30,15 +30,12 @@
 </div>
 
           <!--Cube Button-->
-      
         <div class="cHoover">
         <span class="v186_2479">Kreiere dein eigenes  Möbelstück:</span>
         <span class="v186_2503">1. klicke auf die Linien welche Du erstellen möchtest: </span>
 
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <svg xmlns="http://www.w3.org/2000/svg" width="400" height="230" viewBox="0 0 400 230">
-     
-        <!-- Zeichne den Würfel mit Linien -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="350" height="350" viewBox="0 0 350 350">
+         <!-- Zeichne den Würfel mit Linien -->
         <!--Vorderseite-->
         <line class="cube-line" id="FrontTop" x1="50" y1="50" x2="275" y2="50" />
         <line class="cube-line" id="FrontMiddleCross" x1="50" y1="75" x2="275" y2="75" />
@@ -46,7 +43,6 @@
         <line class="cube-line" id="FrontRight" x1="275" y1="50" x2="275" y2="150" />
         <line class="cube-line" id="FrontBottom" x1="275" y1="150" x2="50" y2="150" />
         <line class="cube-line" id="FrontLeft" x1="50" y1="150" x2="50" y2="50" />
-
         <!--Rückseite-->
         <line class="cube-line" id="BackTop" x1="125" y1="0" x2="325" y2="0" />
         <line class="cube-line" id="BackMiddleCross" x1="125" y1="25" x2="325" y2="25" />
@@ -64,32 +60,24 @@
         <line class="cube-line" id="RightBottom" x1="275" y1="150" x2="325" y2="100" />
     </svg>
   </div>
-
-    <button class="cTrash" id="iTrash"></button>
+    <button class="cTrash" id="iTrash">X</button>
 
 
 
 <!--___________________________________________________________________________________________-->
-<!--EINGABE der Maße + Canvas-->
-
-
-
-
+<!--EINGABE der Maße-->
 
 <div class="cInputField">
   <b>2. Gib deine Maße ein:</b><br><br>
  
   <div  >
 
-    <!--__________________________Eingabefelder_Maße_________________________________________-->
-    <!--TEST-->
-    <!--evtl besser styles direkt in html code?-->
-
+<!--__________________________Eingabefelder_Maße_________________________________________-->
 <!--Materialstärke-->
 <div style="display: flex; align-items: center; gap: 5px; margin: 5px 0; font-weight: bold;">
   <label for="iMaterial" style="width: 100px;">Material</label>
   <input type="range" name="material" class="cInput" min="10" max="50" step="5" id="iMaterial" style="flex: 1;">
-  <output name="materialOutput" id="materialOutput" style="width: 50px; text-align: right;">15</output>
+  <output name="materialOutput" id="materialOutput" style="width: 50px; text-align: right;" >15</output>
   <span>mm</span>
 </div>
 
@@ -137,20 +125,16 @@
 
 
 <!--perspective-->
-<div class="cPerspBox" id="iPerspBox" style="display: flex; flex-direction: column; align-items: flex-start; margin-left: 20px; width: 200px;">
-  <label for="iPerspective" style="width: 100%;">Perspektive</label>
+<div class="cPerspBox" id="iPerspBox" style="display: flex; flex-direction: row; align-items: flex-start; margin-left: 20px; width: 200px;">
+  <label for="iPerspective" style="width: 100%;">Ansicht</label>
   <input class="cInput" type="range" min="0" max="90" id="iPerspective" style="width: 100%;">
+  <button class="cTest" id="iTest" style="display: flex; position: absolute; top: 100px;">Hilfslinien ausblenden</button>
 </div>
-  
-  
-  
-  
-  <button class="cSubmitSub" id="showPopup">3. Zum Warenkorb hinzufügen</button>
- 
-  <canvas id="canvas" width="607" height="328"></canvas>
 
-    <!-- Ein Button, der bei Bedarf in der Nähe der Linien angezeigt wird -->
- <button id="hoverButton" class="cube-button red-button">Add</button>
+<button class="cSubmitSub" id="showPopup">3. Zum Warenkorb hinzufügen</button>
+ 
+  <!-- Ein Button, der bei Bedarf in der Nähe der Linien angezeigt wird -->
+<button id="hoverButton" class="cube-button red-button">Add</button>
 
  <!--___________________POPUP_____________________-->
 
@@ -176,7 +160,7 @@
 
 <script src="FrameCreator.js"></script>
 <script src="popupCreator.js"></script>
-
+<script src="Hover.js"></script>
 
 
 

@@ -20,7 +20,7 @@ position: absolute;
 .cPerspBox{
 position: absolute;
 left: 100px;
-top: 620px; 
+top: 680px; 
 }
 
 
@@ -205,66 +205,48 @@ input[type="range"]:focus::-moz-range-thumb{
                 font-size: 8px; /* Neue Schriftgröße */
                 left: 0px;
             }
-    
+            
             .cube-line {
-                stroke: rgba(0, 0, 0, 0.241);
-                stroke-width: 2;
-                  --default-line-color: #808080; /* Grau als Standardfarbe */
-                transition: stroke-width 0.2s;
-                padding: 0px 0px 0px 0px;
-                margin: 0px 0px 0px 0px;
-                left: 0px;
-                position: fixed;
-                stroke-dasharray: none;    /* Definiert die gestrichelte Linie: 5px Strich, 5px Lücke */
-        
-              }
-    
-            .cube-line.hovered {
-        
-                stroke-width: 4;
-                padding: 0px 0px 0px 0px;
-                margin: 0px 0px 0px 0px;
-                left: 0px;
-                position: fixed;
-                stroke-dasharray: 10, 1;    /* Definiert die gestrichelte Linie: 5px Strich, 5px Lücke */
-            }
+
+              stroke: rgba(0, 0, 0, 0.241);
+              stroke-width: 2;
+              --default-line-color: #808080; /* Grau als Standardfarbe */
+              transition: stroke-width 0.2s, stroke-dasharray 0.2s; /* Übergang auch für stroke-dasharray */
+              padding: 0px 0px 0px 0px;
+              margin: 0px 0px 0px 0px;
+              left: 0px;
+              position: fixed;
+              stroke-dasharray: none;
+              opacity: 1.0;
+          }
+          
+          .cube-line.hovered {
+              stroke-width: 6;
+              stroke:  rgb(0, 0, 0);
+              position: fixed;  
+              opacity: 0.5;
+          }
+          
+
 
 .hoverButton{
 position: fixed;
 }
 
 svg{
+  background-color: whitesmoke;
+  display: flex;
   position: absolute; /* Fixiert das SVG an einer bestimmten Position */
- top: 350px; /* Setzt die obere Kante des SVG 200 Pixel vom oberen Rand des Viewports entfernt */
-/*  left: 50%; /* Zentriert das SVG horizontal */
-  padding: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
-  text-align: left;
-  display: block;
-  background-repeat: no-repeat;
+  top: 350px; /* Setzt die obere Kante des SVG 200 Pixel vom oberen Rand des Viewports entfernt */
+  padding: 0;
+  margin:  0;
   background-position: center center;
   background-size: cover;
   opacity: 1;
   overflow: hidden;
+  justify-content: center; /* Horizontal zentrieren */
+  align-items: center;    /* Vertikal zentrieren */
 
-}
-
-/*_____________CANVAS_________________*/
-canvas{
-padding: 0px 0px 0px 0px;
-margin: 0px 0px 0px 0px;
-text-align: left;
-display: block;
-width: 607px;
-height: 328px;
-
-
-background: whitesmoke;
-opacity: 1;
-position: absolute;
-top: 282px;
-left: 481px;
-overflow: hidden;
 }
 
 /*_________alg_FrameCreator__________*/
@@ -274,18 +256,30 @@ overflow: hidden;
         height: 700px;
         position: absolute;
         top: 144px;
-        left: 1150px;
+        
         overflow: hidden;
         padding: 5px 5px 5px 5px;
         align-items: center; 
         gap: 10px;       
         color: rgba(0,0,0,1);
-        top: 270px;
+        top: 300px;
+        left: 500px;
         font-weight: Light;
         font-size: 16px;
         opacity: 1;
         text-align: left;
      
+      }
+
+      .cSubmitSub{
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        opacity: 1;
+        position: absolute;
+        top: 700px;
+        left: 500px;
+        overflow: hidden;
       }
 
 .OverHead {
@@ -335,7 +329,7 @@ overflow: hidden;
     color: rgba(0,0,0,1);
     position: absolute;
     top: 200px;
-    left: 100px;
+    left: 00px;
 
     font-weight: Light;
     font-size: 24px;
@@ -350,7 +344,7 @@ overflow: hidden;
     position: absolute;
     display: inline;
     top: 46px;
-    left: 850px;
+    left: 450px;
     font-weight: Light;
     font-size: 24px;
     opacity: 1;
@@ -361,7 +355,7 @@ overflow: hidden;
     color: rgba(0,0,0,1);
     position: absolute;
     top: 46px;
-    left: 1197px;
+    left: 790px;
     font-weight: Light;
     font-size: 24px;
     opacity: 1;
@@ -372,7 +366,7 @@ overflow: hidden;
     color: rgba(0,0,0,1);
     position: absolute;
     top: 46px;
-    left: 971px;
+    left: 570px;
     font-weight: Light;
     font-size: 24px;
     opacity: 1;
@@ -400,7 +394,7 @@ overflow: hidden;
     color: rgba(0,0,0,1);
     position: absolute;
     top: 300px;
-    left: 100px;
+    left: 0px;
     font-weight: Light;
     font-size: 16px;
     opacity: 1;
@@ -613,7 +607,7 @@ overflow: hidden;
     opacity: 0.5;
     position: absolute;
     top: 40px;
-    left: 1400px;
+    left: 1000px;
     overflow: hidden;
   }
 
@@ -626,24 +620,22 @@ overflow: hidden;
     opacity: 1;
     position: absolute;
     top: 40px;
-    left: 1400px;
+    left: 1000px;
     overflow: hidden;
   }
 
   .cTrash{
-    width: 60px;
-    height: 60px;
-    background: url("images/trash.jpg");
+    width: 35px;
+    height: 35px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     opacity: 0.5;
     position: absolute;
-    top: 550px;
-    left: 100px;
+    top: 360px;
+    left: 410px;
     border: none;
     cursor: pointer;
-    color: black;
   }
 
   .cTrash:hover{
@@ -651,17 +643,7 @@ overflow: hidden;
   }
 
 
-  .cSubmitSub{
 
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 620px;
-    left: 670px;
-    overflow: hidden;
-  }
 
 
 
