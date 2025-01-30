@@ -26,7 +26,7 @@ const savedData = JSON.parse(localStorage.getItem("accessories")) || {};
 
 // Anzeige-Elemente
 const OutTotal = document.getElementById("iTotoal");
-const clearButton = document.getElementById("clearButton");
+const clearButton = document.getElementById("iClearButton");
 
 // Berechnung der Gesamtsumme
 const calculateTotal = () => {
@@ -72,7 +72,7 @@ const displayConfigurations = () => {
 
     storedConfigurations.forEach((config, index) => {
       const paragraph = document.createElement("p");
-      paragraph.classList.add("cTest");
+      paragraph.classList.add("cList");
 
       paragraph.innerHTML = `
         Möbelstück ${index + 1}:<br>

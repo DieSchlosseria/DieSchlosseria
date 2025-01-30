@@ -81,7 +81,7 @@ input{
 
 
 
-.Logo {
+.cLogo {
   width: 150px;
   height: 133px;
   background: url("images/Logo.png");
@@ -177,7 +177,7 @@ input[type="range"]:focus::-moz-range-thumb{
     
 
 /*_______________cube-Button________________________*/
-            .cube-button {
+            .cCube-button {
                 background: none;
                 border: none;
                 cursor: pointer;
@@ -191,7 +191,7 @@ input[type="range"]:focus::-moz-range-thumb{
                 left: 0px;
             }
     
-            .cube-button.red-button {
+            .cCube-button.cRed-button {
                 background-color: rgba(0, 162, 255, 0.11);
                 color: white;
                 width: 10px; /* Neue Breite */
@@ -202,11 +202,11 @@ input[type="range"]:focus::-moz-range-thumb{
                 display: none;
                 padding: 0px 0px 0px 0px; /* Platz um den Text hinzufügen */
                 margin: 0px 0px 0px 0px;
-                font-size: 8px; /* Neue Schriftgröße */
+                font-size: 4px; /* Neue Schriftgröße */
                 left: 0px;
             }
             
-            .cube-line {
+            .cCube-line{
 
               stroke: rgba(0, 0, 0, 0.241);
               stroke-width: 2;
@@ -220,7 +220,7 @@ input[type="range"]:focus::-moz-range-thumb{
               opacity: 1.0;
           }
           
-          .cube-line.hovered {
+          .cCube-line.hovered {
               stroke-width: 6;
               stroke:  rgb(0, 0, 0);
               position: fixed;  
@@ -229,7 +229,7 @@ input[type="range"]:focus::-moz-range-thumb{
           
 
 
-.hoverButton{
+.iHoverButton{
 position: fixed;
 }
 
@@ -248,6 +248,7 @@ svg{
   align-items: center;    /* Vertikal zentrieren */
 
 }
+
 
 /*_________alg_FrameCreator__________*/
       /*inputField*/
@@ -277,12 +278,12 @@ svg{
         background-size: cover;
         opacity: 1;
         position: absolute;
-        top: 700px;
+        top: 620px;
         left: 500px;
         overflow: hidden;
       }
 
-.OverHead {
+.cOverHead {
   width: 502px;
   color: rgba(0,0,0,1);
   position: absolute;
@@ -338,7 +339,7 @@ svg{
     font-weight: 700;
   }
   
-  .v186_2480 {
+  .cHome {
     width: 91px;
     color: rgba(0,0,0,1);
     position: absolute;
@@ -350,7 +351,7 @@ svg{
     opacity: 1;
     text-align: left;
   }
-  .v186_2481 {
+  .cAccessoires {
     width: 111px;
     color: rgba(0,0,0,1);
     position: absolute;
@@ -361,7 +362,7 @@ svg{
     opacity: 1;
     text-align: left;
   }
-  .v186_2482 {
+  .cExamples {
     width: 212px;
     color: rgba(0,0,0,1);
     position: absolute;
@@ -625,15 +626,15 @@ svg{
   }
 
   .cTrash{
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 0.5;
+    opacity: 0.7;
     position: absolute;
     top: 360px;
-    left: 410px;
+    left: 405px;
     border: none;
     cursor: pointer;
   }
@@ -656,7 +657,7 @@ svg{
 
   /*_________________FÜR_POPUP_Formular______________________*/
 
-          .overlay {
+          .cOverlay {
           display: none;
           position: absolute;
           top: 0;
@@ -734,7 +735,7 @@ svg{
   }
   
 
-#closePopup {
+#iClosePopup {
   color: #000000a8;
   display: flex;
   flex-direction: column;
@@ -752,7 +753,7 @@ svg{
   cursor: pointer; 
 }
 
-.popup {
+.cPopup {
   padding: 30px 30px 30px 30px;
   position: fixed;
   top: 50%;
@@ -843,12 +844,14 @@ display: none;
 }
 
 
-.cTest {
-  position: relative;
+.cDisplayLine {
+  position: absolute;
+  height: 25px;
+  top: 370px;
+  left: 120px;
   font-size: 16px;
-  left: 20px;
-  top: 320px;
 }
+
 .countFix{
   float: LEFT;
   position: ABSOLUTE;
@@ -953,6 +956,18 @@ form {
 
 /* Zubehör und Konfigurationen */
 
+.cList{
+position: static;
+font-weight: bold;
+margin-bottom: 10px;
+margin-top: 0px;
+
+
+
+}
+
+
+
 .extra{
   width: 214px;
   height: 40px;
@@ -1004,12 +1019,7 @@ form {
   margin-top: 10px; 
   padding: 10px;
 }
-.cTest{
-  margin-top: 0 px;
-  margin-bottom: 10 px;
-  position:static;
-  font-weight:bold;
-}
+
 
 
 

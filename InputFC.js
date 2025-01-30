@@ -1,0 +1,421 @@
+
+//____________________VARIABLEN_______________________
+let configurations = [];
+let currentIndex = 0
+let outputText = "";
+
+// Das Output-Element auswählen --> für Popup
+const outDim = document.getElementById("outDim");
+const outCost = document.getElementById("outCost");
+const outDeliv = document.getElementById("outDeliv");
+
+//HooverButton
+let isButtonClicked = false;
+let hideTimeout; // Timeout-Variable hinzugefügt
+const buttonStates = {};
+
+//Eingabe Maße
+let width;
+let hight;
+let deepth;
+let middleH;
+let middleV;
+let perspective;
+let material;
+let materialScaled;
+
+//Input Value
+const widthInput = document.getElementById("iWidth") ?? 150;
+const hightInput = document.getElementById("iHight");
+const deepthInput = document.getElementById("iDeepth");
+const MaterialInput = document.getElementById("iMaterial");
+const MiddleInput = document.getElementById("iMiddleH");
+const MiddleLengthInput = document.getElementById("iMiddleV");
+const perspectiveInput = document.getElementById("iPerspective");
+
+//InOutput (anzeige aktuelle Werte)
+const materialOutput = document.getElementById("iMaterialOutput");
+const hightOutput = document.getElementById("iHightOutput");
+const widthOutput = document.getElementById("iWidthOutput");
+const deepthOutput = document.getElementById("iDeepthOutput");
+const middleVOutput = document.getElementById("iMiddleVOutput");
+const middleHOutput = document.getElementById("iMiddleHOutput");
+
+//Preis
+let Total = 0;
+const PricePerMeter = 10; //Preis pro Meter bei einem 20mm Quadratrohr
+const PricePerPeace = 10; //Für ABschnitt zusammenschweißen usw.
+const PriceVersand = 30; // Versand etc.
+
+const add = document.getElementById("iAdd");
+let takenWidth;
+let takenHight;
+let takenDeepth;
+
+//Eingabe Slider --> führt Input aus
+MaterialInput.addEventListener("input", getData);
+hightInput.addEventListener("input", getData);
+widthInput.addEventListener("input", getData);
+deepthInput.addEventListener("input", getData);
+MiddleInput.addEventListener("input", getData);
+MiddleLengthInput.addEventListener("input", getData);
+perspectiveInput.addEventListener("input", getData);
+
+function updateInput(id, input, min, max) {
+  let value = parseInt(input.value);
+  value = Math.max(min, Math.min(value, max)); // Begrenze auf min/max
+  localStorage.setItem(id, value);
+  return value;
+  };
+
+//Linien in Canvas zeichnen
+function draw(){
+
+//______________________________TEST_______________________________
+let trueCount = 0; // Variable zur Zählung der "true"-Werte
+      
+      for (const key in buttonStates) {
+        if (buttonStates.hasOwnProperty(key) && buttonStates[key] === true) {
+          trueCount++; // Erhöhe die Zählvariable, wenn der Wert "true" ist
+        }
+      }   
+
+}
+  
+//Werte von Inputfeld übernehmen Limitieren und in localStorage  
+function getData() {
+
+width = updateInput("iWidth", widthInput, 10, 200);
+hight = updateInput("iHight", hightInput, 10, 200);
+deepth =  updateInput("iDeepth", deepthInput, 10, 200);
+let limitMiddleH = hight; 
+let limitMiddleV = width;
+middleH = updateInput("iMiddleH",MiddleInput, 10, limitMiddleH);
+middleV = updateInput("iMiddleV",MiddleLengthInput, 10, limitMiddleV);
+perspective = updateInput("iPerspective",perspectiveInput, 10, 50);
+material = updateInput("iMaterial", MaterialInput, 15, 50)
+materialScaled = (Math.ceil(material/5)*5)/10; //in cm und in 5 schritten wandeln   
+
+ActInput();  
+}
+
+function setData(){
+  //Inputwerte aktualisieren
+  widthInput.value = localStorage.getItem("iWidth") ?? 150;
+  localStorage.setItem("iWidth", width);
+  
+  hightInput.value = localStorage.getItem("iHight") ?? 100;
+  localStorage.setItem("iHight", hight);
+  
+  deepthInput.value = localStorage.getItem("iDeepth") ?? 100;
+  localStorage.setItem("iDeepth", deepth);
+  
+  MaterialInput.value = localStorage.getItem("iMaterial") ?? 30;
+  localStorage.setItem("iMaterial", material);
+  
+  MiddleInput.value = localStorage.getItem("iMiddleH") ?? 80;
+  localStorage.setItem("iMiddleH", middleH);
+  
+  MiddleLengthInput.value = localStorage.getItem("iMiddleV") ?? 65;
+  localStorage.setItem("iMiddleV", middleV);
+  
+  perspectiveInput.value = localStorage.getItem("iPerspective") ?? 26;
+  localStorage.setItem("iPerspective", perspective);
+  }
+
+function getButtons(){
+
+    // Lade den gespeicherten Zustand aus localStorage und weise ihn direkt buttonStates zu
+      const savedStates = JSON.parse(localStorage.getItem("buttonStates")) || {}; // Hole die gespeicherten Daten oder setze auf {} als Fallback
+    // Kopiere die gespeicherten Zustände in das bereits vorhandene buttonStates-Objekt
+      Object.assign(buttonStates, savedStates);
+    
+    
+    } 
+
+function setButtons(){
+  // Speichere das aktualisierte buttonStates-Objekt in localStorage
+    localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
+}
+
+//Ein/Ausgabe aktualisieren
+function ActInput(){ //Ein-Ausgänge aktualisieren
+
+  widthInput.value = width;
+  hightInput.value = hight;
+  deepthInput.value = deepth;
+  MaterialInput.value = materialScaled * 10;
+  MiddleLengthInput.value = middleV;
+  MiddleInput.value = middleH;
+  perspectiveInput.value = perspective;
+
+  materialOutput.value = materialScaled * 10; 
+  hightOutput.value = hight;
+  widthOutput.value = width;
+  deepthOutput.value = deepth;
+  middleVOutput.value = middleV;
+  middleHOutput.value = middleH;
+}
+
+//Design löschen
+function FuncClear(){
+
+  PreConfigDesign(100, 150, 100, 80, 65, 26, 40,  0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  
+}
+
+//Für Hoover Würfel
+function funcHooverButton(){
+  const button = document.getElementById("iHoverButton");
+  const svg = document.querySelector("svg");             
+  // Event-Listener für Klick
+  button.addEventListener("click", function () {
+    const lineId = button.getAttribute("data-line-id");
+ // Toggle den Status des Buttons
+    buttonStates[lineId] = !buttonStates[lineId]; // Invertiere den aktuellen Status
+setButtons();
+  });
+
+   // Funktion zum Aktualisieren der Button-Position
+  function updateButtonPosition(x, y) {
+    button.style.left = x - 5 + "px";
+    button.style.top = y - 5 + "px";
+  }
+
+  svg.addEventListener("mousemove", function (e) {
+    
+   const mouseX = e.clientX;
+    const mouseY = e.clientY;
+  
+    const svgRect = svg.getBoundingClientRect(); // Das SVG-Element Rechteck erhalten
+  
+   const relativeX = mouseX - svgRect.left; // Relative X-Position innerhalb des SVG
+    const relativeY = mouseY - svgRect.top; // Relative Y-Position innerhalb des SVG
+  
+  
+    let closestLine = null;
+    let closestDistance = Number.MAX_SAFE_INTEGER;
+  
+    const lines = document.querySelectorAll(".cCube-line");
+  
+    lines.forEach((line) => {
+      const lineBox = line.getBBox();
+      const lineX = (lineBox.x + lineBox.x + lineBox.width) / 2;
+      const lineY = (lineBox.y + lineBox.y + lineBox.height) / 2;
+      const distance = Math.sqrt(
+        Math.pow(relativeX - lineX, 2) + Math.pow(relativeY - lineY, 2)
+      );
+  
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestLine = line;
+      }
+    });
+  
+    lines.forEach((line) => {
+      line.classList.remove("hovered");
+    });
+  
+    if (closestLine) {
+      closestLine.classList.add("hovered");
+      button.style.display = "block";
+      updateButtonPosition(mouseX, mouseY); // Button-Position aktualisieren
+      button.setAttribute("data-line-id", closestLine.id);
+    
+      isButtonClicked = false;
+      clearTimeout(hideTimeout);
+    } else {
+      hideTimeout = setTimeout(() => {
+        button.style.display = "none";
+      
+      }, 200);
+    }
+  });
+}
+
+// Produktbeispiele bzw konfiguration vorbestimmen
+ function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
+
+  // Strebenzustände setzen
+  buttonStates["iFrontTop"] = tFrontTop;
+  buttonStates["iFrontBottom"] = tFrontBottom;
+  buttonStates["iLeftTop"] = tLeftTop;
+  buttonStates["iRightTop"] = tRightTop;
+  buttonStates["iBackTop"] = tBackTop;
+  buttonStates["iBackBottom"] = tBackBottom;
+  buttonStates["iFrontRight"] = tFrontRight;
+  buttonStates["iBackRight"] = tBackRight;
+  buttonStates["iFrontLeft"] = tFrontLeft;
+  buttonStates["iBackLeft"] = tBackLeft; // Hier war ein Tippfehler (ttBackleftrue)
+  buttonStates["iRightBottom"] = tRightBottom;
+  buttonStates["iLeftBottom"] = tLeftBottom;
+  buttonStates["iFrontMiddleCross"] = tFrontMiddleCross;
+  buttonStates["iFrontMiddleLenght"] = tFrontMiddleLength;
+  buttonStates["iBackMiddleCross"] = tBackMiddleCross;
+  buttonStates["iBackMiddleLenght"] = tBackMiddleLength;
+  buttonStates["iRightMiddleCross"] = tRightMiddleCross;
+  buttonStates["iLeftMiddleCross"] = tLeftMiddleCross;
+
+  // Dimensionen setzen
+  hight = tHight;
+  width = tWidth;
+  deepth = tDeepth;
+  middleH = tmiddleH;
+  middleV = tmiddleV;
+  perspective= tPerspective;
+  materialScaled = (Math.ceil(tMaterial / 5) * 5) / 10; // in cm und in 5 Schritten wandeln;
+  
+setData();
+ActInput();  
+setButtons();
+
+}
+
+// Funktion zur Berechnung der Gesamtwerte
+function calculateTotal(buttonStates, dimensions, keys) {
+  return keys.reduce((total, key) => total + (buttonStates[key] ? dimensions : 0), 0);
+}
+
+//Rückgabewert gleich 0 wenn die entsprechenden streben nicht angewählt sind
+function setValueToZero(ButtonList, dimension) {
+  for (let button of ButtonList) {
+    if (buttonStates[button]) {
+      return dimension; // Gibt den Wert von dimension zurück, wenn ein Taster gedrückt ist
+    }
+  }
+  return 0; // Gibt 0 zurück, wenn keiner der Taster gedrückt ist
+}
+
+//______________________AUSFÜHREN_____________________
+
+funcHooverButton();
+
+//alle werte zurücksetzen
+let clear = document.getElementById("iTrash");
+clear.addEventListener('click', FuncClear);
+
+//Seite neu laden
+window.onload = function() {
+
+
+
+
+  getButtons();
+  setData();
+  getData();
+  };
+
+//____________________________POPUP_FENSTER______________________________________
+
+const PopUp = document.getElementById('iShowPopup');
+let fulllength; 
+let delivery;
+let countEdge;
+let element; 
+
+PopUp.addEventListener('click', () => {
+ takenWidth = setValueToZero(["iFrontTop", "iFrontBottom", "iFrontMiddleCross", "iBackTop", "iBackBottom", "iBackMiddleCross"], width);
+ takenHight = setValueToZero(["iFrontLeft", "iFrontRight", "iFrontMiddleLength", "iBackLeft", "iBackRight", "iBackMiddleLength"], hight);
+ takenDeepth = setValueToZero(["iLeftBottom", "iLeftTop", "iLeftMiddleCross", "iRightBottom", "iRightTop", "iRightMiddleCross"], deepth);
+
+ //Lieferung 
+if (takenDeepth > 150 || takenWidth > 150 || takenHight > 150 ) {
+  delivery = "Nur Abholung";
+} else {
+  delivery = "Versand möglich";
+};
+
+//Preis berechnen
+let trueCount = Object.values(buttonStates).filter(value => value == true).length;
+
+// Berechnung der Gesamtwerte für Länge, Höhe und Tiefe
+let FullWidth = calculateTotal(buttonStates, takenWidth, ["iFrontTop", "iFrontBottom", "iFrontMiddleCross", "iBackTop", "iBackBottom", "iBackMiddleCross"]);
+let FullHeight = calculateTotal(buttonStates, takenHight, ["iFrontLeft", "iFrontRight", "iFrontMiddleLength", "iBackLeft", "iBackRight", "iBackMiddleLength"]);
+let FullDepth = calculateTotal(buttonStates, takenDeepth, ["iLeftBottom", "iLeftTop", "iLeftMiddleCross", "iRightBottom", "iRightTop", "iRightMiddleCross"]);
+let Fulllength = (FullWidth + FullHeight + FullDepth)/100 * (material/20); //Für 20mm Quadratrohr kalkuliert
+if (Fulllength > 0) { PricePauschal = PriceVersand;} else {PricePauschal = 0;};
+Total = Fulllength * PricePerPeace + trueCount * PricePerPeace + PricePauschal;
+
+//_________________AUSGABEWERTE____________________
+// Den Wert der Variable in das Output-Element einfügen
+
+outDim.textContent = takenWidth + "X" + takenDeepth + "X" + takenHight ;
+outCost.textContent = Total + "€" ;
+outDeliv.textContent = delivery ;
+});
+
+for (const id in buttonStates) {
+  if (buttonStates.hasOwnProperty(id)) {
+    const status = buttonStates[id];
+  }
+};
+
+//_________________________________FORMULAR_SENDEN____________________________________
+//Speichere Object
+add.addEventListener('click', () => {
+
+  for (const id in buttonStates) {
+    if (buttonStates.hasOwnProperty(id)) {
+      const status = buttonStates[id];
+      outputText += `ID: ${id}, Status: ${status}\n`;
+    }
+  };
+
+  // Create an object with the current configuration
+  const currentConfig = {
+      bitmuster: outputText,
+      dicke: materialScaled * 10,
+      width: takenWidth,
+      deepth: takenDeepth,
+      hight: takenHight,
+      total: Total,
+  };
+
+  // Save the current configuration to the array
+  configurations[currentIndex] = currentConfig;
+
+  // Increment the index for the next configuration
+  currentIndex++;
+
+localStorage.setItem('configurations', JSON.stringify(configurations));
+  alert("erfolgreich zum Warenkorb hinzugefügt.");  
+});
+//_________________________________________________________________________________---
+
+// Beim Laden der Seite --> Konfigurationen wiederherstellen
+window.addEventListener('load', () => {
+  // Laden der gespeicherten Konfigurationen aus dem Local Storage
+  const storedConfigurations = localStorage.getItem('configurations');
+  ActInput();
+
+  // Überprüfen, ob gespeicherte Konfigurationen vorhanden sind
+  if (storedConfigurations) {
+    configurations = JSON.parse(storedConfigurations);
+    currentIndex = configurations.length; // Setzen Sie den Index auf die nächste verfügbare Position
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

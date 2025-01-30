@@ -2,9 +2,9 @@
 // VARIABLEN
 const popups = [
   {
-    showButtonId: 'showPopup',
+    showButtonId: 'iShowPopup',
     overlayId: 'popupOverlay',
-    closeButtonId: 'closePopup',
+    closeButtonId: 'iClosePopup',
   },
   {
     showButtonId: 'showPopup1',
@@ -82,24 +82,24 @@ localStorage.setItem("iPerspective", perspective);
 function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
 
   // Strebenzustände setzen
-  buttonStates["FrontTop"] = tFrontTop;
-  buttonStates["FrontBottom"] = tFrontBottom;
-  buttonStates["LeftTop"] = tLeftTop;
-  buttonStates["RightTop"] = tRightTop;
-  buttonStates["BackTop"] = tBackTop;
-  buttonStates["BackBottom"] = tBackBottom;
-  buttonStates["FrontRight"] = tFrontRight;
-  buttonStates["BackRight"] = tBackRight;
-  buttonStates["FrontLeft"] = tFrontLeft;
-  buttonStates["BackLeft"] = tBackLeft; // Hier war ein Tippfehler (ttBackleftrue)
-  buttonStates["RightBottom"] = tRightBottom;
-  buttonStates["LeftBottom"] = tLeftBottom;
-  buttonStates["FrontMiddleCross"] = tFrontMiddleCross;
-  buttonStates["FrontMiddleLenght"] = tFrontMiddleLength;
-  buttonStates["BackMiddleCross"] = tBackMiddleCross;
-  buttonStates["BackMiddleLenght"] = tBackMiddleLength;
-  buttonStates["RightMiddleCross"] = tRightMiddleCross;
-  buttonStates["LeftMiddleCross"] = tLeftMiddleCross;
+  buttonStates["iFrontTop"] = tFrontTop;
+  buttonStates["iFrontBottom"] = tFrontBottom;
+  buttonStates["iLeftTop"] = tLeftTop;
+  buttonStates["iRightTop"] = tRightTop;
+  buttonStates["iBackTop"] = tBackTop;
+  buttonStates["iBackBottom"] = tBackBottom;
+  buttonStates["iFrontRight"] = tFrontRight;
+  buttonStates["iBackRight"] = tBackRight;
+  buttonStates["iFrontLeft"] = tFrontLeft;
+  buttonStates["iBackLeft"] = tBackLeft; // Hier war ein Tippfehler (ttBackleftrue)
+  buttonStates["iRightBottom"] = tRightBottom;
+  buttonStates["iLeftBottom"] = tLeftBottom;
+  buttonStates["iFrontMiddleCross"] = tFrontMiddleCross;
+  buttonStates["iFrontMiddleLenght"] = tFrontMiddleLength;
+  buttonStates["iBackMiddleCross"] = tBackMiddleCross;
+  buttonStates["iBackMiddleLenght"] = tBackMiddleLength;
+  buttonStates["iRightMiddleCross"] = tRightMiddleCross;
+  buttonStates["iLeftMiddleCross"] = tLeftMiddleCross;
 
   // Dimensionen setzen
   hight = tHight;
@@ -116,7 +116,7 @@ function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspecti
   window.onload = function() {         
     getData();
   console.log(width);
-  console.log(buttonStates["FrontTop"]);
+  console.log(buttonStates["iFrontTop"]);
 
   }
 
