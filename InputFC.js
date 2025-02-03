@@ -160,7 +160,7 @@ function ActInput(){ //Ein-Ausgänge aktualisieren
 //Design löschen
 function FuncClear(){
 
-  PreConfigDesign(100, 150, 100, 80, 65, 26, 40,  0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  PreConfigDesign(100, 150, 100, 80, 65, 26, 40,  0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   
 }
 
@@ -234,13 +234,14 @@ setButtons();
 }
 
 // Produktbeispiele bzw konfiguration vorbestimmen
- function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
+ function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tTopMiddle, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
 
   // Strebenzustände setzen
   buttonStates["iFrontTop"] = tFrontTop;
   buttonStates["iFrontBottom"] = tFrontBottom;
   buttonStates["iLeftTop"] = tLeftTop;
   buttonStates["iRightTop"] = tRightTop;
+  buttonStates["iTopMiddle"] = tTopMiddle;
   buttonStates["iBackTop"] = tBackTop;
   buttonStates["iBackBottom"] = tBackBottom;
   buttonStates["iFrontRight"] = tFrontRight;
@@ -316,7 +317,7 @@ let element;
 PopUp.addEventListener('click', () => {
  takenWidth = setValueToZero(["iFrontTop", "iFrontBottom", "iFrontMiddleCross", "iBackTop", "iBackBottom", "iBackMiddleCross"], width);
  takenHight = setValueToZero(["iFrontLeft", "iFrontRight", "iFrontMiddleLength", "iBackLeft", "iBackRight", "iBackMiddleLength"], hight);
- takenDeepth = setValueToZero(["iLeftBottom", "iLeftTop", "iLeftMiddleCross", "iRightBottom", "iRightTop", "iRightMiddleCross"], deepth);
+ takenDeepth = setValueToZero(["iLeftBottom", "iLeftTop", "iLeftMiddleCross", "iRightBottom", "iRightTop", "iRightMiddleCross", "iTopMiddle"], deepth);
 
  //Lieferung 
 if (takenDeepth > 150 || takenWidth > 150 || takenHight > 150 ) {
@@ -331,7 +332,7 @@ let trueCount = Object.values(buttonStates).filter(value => value == true).lengt
 // Berechnung der Gesamtwerte für Länge, Höhe und Tiefe
 let FullWidth = calculateTotal(buttonStates, takenWidth, ["iFrontTop", "iFrontBottom", "iFrontMiddleCross", "iBackTop", "iBackBottom", "iBackMiddleCross"]);
 let FullHeight = calculateTotal(buttonStates, takenHight, ["iFrontLeft", "iFrontRight", "iFrontMiddleLength", "iBackLeft", "iBackRight", "iBackMiddleLength"]);
-let FullDepth = calculateTotal(buttonStates, takenDeepth, ["iLeftBottom", "iLeftTop", "iLeftMiddleCross", "iRightBottom", "iRightTop", "iRightMiddleCross"]);
+let FullDepth = calculateTotal(buttonStates, takenDeepth, ["iLeftBottom", "iLeftTop", "iLeftMiddleCross", "iRightBottom", "iRightTop", "iRightMiddleCross", "iTopMiddle"]);
 let Fulllength = (FullWidth + FullHeight + FullDepth)/100 * (material/20); //Für 20mm Quadratrohr kalkuliert
 if (Fulllength > 0) { PricePauschal = PriceVersand;} else {PricePauschal = 0;};
 Total = Fulllength * PricePerPeace + trueCount * PricePerPeace + PricePauschal;

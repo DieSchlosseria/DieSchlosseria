@@ -30,11 +30,15 @@
          <!-- Zeichne den Würfel mit Linien -->
         <!--Vorderseite-->
         <line class="cCube-line" id="iFrontTop" x1="50" y1="50" x2="275" y2="50" />
+        <line class="cCube-line" id="iTopMiddle"  x1="175" y1="50" x2="225" y2="0"/>
         <line class="cCube-line" id="iFrontMiddleCross" x1="50" y1="75" x2="275" y2="75" />
         <line class="cCube-line" id="iFrontMiddleLenght" x1="175" y1="50" x2="175" y2="150" />
         <line class="cCube-line" id="iFrontRight" x1="275" y1="50" x2="275" y2="150" />
         <line class="cCube-line" id="iFrontBottom" x1="275" y1="150" x2="50" y2="150" />
         <line class="cCube-line" id="iFrontLeft" x1="50" y1="150" x2="50" y2="50" />
+
+
+
         <!--Rückseite-->
         <line class="cCube-line" id="iBackTop" x1="125" y1="0" x2="325" y2="0" />
         <line class="cCube-line" id="iBackMiddleCross" x1="125" y1="25" x2="325" y2="25" />
@@ -122,8 +126,6 @@
 </div>
 
 <button class="cDisplayLine" id="iDisplayLine" >Hilfslinien ausblenden</button>
-
-
 <button class="cSubmitSub" id="iShowPopup">3. Zum Warenkorb hinzufügen</button>
  
   <!-- Ein Button, der bei Bedarf in der Nähe der Linien angezeigt wird -->
@@ -146,8 +148,20 @@
  <!--<h4 class="Letter2"> Anzahl Zubehör ges:   </h4>
  <output id="outExtra"></output>-->
  <button id="iAdd"> hinzufügen </button>
+
  </div>
 </div>
+
+<a href="Sandbox.html" class="cExamples" style="display: flex; position: absolute; top: 800px; left: 100px;">3D-Anischt</a>
+
+<!--____________________3D_____________________
+<button id="iView" style="display: flex; position: absolute; top: 400px;">3D-Ansicht</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/controls/OrbitControls.js"></script> 
+<script src="3dView.js"></script>-->
+
+
+
 
 <script src="InputFC.js"></script>
 <script src="PopUpFC.js"></script>

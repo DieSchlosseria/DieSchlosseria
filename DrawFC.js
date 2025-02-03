@@ -6,6 +6,7 @@ let LineCoord = {
   FrontLeft: {x1: null, y1: null, x2: null, y2: null},
   FrontMiddleCross: {x1: null, y1: null, x2: null, y2: null},
   FrontMiddleLength: {x1: null, y1: null, x2: null, y2: null},
+  TopMiddle: {x1: null, y1: null, x2: null, y2: null},
   BackTop: {x1: null, y1: null, x2: null, y2: null},
   BackBottom: {x1: null, y1: null, x2: null, y2: null},
   BackRight: {x1: null, y1: null, x2: null, y2: null},
@@ -20,7 +21,7 @@ let LineCoord = {
   LeftMiddleCross: {x1: null, y1: null, x2: null, y2: null},
 };
 const lines = [
-  "iFrontTop", "iFrontBottom", "iFrontLeft", "iFrontRight", "iFrontMiddleCross",
+  "iFrontTop","iTopMiddle", "iFrontBottom", "iFrontLeft", "iFrontRight", "iFrontMiddleCross",
   "iFrontMiddleLenght", "iBackLeft", "iBackTop", "iBackRight", "iBackBottom",
   "iFrontBottom", "iBackMiddleCross", "iBackMiddleLenght", "iLeftTop", 
   "iRightBottom", "iRightTop", "iLeftBottom", "iRightMiddleCross", "iLeftMiddleCross"
@@ -54,7 +55,7 @@ setInterval(value, 200);
 
 function value() {
   // Elemente ein/ausblenden
-     displayed(["iFrontMiddleLenght", "iBackMiddleLenght"], "displayV", "flex");
+     displayed(["iFrontMiddleLenght", "iBackMiddleLenght", "iTopMiddle"], "displayV", "flex");
      displayed(["iFrontMiddleCross", "iBackMiddleCross"], "displayH", "flex");
      //displayed( ["LeftTop", "RightBottom", "RightTop",  "LeftBottom", "RightMiddleCross", "LeftMiddleCross"], "iPerspBox", "flex");
 
@@ -79,6 +80,13 @@ function drawSvg() {
   LineCoord.FrontTop.y1 = starty;
   LineCoord.FrontTop.x2 = startx + width;
   LineCoord.FrontTop.y2 = starty;
+
+  //Top mitte
+  LineCoord.TopMiddle.x1 = startx + middleV;
+  LineCoord.TopMiddle.y1 = starty;
+  LineCoord.TopMiddle.x2 = startx + middleV + offset2;
+  LineCoord.TopMiddle.y2 = starty - offset1;;
+
   //Vorne unten
   LineCoord.FrontBottom.x1 = startx;
   LineCoord.FrontBottom.y1 = starty + hight;
@@ -192,6 +200,9 @@ function drawSvg() {
 
   DrawLine(LineCoord.RightMiddleCross,  "iRightMiddleCross");
   DrawLine(LineCoord.LeftMiddleCross,  "iLeftMiddleCross");
+
+  DrawLine(LineCoord.TopMiddle, "iTopMiddle");
+
 }
 
 // Funktion zum Zeichnen einer Linie mit den Koordinaten

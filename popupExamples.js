@@ -35,8 +35,8 @@ let perspective;
 
 //Konfiguration Produktbeispiele  //siehe funktion productexamples
 const productConfigurations = [
-  { ids: ["iDefined1j", "iDefined1n"], parameters: [120, 110, 50, 50, 50, 40, 20, 1, 0 , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]},
-  { ids: ["iDefined2j", "iDefined2n"], parameters: [120, 60, 50, 50, 50, 40, 15, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
+  { ids: ["iDefined1j", "iDefined1n"], parameters: [120, 110, 50, 50, 50, 40, 20, 1, 0 , 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]},
+  { ids: ["iDefined2j", "iDefined2n"], parameters: [120, 60, 50, 50, 50, 40, 15, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
 ];
 
 
@@ -79,13 +79,14 @@ localStorage.setItem("iPerspective", perspective);
 }
 
 // Produktbeispiele bzw konfiguration vorbestimmen
-function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
+function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tTopMiddle, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
 
   // Strebenzustände setzen
   buttonStates["iFrontTop"] = tFrontTop;
   buttonStates["iFrontBottom"] = tFrontBottom;
   buttonStates["iLeftTop"] = tLeftTop;
   buttonStates["iRightTop"] = tRightTop;
+  buttonStates["iTopMiddle"] = tTopMiddle;
   buttonStates["iBackTop"] = tBackTop;
   buttonStates["iBackBottom"] = tBackBottom;
   buttonStates["iFrontRight"] = tFrontRight;
