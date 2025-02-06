@@ -1,9 +1,68 @@
 const viewButton = document.getElementById("iView");
 
 let Thickness = 4; // Materialstärke
-let width = 100;
-let height = 100;
-let length = 100;
+
+// Sichtbarkeitsvariablen für jede Linie
+let lineVisibility = [
+    false, false, false, false,  // Back
+    false, false, false, false,  // quer
+    false, false, false, false,  // Decke
+    false, false, false, false   // Vertikale Kanten
+];
+
+lineVisibility[0] =  buttonStates["iBackBottom"];
+lineVisibility[1] = buttonStates["iBackRight"];
+lineVisibility[2] = buttonStates["iBackTop"];
+lineVisibility[3] = buttonStates["iBackLeft"];
+
+lineVisibility[4] = buttonStates["iLeftBottom"];
+lineVisibility[5] = buttonStates["iRightBottom"];
+lineVisibility[6] = buttonStates["iRightTop"];
+lineVisibility[7] = buttonStates["iLeftTop"];
+
+lineVisibility[8] = buttonStates["iFrontBottom"];
+lineVisibility[9] = buttonStates["iFrontRight"];
+lineVisibility[10] = buttonStates["iFrontTop"];
+lineVisibility[11] = buttonStates["iFrontLeft"];
+
+lineVisibility[12] = buttonStates["iBackMiddleCross"];
+lineVisibility[13] = buttonStates["iFrontMiddleCross"];
+lineVisibility[14] = buttonStates["iLeftMiddleCross"];
+
+lineVisibility[15] = buttonStates["iRightMiddleCross"];
+
+lineVisibility[16] = buttonStates["iTopMiddle"];
+lineVisibility[17] = buttonStates["iFrontMiddleLenght"];
+lineVisibility[18] = buttonStates["iBackMiddleLenght"];
+
+// Koordinaten für den Würfelrahmen mit Indexq
+var coordinates = {
+    0: [0, 0, 0, width, 0, 0],
+    1: [width, 0, 0, width, height, 0],
+    2: [width, height, 0, 0, height, 0],
+    3: [0, height, 0, 0, 0, 0],
+    4: [0, 0, 0, 0, 0, length],
+    5: [width, 0, 0, width, 0, length],
+    6: [width, height, 0, width, height, length],
+    7: [0, height, 0, 0, height, length],
+    8: [0, 0, length, width, 0, length],
+    9: [width, 0, length, width, height, length],
+    10: [width, height, length, 0, height, length],
+    11: [0, height, length, 0, 0, length],
+    12: [0, middleH, 0, width, middleH, 0],
+    13: [0, middleH, length, width, middleH, length],
+
+    14: [0, middleH, 0, 0, middleH, length],
+    15: [width, middleH, 0, width, middleH, length],
+
+    16: [middleV, height, 0, middleV, height, length],
+
+    17: [middleV, 0, length, middleV, height, length],
+    18: [middleV, 0, 0, middleV, height, 0],
+
+};
+
+console.log(middleV);
 
 // Szene, Kamera und Renderer erstellen
 var scene = new THREE.Scene();
@@ -15,10 +74,8 @@ var material = new THREE.MeshStandardMaterial({
     metalness: 0.5,
     envMapIntensity: 1.0,
     emissive: 0x1a1a1a,
-    side: THREE.DoubleSide  // Beleuchtet sowohl Vorder- als auch Rückseite
+    side: THREE.DoubleSide
 });
-
-
 
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 400);
 camera.position.set(150, 150, 150);
@@ -29,30 +86,13 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Licht hinzufügen
-var ambientLight = new THREE.AmbientLight(0x404040, 3); // Erhöhte Intensität
+var ambientLight = new THREE.AmbientLight(0x404040, 3);
 scene.add(ambientLight);
 
 var directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
 directionalLight.position.set(10, 20, 10);
-// directionalLight.castShadow = true;
-directionalLight.intensity = 1.0; // Geringere Intensität des Lichts
-
-
+directionalLight.intensity = 1.0;
 scene.add(directionalLight);
-
-// CubeMap-Textur für Reflexionen
-var loader = new THREE.CubeTextureLoader();
-var texture = loader.load([
-    'https://threejs.org/examples/textures/skybox/px.jpg',
-    'https://threejs.org/examples/textures/skybox/nx.jpg',
-    'https://threejs.org/examples/textures/skybox/py.jpg',
-    'https://threejs.org/examples/textures/skybox/ny.jpg',
-    'https://threejs.org/examples/textures/skybox/pz.jpg',
-    'https://threejs.org/examples/textures/skybox/nz.jpg'
-]);
-scene.environment = texture;
-material.envMap = texture;
-material.needsUpdate = true;
 
 // Gruppe für Rohre
 var cubeGroup = new THREE.Group();
@@ -61,6 +101,10 @@ cubeGroup.scale.set(0.7, 0.7, 0.7);
 
 // Funktion zur Erstellung eines quadratischen Rohrs mit Überlappung
 function createSquarePipe(x1, y1, z1, x2, y2, z2) {
+
+
+
+
     var length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2) + Thickness;
     var geometry = new THREE.BoxGeometry(Thickness, Thickness, length);
     var pipe = new THREE.Mesh(geometry, material);
@@ -71,55 +115,32 @@ function createSquarePipe(x1, y1, z1, x2, y2, z2) {
     pipe.position.set((x1 + x2) / 2, (y1 + y2) / 2, (z1 + z2) / 2);
     pipe.setRotationFromQuaternion(quaternion);
     cubeGroup.add(pipe);
-
-    // **Kanten hervorheben mit LineBasicMaterial (durchgezogen)**
-    var edges = new THREE.EdgesGeometry(geometry);
-    var basicMaterial = new THREE.LineBasicMaterial({
-        color: 0x000000,  // Kantenfarbe (schwarz)
-        linewidth: 2      // Stärke der Linie
-    });
-    var edgeLines = new THREE.LineSegments(edges, basicMaterial);
-    
-    edgeLines.position.copy(pipe.position);
-    edgeLines.setRotationFromQuaternion(quaternion);
-    cubeGroup.add(edgeLines);  // Linien zum gleichen Gruppieren hinzufügen
 }
 
-// Koordinaten für den Würfelrahmen
-var coordinates = [
-    [0, 0, 0, width, 0, 0], [width, 0, 0, width, height, 0],
-    [width, height, 0, 0, height, 0], [0, height, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, length], [width, 0, 0, width, 0, length],
-    [width, height, 0, width, height, length], [0, height, 0, 0, height, length],
-    [0, 0, length, width, 0, length], [width, 0, length, width, height, length],
-    [width, height, length, 0, height, length], [0, height, length, 0, 0, length],
-    [0, 0, 0, 0, height, 0], [width, 0, 0, width, height, 0],
-    [0, 0, length, 0, height, length], [width, 0, length, width, height, length]
-];
-
-coordinates.forEach(coord => {
-    createSquarePipe(coord[0] - width / 2, coord[1] - height / 2, coord[2] - length / 2,
-                     coord[3] - width / 2, coord[4] - height / 2, coord[5] - length / 2);
+Object.entries(coordinates).forEach(([index, coord]) => {
+    if (lineVisibility[index]) {
+        createSquarePipe(coord[0] - width / 2, coord[1] - height / 2, coord[2] - length / 2,
+                         coord[3] - width / 2, coord[4] - height / 2, coord[5] - length / 2);
+    }
 });
-
 
 // OrbitControls aktivieren
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.minDistance = 150;  // Kamera kann nicht näher als 150 Einheiten kommen
-controls.maxDistance = 200;  // Kamera kann nicht weiter als 200 Einheiten weg sein
-controls.enableDamping = true;  // Aktivieren der Dämpfung
-controls.dampingFactor = 0.1;  // Dämpfungsfaktor
-controls.target.set(0, 0, 0);  // Zielpunkt der Kamera (Mittelpunkt der Szene)
-controls.maxPolarAngle = Math.PI / 2;  // Begrenzung der vertikalen Drehung
-controls.update();  // Updates für die Steuerung
-
-
+controls.minDistance = 150;
+controls.maxDistance = 200;
+controls.enableDamping = true;
+controls.dampingFactor = 0.1;
+controls.target.set(0, 0, 0);
+controls.maxPolarAngle = Math.PI / 2;
+controls.update();
 
 // Animationsschleife
 function animate() {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
+
+
 }
 animate();
 
