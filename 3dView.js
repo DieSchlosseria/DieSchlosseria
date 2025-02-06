@@ -1,14 +1,9 @@
 const viewButton = document.getElementById("iView");
 
-let Thickness = 4; // Materialstärke
+let Thickness = thick/10; // Materialstärke
 
 // Sichtbarkeitsvariablen für jede Linie
-let lineVisibility = [
-    false, false, false, false,  // Back
-    false, false, false, false,  // quer
-    false, false, false, false,  // Decke
-    false, false, false, false   // Vertikale Kanten
-];
+let lineVisibility = [];
 
 lineVisibility[0] =  buttonStates["iBackBottom"];
 lineVisibility[1] = buttonStates["iBackRight"];
@@ -51,18 +46,14 @@ var coordinates = {
     11: [0, height, length, 0, 0, length],
     12: [0, middleH, 0, width, middleH, 0],
     13: [0, middleH, length, width, middleH, length],
-
     14: [0, middleH, 0, 0, middleH, length],
     15: [width, middleH, 0, width, middleH, length],
-
     16: [middleV, height, 0, middleV, height, length],
-
     17: [middleV, 0, length, middleV, height, length],
     18: [middleV, 0, 0, middleV, height, 0],
-
 };
 
-console.log(middleV);
+
 
 // Szene, Kamera und Renderer erstellen
 var scene = new THREE.Scene();
