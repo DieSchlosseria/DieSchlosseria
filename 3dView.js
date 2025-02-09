@@ -3,7 +3,8 @@ const viewButton = document.getElementById("iView");
 let Thickness = thick/10; // Materialstärke
 
 // Sichtbarkeitsvariablen für jede Linie
-let lineVisibility = [];
+let lineVisibility = [];3
+
 
 lineVisibility[0] =  buttonStates["iBackBottom"];
 lineVisibility[1] = buttonStates["iBackRight"];

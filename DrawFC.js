@@ -65,63 +65,71 @@ function value() {
 
 // Funktion zum Zeichnen der Linien im SVG
 function drawSvg() {
-  const WindowWidth = 350;
-  const WindowHeight = 350;
+  const WindowWidth = 700;
+  const WindowHeight = 700;
+  const scaleFactor = 2;
   console.log(perspective);
-  let offset1 = (1 - Math.sin(perspective * (Math.PI / 180))) * deepth;
-  let offset2 = (  Math.sin(perspective * (Math.PI / 180))) * deepth;
 
-  let starty = WindowHeight / 2 - hight / 2 + offset1/2; 
-  let startx = WindowWidth / 2 - width / 2 - offset2/2;  
+let hightScaled = hight * scaleFactor;
+let widthScaled = width * scaleFactor;
+let deepthScaled = deepth * scaleFactor;
+let middleVScaled = middleV * scaleFactor;
+let middleHScaled = middleH * scaleFactor;
+
+  let offset1 = (1 - Math.sin(perspective * (Math.PI / 180))) * deepthScaled;
+  let offset2 = (  Math.sin(perspective * (Math.PI / 180))) * deepthScaled;
+
+  let starty = WindowHeight / 2 - hightScaled / 2 + offset1/2; 
+  let startx = WindowWidth / 2 - widthScaled / 2 - offset2/2;  
 
   // Aktualisierung der Koordinaten
   //Vorne oben
   LineCoord.FrontTop.x1 = startx;
   LineCoord.FrontTop.y1 = starty;
-  LineCoord.FrontTop.x2 = startx + width;
+  LineCoord.FrontTop.x2 = startx + widthScaled;
   LineCoord.FrontTop.y2 = starty;
 
   //Top mitte
-  LineCoord.TopMiddle.x1 = startx + middleV;
+  LineCoord.TopMiddle.x1 = startx + middleVScaled;
   LineCoord.TopMiddle.y1 = starty;
-  LineCoord.TopMiddle.x2 = startx + middleV + offset2;
+  LineCoord.TopMiddle.x2 = startx + middleVScaled + offset2;
   LineCoord.TopMiddle.y2 = starty - offset1;;
 
   //Vorne unten
   LineCoord.FrontBottom.x1 = startx;
-  LineCoord.FrontBottom.y1 = starty + hight;
-  LineCoord.FrontBottom.x2 = startx + width;
-  LineCoord.FrontBottom.y2 = starty + hight;
+  LineCoord.FrontBottom.y1 = starty + hightScaled;
+  LineCoord.FrontBottom.x2 = startx + widthScaled;
+  LineCoord.FrontBottom.y2 = starty + hightScaled;
   //Vorne links
   LineCoord.FrontLeft.x1 = startx;
   LineCoord.FrontLeft.y1 = starty;
   LineCoord.FrontLeft.x2 = startx;
-  LineCoord.FrontLeft.y2 = starty + hight;
+  LineCoord.FrontLeft.y2 = starty + hightScaled;
   //Vorne rechts
-  LineCoord.FrontRight.x1 = startx + width;
+  LineCoord.FrontRight.x1 = startx + widthScaled;
   LineCoord.FrontRight.y1 = starty;
-  LineCoord.FrontRight.x2 = startx + width;
-  LineCoord.FrontRight.y2 = starty + hight;
+  LineCoord.FrontRight.x2 = startx + widthScaled;
+  LineCoord.FrontRight.y2 = starty + hightScaled;
   //Hinten oben
   LineCoord.BackTop.x1 = startx + offset2;
   LineCoord.BackTop.y1 = starty - offset1;
-  LineCoord.BackTop.x2 = startx + width + offset2;
+  LineCoord.BackTop.x2 = startx + widthScaled + offset2;
   LineCoord.BackTop.y2 = starty - offset1;
   //Hinten unten
   LineCoord.BackBottom.x1 = startx + offset2;
-  LineCoord.BackBottom.y1 = starty + hight - offset1;
-  LineCoord.BackBottom.x2 = startx + width + offset2;
-  LineCoord.BackBottom.y2 = starty + hight - offset1;
+  LineCoord.BackBottom.y1 = starty + hightScaled - offset1;
+  LineCoord.BackBottom.x2 = startx + widthScaled + offset2;
+  LineCoord.BackBottom.y2 = starty + hightScaled - offset1;
   //Hinten links
   LineCoord.BackLeft.x1 = startx + offset2;
   LineCoord.BackLeft.y1 = starty - offset1;
   LineCoord.BackLeft.x2 = startx + offset2;
-  LineCoord.BackLeft.y2 = starty + hight - offset1;
+  LineCoord.BackLeft.y2 = starty + hightScaled - offset1;
   //Hinten rechts
-  LineCoord.BackRight.x1 = startx + width + offset2;
+  LineCoord.BackRight.x1 = startx + widthScaled + offset2;
   LineCoord.BackRight.y1 = starty - offset1;
-  LineCoord.BackRight.x2 = startx + width + offset2;
-  LineCoord.BackRight.y2 = starty + hight - offset1;
+  LineCoord.BackRight.x2 = startx + widthScaled + offset2;
+  LineCoord.BackRight.y2 = starty + hightScaled - offset1;
   
   //oben links
   LineCoord.LeftTop.x1 = startx;
@@ -131,51 +139,51 @@ function drawSvg() {
 
   //unten links
   LineCoord.LeftBottom.x1 = startx;
-  LineCoord.LeftBottom.y1 = starty + hight ;
+  LineCoord.LeftBottom.y1 = starty + hightScaled ;
   LineCoord.LeftBottom.x2 = startx + offset2;
-  LineCoord.LeftBottom.y2 = starty + hight - offset1;
+  LineCoord.LeftBottom.y2 = starty + hightScaled - offset1;
 
   //oben rechts
-  LineCoord.RightTop.x1 = startx + width;
+  LineCoord.RightTop.x1 = startx + widthScaled;
   LineCoord.RightTop.y1 = starty;
-  LineCoord.RightTop.x2 = startx + offset2 + width;
+  LineCoord.RightTop.x2 = startx + offset2 + widthScaled;
   LineCoord.RightTop.y2 = starty - offset1;
 
   //unten rechts
-  LineCoord.RightBottom.x1 = startx + width;
-  LineCoord.RightBottom.y1 = starty + hight ;
-  LineCoord.RightBottom.x2 = startx + width + offset2;
-  LineCoord.RightBottom.y2 = starty + hight - offset1;
+  LineCoord.RightBottom.x1 = startx + widthScaled;
+  LineCoord.RightBottom.y1 = starty + hightScaled ;
+  LineCoord.RightBottom.x2 = startx + widthScaled + offset2;
+  LineCoord.RightBottom.y2 = starty + hightScaled - offset1;
 
   LineCoord.FrontMiddleCross.x1 = startx;
-  LineCoord.FrontMiddleCross.y1 = starty  + hight - middleH;
-  LineCoord.FrontMiddleCross.x2 = startx + width ;
-  LineCoord.FrontMiddleCross.y2 = starty  + hight  - middleH;
+  LineCoord.FrontMiddleCross.y1 = starty  + hightScaled - middleHScaled;
+  LineCoord.FrontMiddleCross.x2 = startx + widthScaled ;
+  LineCoord.FrontMiddleCross.y2 = starty  + hightScaled  - middleHScaled;
 
-  LineCoord.FrontMiddleLength.x1 = startx + middleV;
+  LineCoord.FrontMiddleLength.x1 = startx + middleVScaled;
   LineCoord.FrontMiddleLength.y1 = starty;
-  LineCoord.FrontMiddleLength.x2 = startx + middleV;
-  LineCoord.FrontMiddleLength.y2 = starty + hight;
+  LineCoord.FrontMiddleLength.x2 = startx + middleVScaled;
+  LineCoord.FrontMiddleLength.y2 = starty + hightScaled;
 
   LineCoord.BackMiddleCross.x1 = startx + offset2;
-  LineCoord.BackMiddleCross.y1 = starty  + hight - middleH - offset1;
-  LineCoord.BackMiddleCross.x2 = startx + width + offset2;
-  LineCoord.BackMiddleCross.y2 = starty  + hight  - middleH - offset1;
+  LineCoord.BackMiddleCross.y1 = starty  + hightScaled - middleHScaled - offset1;
+  LineCoord.BackMiddleCross.x2 = startx + widthScaled + offset2;
+  LineCoord.BackMiddleCross.y2 = starty  + hightScaled  - middleHScaled - offset1;
 
-  LineCoord.BackMiddleLenght.x1 = startx + middleV + offset2;
+  LineCoord.BackMiddleLenght.x1 = startx + middleVScaled + offset2;
   LineCoord.BackMiddleLenght.y1 = starty - offset1;
-  LineCoord.BackMiddleLenght.x2 = startx + middleV + offset2;
-  LineCoord.BackMiddleLenght.y2 = starty + hight - offset1;
+  LineCoord.BackMiddleLenght.x2 = startx + middleVScaled + offset2;
+  LineCoord.BackMiddleLenght.y2 = starty + hightScaled - offset1;
 
-  LineCoord.RightMiddleCross.x1 = startx + width ;
-  LineCoord.RightMiddleCross.y1 = starty  + hight - middleH;
-  LineCoord.RightMiddleCross.x2 = startx + width + offset2;
-  LineCoord.RightMiddleCross.y2 = starty  + hight - middleH - offset1;
+  LineCoord.RightMiddleCross.x1 = startx + widthScaled ;
+  LineCoord.RightMiddleCross.y1 = starty  + hightScaled - middleHScaled;
+  LineCoord.RightMiddleCross.x2 = startx + widthScaled + offset2;
+  LineCoord.RightMiddleCross.y2 = starty  + hightScaled - middleHScaled - offset1;
 
   LineCoord.LeftMiddleCross.x1 = startx;
-  LineCoord.LeftMiddleCross.y1 = starty  + hight - middleH;
+  LineCoord.LeftMiddleCross.y1 = starty  + hightScaled - middleHScaled;
   LineCoord.LeftMiddleCross.x2 = startx + offset2;
-  LineCoord.LeftMiddleCross.y2 = starty  + hight - middleH - offset1;
+  LineCoord.LeftMiddleCross.y2 = starty  + hightScaled - middleHScaled - offset1;
 
   DrawLine(LineCoord.FrontTop, "iFrontTop");
   DrawLine(LineCoord.FrontBottom, "iFrontBottom");

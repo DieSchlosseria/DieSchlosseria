@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+
   <link href="main.css" rel="stylesheet" />
   <meta name="robots" content="noindex, nofollow">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FrameCreator</title>
-  <a href="Warenkorb.html">
-  <img src="images/Warenkorp.png" class="cWare" alt="Warenkorb">
+
   </a>
 </head>
 
-<body>
+<header >
   <div class="cHead">
-  <span class="cLogo"></span>
-  <span class="cOverHead">FrameCreator</span>
+    <span class="cLogo"></span>
+    <a class="cHome">Home </a>
+    <a href="ProduktExamples.html" class="cExamples">Produkte</a>
+    <a href="#" class="cWe">Über uns</a>
+    <a href="accessoires.html" class="cAccessoires">Accessoires</a>
+    <a href="#" class="cContact">Kontakt</a>
+    <a class="cIntroVideoPlay"> ▷ </a> <a class="cIntroVideo">Intro-Video</a>
+    <a href="Warenkorb.html">
+    <img src="images/Warenkorb.png" class="cWare" alt="Warenkorb">
+    </a>
+  </div>
 
-  <span class="cHome">Home </span>
-  <a href="accessoires.html" class="cAccessoires">Accessoires</a>
-  <a href="ProduktExamples.html" class="cExamples">ProduktBeispiele</a>
-</div>
+</header>
 
+<body>
+  
           <!--Cube Button-->
   <div class="cHoover">
-        <span class="v186_2479">Kreiere dein eigenes  Möbelstück:</span>
-        <span class="v186_2503">1. klicke auf die Linien welche Du erstellen möchtest: </span>
+        <span class = "cStep1No">1.</span>
+        <span class="cStep1">Klicke auf die zu erstellende Linien: </span>
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="350" height="350" viewBox="0 0 350 350">
+    <svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 700 700">
          <!-- Zeichne den Würfel mit Linien -->
         <!--Vorderseite-->
         <line class="cCube-line" id="iFrontTop" x1="50" y1="50" x2="275" y2="50" />
@@ -55,8 +64,26 @@
         <line class="cCube-line" id="iRightMiddleCross" x1="275" y1="75" x2="325" y2="25" />
         <line class="cCube-line" id="iRightBottom" x1="275" y1="150" x2="325" y2="100" />
     </svg>
+<!--3D-Ansicht-->
+<a href="Sandbox.html" class="cView">
+<button>3D-Anischt</button>
+</a>
+
+<!--perspective-->
+<div class="cPerspBox" id="iPerspBox" style="display: flex; flex-direction: row; align-items: flex-start; margin-left: 20px; width: 200px;">
+  <label for="iPerspective" style="width: 100%;">Ansicht</label>
+  <input class="cInputView" type="range" min="0" max="90" id="iPerspective" style="width: 100%;">
+</div>
+
+<button class="cDisplayLine" id="iDisplayLine" >Hilfslinien ausblenden</button>
+
+<img src="images/trash.png" class="cTrash" id="iTrash" alt="Warenkorb">
+
   </div>
-    <button class="cTrash" id="iTrash">X</button>
+
+
+
+
 
 
 
@@ -64,7 +91,8 @@
 <!--EINGABE der Maße-->
 
 <div class="cInputField">
-  <b>2. Gib deine Maße ein:</b><br><br>
+  <span class = "cStep1No">2.</span>
+  <span class = "cStep2">Maße auswählen:</span><br><br><br><br><br><br><br><br>
  
   <div  >
 
@@ -75,7 +103,7 @@
   <input type="range" name="material" class="cInput" min="10" max="50" step="5" id="iMaterial" style="flex: 1;">
   <output name="materialOutput" id="iMaterialOutput" style="width: 50px; text-align: right;" >15</output>
   <span>mm</span>
-</div>
+</div><br>
 
 <!--Höhe-->
 <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;">
@@ -83,7 +111,7 @@
   <input type="range" name="hight" class="cInput" min="10" max="200" step="10" id="iHight" style="flex: 1;">
   <output name="hightOutput" id="iHightOutput" style="width: 50px; text-align: right;">100</output>
   <span>cm</span>
-</div>
+</div><br>
 
 <!--Breite-->
 <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;">
@@ -91,7 +119,7 @@
   <input type="range" name="width" class="cInput" value="150" min="10" max="200" step="5" id="iWidth" style="flex: 1;">
   <output name="widthOutput" id="iWidthOutput" style="width: 50px; text-align: right;">100</output>
   <span>cm</span>
-</div>
+</div><br>
 
 <!--Tiefe-->
 <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;" >
@@ -99,7 +127,7 @@
   <input type="range" name="deepth" class="cInput" min="10" max="200" step="5" id="iDeepth" style="flex: 1;">
   <output name="deepthOutput" id="iDeepthOutput" style="width: 50px; text-align: right;">100</output>
   <span>cm</span>
-</div>
+</div><br>
 
 <!--Mitte V-->
 <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;" id="displayV">
@@ -107,26 +135,27 @@
   <input type="range" name="middleV" class="cInput" min="10" max="200" step="5" id="iMiddleV" style="flex: 1;">
   <output name="middleVOutput" id="iMiddleVOutput" style="width: 50px; text-align: right;">100</output>
   <span>cm</span>
-</div>
+</div><br>
 
 <!--Mitte H-->
 <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0; font-weight: bold;" id="displayH">
+
   <label for="iMiddleH" style="width: 100px;">Mitte h</label>
   <input type="range" name="middleH" class="cInput" min="10" max="200" step="5" id="iMiddleH" style="flex: 1;">
   <output name="middleHOutput" id="iMiddleHOutput" style="width: 50px; text-align: right;">100</output>
-  <span>cm</span>
+  <span>cm</span><br>
+
+
 </div><br>
 </div><br>
+<span class = "cstep3No">3</span>
+<button class="cSubmitSub" id="iShowPopup">Zum Warenkorb hinzufügen</button>
 </div><br><br>
 
-<!--perspective-->
-<div class="cPerspBox" id="iPerspBox" style="display: flex; flex-direction: row; align-items: flex-start; margin-left: 20px; width: 200px;">
-  <label for="iPerspective" style="width: 100%;">Ansicht</label>
-  <input class="cInput" type="range" min="0" max="90" id="iPerspective" style="width: 100%;">
-</div>
 
-<button class="cDisplayLine" id="iDisplayLine" >Hilfslinien ausblenden</button>
-<button class="cSubmitSub" id="iShowPopup">3. Zum Warenkorb hinzufügen</button>
+
+
+
  
   <!-- Ein Button, der bei Bedarf in der Nähe der Linien angezeigt wird -->
 <button id="iHoverButton" class="cCube-button cRed-button">  Add  </button>
@@ -152,7 +181,7 @@
  </div>
 </div>
 
-<a href="Sandbox.html" class="cExamples" style="display: flex; position: absolute; top: 800px; left: 100px;">3D-Anischt</a>
+
 
 <!--____________________3D_____________________
 <button id="iView" style="display: flex; position: absolute; top: 400px;">3D-Ansicht</button>
@@ -170,8 +199,27 @@
 
 
 
+<footer>
+  <div class="cFooterMain">
+  <div class="cFooterL">
+    <div class="cFooter1"><a>Sonderwunsch?</a><br><br>
+      <b>info@dieSchlosseria.de</b>
 
+
+    </div>
+  </div>
+
+ 
+  <div class="cFooter">
+    <b>Impressum ... </b>
+    <p class="cFooterDown">&copy; 2025 FrameCreator. Alle Rechte vorbehalten.</p>
+  </div>
+</div>
+</footer>
 
 
 </body>
+
+
+
 </html>
