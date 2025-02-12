@@ -1,3 +1,7 @@
+
+
+
+
 /*________________ALLGEMEIN________________*/
 
 
@@ -43,7 +47,19 @@ footer {
 }
 
 /*________________HEADER____________*/
+.cBody{
 
+  position: absolute;
+  height: 1140px;
+  width: 1920px;
+  background-size: contain; /* Bild wird verkleinert, um vollständig sichtbar zu bleiben */
+  background: url("images/Backround.png");
+  background-size: contain; /* Bild wird verkleinert, um vollständig sichtbar zu bleiben */
+  background-repeat: no-repeat; /* Verhindert Wiederholung des Bildes */
+  background-position: center; /* Zentriert das Bild */
+  z-index: -3; /* Niedrigerer Wert als das andere Element */
+  
+}
 
 .cLogo {
   width: 123px;
@@ -230,7 +246,7 @@ width: 1920px;
         height: 700px;
         position: absolute;
         background-color: teal;
-        z-index: -2; /* Niedrigerer Wert als das andere Element */
+        z-index: -1; /* Niedrigerer Wert als das andere Element */
         }
 
         svg{
@@ -242,7 +258,7 @@ width: 1920px;
           opacity: 1;
           justify-content: center; /* Horizontal zentrieren */
           align-items: center;    /* Vertikal zentrieren */
-          z-index: -1; /* Niedrigerer Wert als das andere Element */
+          z-index: -2; /* Niedrigerer Wert als das andere Element */
         }
         
 

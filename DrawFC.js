@@ -79,9 +79,12 @@ let middleHScaled = middleH * scaleFactor;
   let offset1 = (1 - Math.sin(perspective * (Math.PI / 180))) * deepthScaled;
   let offset2 = (  Math.sin(perspective * (Math.PI / 180))) * deepthScaled;
 
-  let starty = WindowHeight / 2 - hightScaled / 2 + offset1/2; 
-  let startx = WindowWidth / 2 - widthScaled / 2 - offset2/2;  
+  var starty = WindowHeight / 2 - hightScaled / 2 + offset1/2; 
+  var startx = WindowWidth / 2 - widthScaled / 2 - offset2/2;  
 
+
+  console.log(LineCoord);
+  console.log("FrontTop existiert?", LineCoord.FrontTop);
   // Aktualisierung der Koordinaten
   //Vorne oben
   LineCoord.FrontTop.x1 = startx;
