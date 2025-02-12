@@ -53,9 +53,10 @@ footer {
   width: 1920px;
   background-size: contain; /* Bild wird verkleinert, um vollständig sichtbar zu bleiben */
   background: url("images/Backround.png");
+  background-size: contain; /* Bild wird verkleinert, um vollständig sichtbar zu bleiben */
   background-repeat: no-repeat; /* Verhindert Wiederholung des Bildes */
   background-position: center; /* Zentriert das Bild */
-  z-index: -3; /* Niedrigerer Wert als  andere Elemente */
+  z-index: -3; /* Niedrigerer Wert als das andere Element */
 }
 
 .cLogo {
