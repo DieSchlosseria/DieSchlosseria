@@ -6,13 +6,16 @@ let outputText = "";
 
 // Das Output-Element auswählen --> für Popup
 const outDim = document.getElementById("outDim");
-const outCost = document.getElementById("outCost");
+const outTotalWare = document.getElementById("outTotalWare");
 const outDeliv = document.getElementById("outDeliv");
+const outTotalDel = document.getElementById("outTotalDel");
 
 //HooverButton
 let isButtonClicked = false;
 let hideTimeout; // Timeout-Variable hinzugefügt
 const buttonStates = {};
+
+
 
 //Eingabe Maße
 let width;
@@ -20,6 +23,9 @@ let hight;
 let deepth;
 let middleH;
 let middleV;
+let oversetLiRe;
+let oversetFoBa;
+
 let perspective;
 let material;
 let materialScaled;
@@ -31,6 +37,8 @@ const deepthInput = document.getElementById("iDeepth");
 const MaterialInput = document.getElementById("iMaterial");
 const MiddleInput = document.getElementById("iMiddleH");
 const MiddleLengthInput = document.getElementById("iMiddleV");
+const OversetLiReInput = document.getElementById("iOversetLeRi");
+const OversetFoBaInput = document.getElementById("iOversetFoBa");
 const perspectiveInput = document.getElementById("iPerspective");
 
 //InOutput (anzeige aktuelle Werte)
@@ -40,14 +48,33 @@ const widthOutput = document.getElementById("iWidthOutput");
 const deepthOutput = document.getElementById("iDeepthOutput");
 const middleVOutput = document.getElementById("iMiddleVOutput");
 const middleHOutput = document.getElementById("iMiddleHOutput");
+const OversetLeRiOutput = document.getElementById("iOversetLeRiOutput");
+const OversetFoBaOutput = document.getElementById("iOversetFoBaOutput");
+
+const perspectiveOutput = document.getElementById("iPerspectiveOutput");
 
 //Preis
 let Total = 0;
-const PricePerMeter = 10; //Preis pro Meter bei einem 20mm Quadratrohr
+const PricePerMeter = 8; //Preis pro Meter bei einem 20mm Quadratrohr
 const PricePerPeace = 10; //Für ABschnitt zusammenschweißen usw.
-const PriceVersand = 30; // Versand etc.
+const PriceDelivery = 30; // Versand etc.
 
 const add = document.getElementById("iAdd");
+
+
+//______________________TEST_________________________
+
+  //Tischplatte hinzufügen
+  let addBoard = document.getElementById("iAddBoard");
+  var addedBoard = false;
+
+  addBoard.addEventListener("click", function () {
+    addedBoard = !addedBoard; // Toggle der Variable
+    localStorage.setItem("iAddBoard", addedBoard);
+    console.log("TEst");
+  });
+
+
 let takenWidth;
 let takenHight;
 let takenDeepth;
@@ -59,6 +86,9 @@ widthInput.addEventListener("input", getData);
 deepthInput.addEventListener("input", getData);
 MiddleInput.addEventListener("input", getData);
 MiddleLengthInput.addEventListener("input", getData);
+OversetLiReInput.addEventListener("input", getData);
+OversetFoBaInput.addEventListener("input", getData);
+
 perspectiveInput.addEventListener("input", getData);
 
 function updateInput(id, input, min, max) {
@@ -79,10 +109,9 @@ let trueCount = 0; // Variable zur Zählung der "true"-Werte
           trueCount++; // Erhöhe die Zählvariable, wenn der Wert "true" ist
         }
       }   
-
 }
   
-//Werte von Inputfeld übernehmen Limitieren und in localStorage  
+//Werte von Inputfeld übernehmen Limitieren und in localStorage  speichern
 function getData() {
 
 width = updateInput("iWidth", widthInput, 10, 200);
@@ -92,11 +121,17 @@ let limitMiddleH = hight;
 let limitMiddleV = width;
 middleH = updateInput("iMiddleH",MiddleInput, 10, limitMiddleH);
 middleV = updateInput("iMiddleV",MiddleLengthInput, 10, limitMiddleV);
-perspective = updateInput("iPerspective",perspectiveInput, 10, 50);
+perspective = updateInput("iPerspective",perspectiveInput, 25, 50);
 material = updateInput("iMaterial", MaterialInput, 15, 50)
 materialScaled = (Math.ceil(material/5)*5)/10; //in cm und in 5 schritten wandeln   
 
+oversetLiRe =updateInput("iOversetLeRi",OversetLiReInput, 0, 50);
+oversetFoBa =updateInput("iOversetFoBa",OversetFoBaInput, 0, 50);
+
+
+
 ActInput();  
+
 }
 
 function setData(){
@@ -121,21 +156,31 @@ function setData(){
   
   perspectiveInput.value = localStorage.getItem("iPerspective") ?? 26;
   localStorage.setItem("iPerspective", perspective);
+
+  OversetLiReInput.value= localStorage.getItem("iOversetLeRi") ?? 0;
+  localStorage.setItem("iOversetLeRi", oversetLiRe);
+
+  OversetFoBaInput.value= localStorage.getItem("iOversetFoBa") ?? 0;
+  localStorage.setItem("iOversetFoBa", oversetFoBa);
+
+
   }
 
-function getButtons(){
 
+
+
+function getButtons(){
+   
     // Lade den gespeicherten Zustand aus localStorage und weise ihn direkt buttonStates zu
       const savedStates = JSON.parse(localStorage.getItem("buttonStates")) || {}; // Hole die gespeicherten Daten oder setze auf {} als Fallback
     // Kopiere die gespeicherten Zustände in das bereits vorhandene buttonStates-Objekt
       Object.assign(buttonStates, savedStates);
-    
-    
     } 
 
 function setButtons(){
   // Speichere das aktualisierte buttonStates-Objekt in localStorage
     localStorage.setItem("buttonStates", JSON.stringify(buttonStates));
+
 }
 
 //Ein/Ausgabe aktualisieren
@@ -148,6 +193,8 @@ function ActInput(){ //Ein-Ausgänge aktualisieren
   MiddleLengthInput.value = middleV;
   MiddleInput.value = middleH;
   perspectiveInput.value = perspective;
+  OversetLiReInput.value = oversetLiRe;
+  OversetFoBaInput.value = oversetFoBa;
 
   materialOutput.value = materialScaled * 10; 
   hightOutput.value = hight;
@@ -155,13 +202,13 @@ function ActInput(){ //Ein-Ausgänge aktualisieren
   deepthOutput.value = deepth;
   middleVOutput.value = middleV;
   middleHOutput.value = middleH;
+  OversetLeRiOutput.value = oversetLiRe;
+  OversetFoBaOutput.value = oversetFoBa;
 }
 
 //Design löschen
 function FuncClear(){
-
-  PreConfigDesign(100, 150, 100, 80, 65, 26, 40,  0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-  
+  PreConfigDesign(100, 150, 100, 80, 65, 26, 40,  0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,false);  
 }
 
 //Für Hoover Würfel
@@ -186,12 +233,9 @@ setButtons();
     
    const mouseX = e.clientX;
     const mouseY = e.clientY;
-  
     const svgRect = svg.getBoundingClientRect(); // Das SVG-Element Rechteck erhalten
-  
    const relativeX = mouseX - svgRect.left; // Relative X-Position innerhalb des SVG
     const relativeY = mouseY - svgRect.top; // Relative Y-Position innerhalb des SVG
-  
   
     let closestLine = null;
     let closestDistance = Number.MAX_SAFE_INTEGER;
@@ -234,7 +278,7 @@ setButtons();
 }
 
 // Produktbeispiele bzw konfiguration vorbestimmen
- function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tTopMiddle, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
+ function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tTopMiddle, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross, tOversetLiRe, tOversetFoBa, tAddBoard ) {
 
   // Strebenzustände setzen
   buttonStates["iFrontTop"] = tFrontTop;
@@ -247,7 +291,7 @@ setButtons();
   buttonStates["iFrontRight"] = tFrontRight;
   buttonStates["iBackRight"] = tBackRight;
   buttonStates["iFrontLeft"] = tFrontLeft;
-  buttonStates["iBackLeft"] = tBackLeft; // Hier war ein Tippfehler (ttBackleftrue)
+  buttonStates["iBackLeft"] = tBackLeft; 
   buttonStates["iRightBottom"] = tRightBottom;
   buttonStates["iLeftBottom"] = tLeftBottom;
   buttonStates["iFrontMiddleCross"] = tFrontMiddleCross;
@@ -266,10 +310,16 @@ setButtons();
   perspective= tPerspective;
   materialScaled = (Math.ceil(tMaterial / 5) * 5) / 10; // in cm und in 5 Schritten wandeln;
   
+  oversetLiRe = tOversetLiRe;
+  oversetFoBa = tOversetFoBa;
+  addedBoard = tAddBoard;
 setData();
 ActInput();  
 setButtons();
 
+
+
+localStorage.setItem("iAddBoard", addedBoard);
 }
 
 // Funktion zur Berechnung der Gesamtwerte
@@ -297,13 +347,16 @@ clear.addEventListener('click', FuncClear);
 
 //Seite neu laden
 window.onload = function() {
-
-
-
-
   getButtons();
   setData();
   getData();
+
+  
+  if ( localStorage.getItem("iAddBoard") === "true") {
+    addedBoard = true;
+  } else {
+    addedBoard = false;
+  }
   };
 
 //____________________________POPUP_FENSTER______________________________________
@@ -334,17 +387,18 @@ let FullWidth = calculateTotal(buttonStates, takenWidth, ["iFrontTop", "iFrontBo
 let FullHeight = calculateTotal(buttonStates, takenHight, ["iFrontLeft", "iFrontRight", "iFrontMiddleLength", "iBackLeft", "iBackRight", "iBackMiddleLength"]);
 let FullDepth = calculateTotal(buttonStates, takenDeepth, ["iLeftBottom", "iLeftTop", "iLeftMiddleCross", "iRightBottom", "iRightTop", "iRightMiddleCross", "iTopMiddle"]);
 let Fulllength = (FullWidth + FullHeight + FullDepth)/100 * (material/20); //Für 20mm Quadratrohr kalkuliert
-if (Fulllength > 0) { PricePauschal = PriceVersand;} else {PricePauschal = 0;};
-Total = Fulllength * PricePerPeace + trueCount * PricePerPeace + PricePauschal;
+if (Fulllength > 0) { PricePauschal = PriceDelivery;} else {PricePauschal = 0;};
+Total = Fulllength * PricePerPeace + trueCount * PricePerPeace;
+ 
 
 //_________________AUSGABEWERTE____________________
 // Den Wert der Variable in das Output-Element einfügen
 
 outDim.textContent = takenWidth + "X" + takenDeepth + "X" + takenHight ;
-outCost.textContent = Total + "€" ;
+outTotalWare.textContent = Total + "€" ;
 outDeliv.textContent = delivery ;
+outTotalDel.textContent = PricePauschal + "€";
 });
-
 for (const id in buttonStates) {
   if (buttonStates.hasOwnProperty(id)) {
     const status = buttonStates[id];
@@ -370,8 +424,12 @@ add.addEventListener('click', () => {
       deepth: takenDeepth,
       hight: takenHight,
       total: Total,
+      versand: PricePauschal
   };
 
+
+if (takenWidth > 0 || takenDeepth > 0 || takenHight > 0) {
+  
   // Save the current configuration to the array
   configurations[currentIndex] = currentConfig;
 
@@ -380,6 +438,10 @@ add.addEventListener('click', () => {
 
 localStorage.setItem('configurations', JSON.stringify(configurations));
   alert("erfolgreich zum Warenkorb hinzugefügt.");  
+
+} else {
+  alert("Bitte wählen sie eine Strebe aus!");  
+}
 });
 //_________________________________________________________________________________---
 

@@ -40,7 +40,7 @@ footer {
   text-align: center;
   padding: 10px 0;
   width: 100%;
-  height: 200px;
+  height: 380px;
   background-color: #555555;
   position: absolute;
 
@@ -179,18 +179,14 @@ footer {
 }
 
 
-/*___________________FOOTER_______________________________*/
-.cFotterMain{
-width: 1920px;
-
-}
+/*___________________FOOTER______________________________*/
 
 .cFooterL{
   color: black;
   left: 0;
   bottom: 0;
-  width: 454px;
-  height: 200px;
+  width: 750px;
+  height: 380px;
   background-color: white;
   position: absolute;
   text-align: left;
@@ -199,15 +195,59 @@ width: 1920px;
 .cFooter1{
   color: black;
   position: absolute;
-  left: 120px;
-  top: 70px;
+  left: 270px;
+  top: 130px;
   text-align: left;
 }
 
-.cFooterDown{
-  top: 150px;
+.cFooterDownL{
+  color: black;
+  position: absolute;
+  left: 270px;
+  top: 320px;
+  text-align: left;
+  opacity: 0.5;
+}
+
+
+.cFooter2{
+  left: 1100px;
+  top: 80px;
+  position: absolute;
+  text-align: left;
   color: white;
-  position: relative;
+}
+
+.cFooter3{
+  left: 1400px;
+  top: 80px;
+  position: absolute;
+  text-align: left;
+  color: white;
+}
+
+.cFooterDown{
+  left: 1100px;
+  top: 320px;
+  color: white;
+  position: absolute;
+}
+
+.cFooterLogo{
+  width: 120px;
+  height: 120px;
+  left:1750px;
+  top: 230px;
+  position: absolute;
+  background-color: transparent;
+  background-size: cover;
+
+}
+
+.cSocialLogo{
+margin: 10px 10px 10px 0px;
+width: 40px;
+height: 40px;
 }
 
 /*_____________________________BODY__________________________*/
@@ -216,9 +256,9 @@ width: 1920px;
 
       .cInputField{
         left: 1100px;
-        top: 210px;
+        top: 190px;
         width: 500px;
-        height: 700px;
+        height: 750px;
         background-color: #F5F5F5;
         padding: 10px 10px 10px 5px;
         position: absolute;
@@ -239,7 +279,7 @@ width: 1920px;
 
       .cHoover{
         left: 150px;
-        top: 210px;
+        top: 190px;
         width: 700px;
         height: 700px;
         position: absolute;
@@ -353,8 +393,8 @@ width: 1920px;
       }
 
         .cTrash{
-          left: 50px;
-          top: 590px;
+          left: 30px;
+          top: 630px;
           width: 33px;
           height: 40px;
           background-repeat: no-repeat;
@@ -362,21 +402,28 @@ width: 1920px;
           background-size: cover;
           opacity: 0.7;
           position: absolute;
-
+          margin: 10px 10px 10px 10px;
           border: none;
           cursor: pointer;
+          z-index: 5;
         }
         .cTrash:hover{
           opacity: 1.0;
         }
 
         .cDisplayLine {
-          top: 600px;
+          top: 670px;
           left: 400px;
           position: absolute;
           font-size: 16px;
         }
 
+.cAddBoard{
+  top: 710px;
+  left: 400px;
+  position: absolute;
+  font-size: 16px;
+}
 
 
         
@@ -384,7 +431,7 @@ width: 1920px;
   position: absolute;
   font-size: 20px;
   left: 24px;
-  top: 650px; 
+  top: 710px; 
   }
 
   .cInputView {
@@ -396,8 +443,8 @@ width: 1920px;
   }
 
   .cView{
-    left: 460px;
-    top: 650px; 
+    left: 250px;
+    top: 670px; 
     display: flex; 
     position: absolute; 
     color: black;
@@ -421,6 +468,7 @@ margin-bottom: 10px;
 
 p{
 margin-top: 0px;
+margin-bottom: 5px;
 
 }
 h1{
@@ -463,37 +511,13 @@ input{
 /*_____________________________________________________________________________*/
 
 
-
-
-
-
-
-
-img.cSubmit {
-  max-height: 100%; /* Verhindert, dass das Bild größer als das umgebende Element wird */
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*********** Baseline, reset styles ***********/
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
   cursor: pointer;
-  width: 25rem;
+  width: 24rem;
 }
 
 /* Removes default focus */
@@ -504,49 +528,48 @@ input[type="range"]:focus {
 /******** Chrome, Safari, Opera and Edge Chromium styles ********/
 /* slider track */
 input[type="range"]::-webkit-slider-runnable-track {
-  background-color: #c9c9c9;
-  border-radius: 0.5rem;
-  height: 0.5rem;
+  background-color: #2b8591;
+  border-radius: 0rem;
+  height: 0.4rem;
 }
 
 /* slider thumb */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
-  margin-top: -4px; /* Centers thumb on the track */
-  background-color: #808080;
-  border-radius: 0.5rem;
+  margin-top: -4.8px; /* Centers thumb on the track */
+  background-color: #585656;
+  border-radius: 0rem;
   height: 1rem;
   width: 1rem;
 }
 
 input[type="range"]:focus::-webkit-slider-thumb {
-  outline: 3px solid #808080;
+  outline: 3px solid #585656;
   outline-offset: 0.125rem;
 }
 
 /*********** Firefox styles ***********/
 /* slider track */
 input[type="range"]::-moz-range-track {
-  background-color: #c9c9c9;
-  border-radius: 0.5rem;
-  height: 0.5rem;
+  background-color: #2b8591;
+  border-radius: 0rem;
+  height: 0.4rem;
 }
 
 /* slider thumb */
 input[type="range"]::-moz-range-thumb {
-  background-color: #808080;
+  background-color: #585656;
   border: none; /*Removes extra border that FF applies*/
-  border-radius: 0.5rem;
+  border-radius: 0rem;
   height: 1rem;
   width: 1rem;
 }
 
 input[type="range"]:focus::-moz-range-thumb{
-  outline: 3px solid #808080;
+  outline: 3px solid #585656;
   outline-offset: 0.125rem;
 }
-
 /*___________________________________Wichtig für FrameCreator __________________________________*/
     
 
@@ -578,6 +601,7 @@ input[type="range"]:focus::-moz-range-thumb{
                 margin: 0px 0px 0px 0px;
                 font-size: 8px; /* Neue Schriftgröße */
                 left: 0px;
+                z-index: -1;
             }
             
             .cCube-line{
@@ -592,6 +616,7 @@ input[type="range"]:focus::-moz-range-thumb{
               position: fixed;
               stroke-dasharray: none;
               opacity: 1.0;
+              z-index: -1;
           }
           
           .cCube-line.hovered {
@@ -599,6 +624,7 @@ input[type="range"]:focus::-moz-range-thumb{
               stroke:  rgb(0, 0, 0);
               position: fixed;  
               opacity: 0.5;
+              z-index: -1;
           }
           
 
@@ -606,15 +632,6 @@ input[type="range"]:focus::-moz-range-thumb{
 .iHoverButton{
 position: fixed;
 }
-
-
-
-
-
-
-
-
-
 
 
 .cOverHead {

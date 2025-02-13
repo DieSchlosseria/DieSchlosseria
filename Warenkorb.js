@@ -1,5 +1,5 @@
 // Zubehörpreise pro Artikel und Dimension
-const accessoryPrices = {
+const accessoryPrices = {    //muss aktuell hier und im accesoires.js aktualisiert werden --> evtl iwo global erstellen
   "Tischbefestigung": {
     15: 4,
     20: 5,
@@ -18,7 +18,7 @@ const accessoryPrices = {
 const START_WERT_COUNT = 0;
 const START_WERT_DIMENSION = 20;
 
-// Accessory data --> muss aktuell in accessoires.js und Warenkorb.js geändert werden --> besser machen. --> über localStorage?? 
+// Accessory data 
 var outExtra1 = document.getElementById("outExtra1");
 
 // Lade die Zubehör-Daten aus dem Local Storage
@@ -36,6 +36,7 @@ const calculateTotal = () => {
   const storedConfigurations = JSON.parse(localStorage.getItem("configurations")) || [];
   storedConfigurations.forEach((config) => {
     total += parseFloat(config.total) || 0;
+    total += parseFloat(config.versand) || 0;
   });
 
   // Addiere alle Zubehörpreise
@@ -80,6 +81,7 @@ const displayConfigurations = () => {
         Tiefe: ${config.deepth},<br>
         Höhe: ${config.hight},<br>
         Preis: ${parseFloat(config.total).toFixed(2)} €<br>
+        Versand: ${config.versand} €,<br>
       `;
       container.appendChild(paragraph);
     });

@@ -26,21 +26,23 @@ const lines = [
   "iFrontBottom", "iBackMiddleCross", "iBackMiddleLenght", "iLeftTop", 
   "iRightBottom", "iRightTop", "iLeftBottom", "iRightMiddleCross", "iLeftMiddleCross"
 ];
-//______________TEST_____________
-let test = document.getElementById("iDisplayLine");
-let isActive = false; // Die Variable, die getoggelt wird
 
+  // Erstelle das Polygon mit Holztextur
+  const polygon = document.getElementById("iBoard");
+
+//______________TEST_____________
+
+let test = document.getElementById("iDisplayLine");
+let isActive1 = false; // Die Variable, die getoggelt wird
 test.addEventListener("click", function () {
-  isActive = !isActive; // Toggle der Variable
-  console.log("isActive:", isActive); // Zum Debuggen in der Konsole ausgeben
+  isActive1 = !isActive1; // Toggle der Variable
 //Zustand ausgeben
-if (isActive) {
+if (isActive1) {
   test.innerHTML = "Hilfslinien einblenden";
 } else {
   test.innerHTML = "Hilfslinien ausblenden";
 }
 });
-
 
 // Funktion zum Ändern der Linienbreite
 function changeMultipleLineWidths(lineIds, width) {
@@ -54,21 +56,43 @@ function changeMultipleLineWidths(lineIds, width) {
 setInterval(value, 200);
 
 function value() {
+  
   // Elemente ein/ausblenden
      displayed(["iFrontMiddleLenght", "iBackMiddleLenght", "iTopMiddle"], "displayV", "flex");
      displayed(["iFrontMiddleCross", "iBackMiddleCross"], "displayH", "flex");
-     //displayed( ["LeftTop", "RightBottom", "RightTop",  "LeftBottom", "RightMiddleCross", "LeftMiddleCross"], "iPerspBox", "flex");
+     
+     document.querySelectorAll(".cDisplayB").forEach(el => {
+      el.style.display = addedBoard ? "flex" : "none";
+    });
 
   lines.forEach(line => createLine(line));
   drawSvg();
-}
+
+
+console.log("addedBoardBit" + addedBoard);
+console.log("ID" + localStorage.getItem("iAddBoard"));
+  //Zustand ausgeben
+  if (!addBoard || !polygon) {
+    console.error("Fehlende Elemente im DOM: addBoard oder polygon nicht gefunden");
+  } else {
+    if (addedBoard) {
+      addBoard.innerHTML = "Holzplatte entfernen";
+      polygon.style.display = "flex"; 
+      polygon.style.position = "relative";
+      polygon.style.zIndex = "99";
+      console.log("Ein");
+    } else {
+      addBoard.innerHTML = "Holzplatte hinzufügen";
+      polygon.style.display = "none"; 
+      console.log("Aus");
+    }
+  }
 
 // Funktion zum Zeichnen der Linien im SVG
 function drawSvg() {
   const WindowWidth = 700;
-  const WindowHeight = 700;
-  const scaleFactor = 2;
-  console.log(perspective);
+  const WindowHeight = 750;
+  const scaleFactor = 1.8;
 
 let hightScaled = hight * scaleFactor;
 let widthScaled = width * scaleFactor;
@@ -83,14 +107,13 @@ let middleHScaled = middleH * scaleFactor;
   var startx = WindowWidth / 2 - widthScaled / 2 - offset2/2;  
 
 
-  console.log(LineCoord);
-  console.log("FrontTop existiert?", LineCoord.FrontTop);
   // Aktualisierung der Koordinaten
   //Vorne oben
   LineCoord.FrontTop.x1 = startx;
   LineCoord.FrontTop.y1 = starty;
   LineCoord.FrontTop.x2 = startx + widthScaled;
   LineCoord.FrontTop.y2 = starty;
+
 
   //Top mitte
   LineCoord.TopMiddle.x1 = startx + middleVScaled;
@@ -188,6 +211,7 @@ let middleHScaled = middleH * scaleFactor;
   LineCoord.LeftMiddleCross.x2 = startx + offset2;
   LineCoord.LeftMiddleCross.y2 = starty  + hightScaled - middleHScaled - offset1;
 
+
   DrawLine(LineCoord.FrontTop, "iFrontTop");
   DrawLine(LineCoord.FrontBottom, "iFrontBottom");
   DrawLine(LineCoord.FrontRight, "iFrontRight");
@@ -214,6 +238,24 @@ let middleHScaled = middleH * scaleFactor;
 
   DrawLine(LineCoord.TopMiddle, "iTopMiddle");
 
+
+      //Skalierung perspektive + übermaß Holzplatte
+      let offset10 = (1 - Math.sin(perspective * (Math.PI / 180))) * oversetFoBa;
+      let offset20 = (  Math.sin(perspective * (Math.PI / 180))) * oversetFoBa;
+    
+    const p1X = LineCoord.FrontTop.x1 - oversetLiRe - offset20;
+    const p1Y = LineCoord.FrontTop.y1 + offset10;
+    const p2X = LineCoord.FrontTop.x2 + oversetLiRe - offset20 ;
+    const p2Y = LineCoord.FrontTop.y2 + offset10;
+    const p3X = LineCoord.BackTop.x2 + oversetLiRe + offset20;
+    const p3Y = LineCoord.BackTop.y2 - offset10;
+    const p4X = LineCoord.BackTop.x1 - oversetLiRe + offset20;
+    const p4Y = LineCoord.BackTop.y1 - offset10;
+    
+      polygon.setAttribute("points", `${p1X},${p1Y} ${p2X},${p2Y} ${p3X},${p3Y} ${p4X},${p4Y}`);
+
+
+  }
 }
 
 // Funktion zum Zeichnen einer Linie mit den Koordinaten
@@ -224,6 +266,10 @@ function DrawLine(coord, Id) {
     line.setAttribute('y1', coord.y1);
     line.setAttribute('x2', coord.x2);
     line.setAttribute('y2', coord.y2);
+
+
+
+
   }
 }
 
@@ -236,13 +282,13 @@ function createLine(Line) {
     tLine.style.stroke = "black";
     tLine.style.strokeDasharray = "none";
     tLine.parentNode.appendChild(tLine); // Linie nach vorne bringen
-    changeMultipleLineWidths(Line, materialScaled); // materialScaled sollte definiert sein
+    changeMultipleLineWidths(Line, materialScaled);
   } else {
     tLine.style.stroke = "";
     tLine.style.strokeDasharray = "10, 1";
     tLine.style.strokeWidth = ""; // Zurücksetzen, damit CSS wieder greift
   }
- if (isActive) {
+ if (isActive1) {
   if (!buttonStates[Line]) {
     tLine.style.stroke = "none";
   }
@@ -277,3 +323,7 @@ function displayed(ButtonList, id, show) {
       element.style.display = "none"; // Element ausblenden
   }
 }
+
+
+
+

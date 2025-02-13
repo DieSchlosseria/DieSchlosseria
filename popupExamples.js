@@ -35,8 +35,8 @@ let perspective;
 
 //Konfiguration Produktbeispiele  //siehe funktion productexamples
 const productConfigurations = [
-  { ids: ["iDefined1j", "iDefined1n"], parameters: [120, 110, 50, 50, 50, 40, 20, 1, 0 , 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]},
-  { ids: ["iDefined2j", "iDefined2n"], parameters: [120, 60, 50, 50, 50, 40, 15, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
+  { ids: ["iDefined1j", "iDefined1n"], parameters: [120, 110, 50, 50, 50, 40, 20, 1, 0 , 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, "true"]},
+  { ids: ["iDefined2j", "iDefined2n"], parameters: [120, 60, 50, 50, 50, 40, 15, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "false"] }
 ];
 
 
@@ -58,7 +58,7 @@ middleV = localStorage.getItem("iMiddleV");
 perspective = localStorage.getItem("iPerspective");
 
 // Lade den gespeicherten Zustand aus localStorage und weise ihn direkt buttonStates zu
-const savedStates = JSON.parse(localStorage.getItem("buttonStates")) || {}; // Hole die gespeicherten Daten oder setze auf {} als Fallback
+const savedStates = JSON.parse(localStorage.getItem("buttonStates")) || {}; 
 Object.assign(buttonStates, savedStates);
 }
 
@@ -75,12 +75,12 @@ localStorage.setItem("iMaterial", material);
 localStorage.setItem("iMiddleH", middleH);
 localStorage.setItem("iMiddleV", middleV);
 localStorage.setItem("iPerspective", perspective);
-
+localStorage.setItem("iOversetLeRi", oversetLiRe);
+localStorage.setItem("iOversetFoBa", oversetFoBa);
 }
 
 // Produktbeispiele bzw konfiguration vorbestimmen
-function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tTopMiddle, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross) {
-
+function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tTopMiddle, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross, tOversetLiRe, tOversetFoBa, tAddBoard ) {
   // Strebenzustände setzen
   buttonStates["iFrontTop"] = tFrontTop;
   buttonStates["iFrontBottom"] = tFrontBottom;
@@ -92,7 +92,7 @@ function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspecti
   buttonStates["iFrontRight"] = tFrontRight;
   buttonStates["iBackRight"] = tBackRight;
   buttonStates["iFrontLeft"] = tFrontLeft;
-  buttonStates["iBackLeft"] = tBackLeft; // Hier war ein Tippfehler (ttBackleftrue)
+  buttonStates["iBackLeft"] = tBackLeft; 
   buttonStates["iRightBottom"] = tRightBottom;
   buttonStates["iLeftBottom"] = tLeftBottom;
   buttonStates["iFrontMiddleCross"] = tFrontMiddleCross;
@@ -110,14 +110,18 @@ function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspecti
   middleV = tmiddleV;
   perspective= tPerspective;
   materialScaled = (Math.ceil(tMaterial / 5) * 5) / 10; // in cm und in 5 Schritten wandeln;
-  setData();
+  
+  oversetLiRe = tOversetLiRe;
+  oversetFoBa = tOversetFoBa;
+  addedBoard = tAddBoard;
+
+setData();
+localStorage.setItem("iAddBoard", addedBoard);
 }
 
 // Gespeicherte Werte laden
   window.onload = function() {         
     getData();
-  console.log(width);
-  console.log(buttonStates["iFrontTop"]);
 
   }
 
@@ -176,9 +180,6 @@ function initializeIds() {
               config.ids.forEach(id => localStorage.setItem(id, "false"));
             }
           });
-          
-
-
         });
       } else {
         console.warn(`Element mit ID ${id} nicht gefunden.`);
@@ -188,11 +189,8 @@ function initializeIds() {
 }
 
 
-
-
-
 function updateAccessoryBasedOnCondition(Button, IdAccessories, countAccessories, dimensionAccessories) {
-  const accessoryId = IdAccessories; // ID, die du gerade bearbeiten möchtest
+  const accessoryId = IdAccessories; // ID, die gerade bearbeiten sollte
 
   if (Button) {
     console.log("test")
@@ -208,10 +206,7 @@ function updateAccessoryBasedOnCondition(Button, IdAccessories, countAccessories
     const accessory = taccessories[accessoryId];
 
     if (accessory) {
-      // Dimension auf 20 setzen
       accessory.dimension = dimensionAccessories;
- 
-      // Menge um 5 erhöhen
       accessory.quantity += countAccessories;
       console.log(accessory.quantity);
       // Aktualisiere das Dropdown (falls vorhanden)
@@ -232,15 +227,6 @@ function updateAccessoryBasedOnCondition(Button, IdAccessories, countAccessories
     }
   }
 }
-
-
-
-
-
-
-
-
-
 
 
 // Initialisierungen ausführen

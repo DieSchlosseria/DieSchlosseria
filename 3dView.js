@@ -94,9 +94,6 @@ cubeGroup.scale.set(0.7, 0.7, 0.7);
 // Funktion zur Erstellung eines quadratischen Rohrs mit Überlappung
 function createSquarePipe(x1, y1, z1, x2, y2, z2) {
 
-
-
-
     var length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2) + Thickness;
     var geometry = new THREE.BoxGeometry(Thickness, Thickness, length);
     var pipe = new THREE.Mesh(geometry, material);
@@ -131,8 +128,6 @@ function animate() {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
-
-
 }
 animate();
 
