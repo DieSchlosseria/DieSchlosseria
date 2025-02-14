@@ -28,7 +28,10 @@ const lines = [
 ];
 
   // Erstelle das Polygon mit Holztextur
-  const polygon = document.getElementById("iBoard");
+  const blade = document.getElementById("polygonGroup");
+  const polygon = document.getElementById("iBoardT");;
+  const polygonF = document.getElementById("iBoardF");
+  const polygonR = document.getElementById("iBoardR");
 
 //______________TEST_____________
 
@@ -72,18 +75,18 @@ function value() {
 console.log("addedBoardBit" + addedBoard);
 console.log("ID" + localStorage.getItem("iAddBoard"));
   //Zustand ausgeben
-  if (!addBoard || !polygon) {
+  if (!addBoard || !blade) {
     console.error("Fehlende Elemente im DOM: addBoard oder polygon nicht gefunden");
   } else {
     if (addedBoard) {
       addBoard.innerHTML = "Holzplatte entfernen";
-      polygon.style.display = "flex"; 
-      polygon.style.position = "relative";
-      polygon.style.zIndex = "99";
+      blade.style.display = "flex"; 
+      blade.style.position = "relative";
+      blade.style.zIndex = "99";
       console.log("Ein");
     } else {
       addBoard.innerHTML = "Holzplatte hinzufügen";
-      polygon.style.display = "none"; 
+      blade.style.display = "none"; 
       console.log("Aus");
     }
   }
@@ -243,18 +246,47 @@ let middleHScaled = middleH * scaleFactor;
       let offset10 = (1 - Math.sin(perspective * (Math.PI / 180))) * oversetFoBa;
       let offset20 = (  Math.sin(perspective * (Math.PI / 180))) * oversetFoBa;
     
+
+    const Thickness = -10;
+
     const p1X = LineCoord.FrontTop.x1 - oversetLiRe - offset20;
-    const p1Y = LineCoord.FrontTop.y1 + offset10;
+    const p1Y = LineCoord.FrontTop.y1 + offset10 + Thickness;
     const p2X = LineCoord.FrontTop.x2 + oversetLiRe - offset20 ;
-    const p2Y = LineCoord.FrontTop.y2 + offset10;
+    const p2Y = LineCoord.FrontTop.y2 + offset10 + Thickness;
     const p3X = LineCoord.BackTop.x2 + oversetLiRe + offset20;
-    const p3Y = LineCoord.BackTop.y2 - offset10;
+    const p3Y = LineCoord.BackTop.y2 - offset10 + Thickness;
     const p4X = LineCoord.BackTop.x1 - oversetLiRe + offset20;
-    const p4Y = LineCoord.BackTop.y1 - offset10;
+    const p4Y = LineCoord.BackTop.y1 - offset10 + Thickness;
     
       polygon.setAttribute("points", `${p1X},${p1Y} ${p2X},${p2Y} ${p3X},${p3Y} ${p4X},${p4Y}`);
 
+      const f1X = LineCoord.FrontTop.x1 - oversetLiRe - offset20;
+      const f1Y = LineCoord.FrontTop.y1 + offset10 ;
+      const f2X = LineCoord.FrontTop.x2 + oversetLiRe - offset20 ;
+      const f2Y = LineCoord.FrontTop.y2 + offset10;
+      const f3X = LineCoord.FrontTop.x2 + oversetLiRe - offset20 ;
+      const f3Y = LineCoord.FrontTop.y2 + offset10 + Thickness;
+      const f4X = LineCoord.FrontTop.x1 - oversetLiRe - offset20;
+      const f4Y = LineCoord.FrontTop.y1 + offset10 + Thickness;
 
+
+
+      polygonF.setAttribute("points", `${f1X},${f1Y} ${f2X},${f2Y} ${f3X},${f3Y} ${f4X},${f4Y}`);
+
+      const l1X = LineCoord.FrontTop.x2 + oversetLiRe - offset20 ;
+      const l1Y =LineCoord.FrontTop.y2 + offset10 + Thickness;
+      const l2X = LineCoord.FrontTop.x2 + oversetLiRe - offset20 ;
+      const l2Y = LineCoord.FrontTop.y2 + offset10 ;
+
+
+      const l3X = LineCoord.BackTop.x2 + oversetLiRe + offset20 ;
+      const l3Y = LineCoord.BackTop.y2 - offset10 ;
+      const l4X = LineCoord.BackTop.x2 + oversetLiRe + offset20 ;
+      const l4Y = LineCoord.BackTop.y2 - offset10 + Thickness;
+
+
+
+      polygonR.setAttribute("points", `${l1X},${l1Y} ${l2X},${l2Y} ${l3X},${l3Y} ${l4X},${l4Y}`);
   }
 }
 
