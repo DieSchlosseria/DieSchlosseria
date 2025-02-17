@@ -106,6 +106,57 @@ function createSquarePipe(x1, y1, z1, x2, y2, z2) {
     cubeGroup.add(pipe);
 }
 
+
+
+// Lade die Textur (stelle sicher, dass das Bild korrekt geladen wird)
+const loader = new THREE.TextureLoader();
+const woodTexture = loader.load('images/Holz3.png');
+
+// Material für die Holzplatte mit Textur
+var woodMaterial = new THREE.MeshStandardMaterial({
+    map: woodTexture,  // Bild als Textur
+    roughness: 0.8,
+    metalness: 0.2,
+    side: THREE.DoubleSide
+});
+
+// Funktion zur Erstellung der Holzplatte
+
+const widthWood = parseFloat(width) + Thickness;
+const ThicknessWood = 5;
+const hightWood = parseFloat(height) + Thickness * 2;
+const lengthWood = parseFloat(length) + Thickness;
+
+console.log(width);
+
+function createWoodenTopPlate() {
+    var woodGeometry = new THREE.BoxGeometry(widthWood, 5, lengthWood);
+    var woodPlate = new THREE.Mesh(woodGeometry, woodMaterial);
+    
+    woodPlate.position.set(0, hightWood / 2, 0);
+    cubeGroup.add(woodPlate);
+}
+
+// Holzplatte hinzufügen
+createWoodenTopPlate();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Object.entries(coordinates).forEach(([index, coord]) => {
     if (lineVisibility[index]) {
         createSquarePipe(coord[0] - width / 2, coord[1] - height / 2, coord[2] - length / 2,

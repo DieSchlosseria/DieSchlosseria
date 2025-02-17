@@ -37,6 +37,7 @@ const lines = [
 
 let test = document.getElementById("iDisplayLine");
 let isActive1 = false; // Die Variable, die getoggelt wird
+
 test.addEventListener("click", function () {
   isActive1 = !isActive1; // Toggle der Variable
 //Zustand ausgeben
@@ -71,9 +72,6 @@ function value() {
   lines.forEach(line => createLine(line));
   drawSvg();
 
-
-console.log("addedBoardBit" + addedBoard);
-console.log("ID" + localStorage.getItem("iAddBoard"));
   //Zustand ausgeben
   if (!addBoard || !blade) {
     console.error("Fehlende Elemente im DOM: addBoard oder polygon nicht gefunden");

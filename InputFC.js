@@ -7,6 +7,7 @@ let outputText = "";
 // Das Output-Element auswählen --> für Popup
 const outDim = document.getElementById("outDim");
 const outTotalWare = document.getElementById("outTotalWare");
+const outTotalWood = document.getElementById("outTotalWood");
 const outDeliv = document.getElementById("outDeliv");
 const outTotalDel = document.getElementById("outTotalDel");
 
@@ -55,9 +56,12 @@ const perspectiveOutput = document.getElementById("iPerspectiveOutput");
 
 //Preis
 let Total = 0;
+let TotalFrame = 0;
+let TotalWood = 0;
 const PricePerMeter = 8; //Preis pro Meter bei einem 20mm Quadratrohr
 const PricePerPeace = 10; //Für ABschnitt zusammenschweißen usw.
 const PriceDelivery = 30; // Versand etc.
+const PriceWood = 100; //Price pro Quadratmeter
 
 const add = document.getElementById("iAdd");
 
@@ -114,15 +118,15 @@ let trueCount = 0; // Variable zur Zählung der "true"-Werte
 //Werte von Inputfeld übernehmen Limitieren und in localStorage  speichern
 function getData() {
 
-width = updateInput("iWidth", widthInput, 10, 200);
-hight = updateInput("iHight", hightInput, 10, 200);
-deepth =  updateInput("iDeepth", deepthInput, 10, 200);
+width = updateInput("iWidth", widthInput, 5, 200);
+hight = updateInput("iHight", hightInput, 5, 200);
+deepth =  updateInput("iDeepth", deepthInput, 5, 200);
 let limitMiddleH = hight; 
 let limitMiddleV = width;
-middleH = updateInput("iMiddleH",MiddleInput, 10, limitMiddleH);
-middleV = updateInput("iMiddleV",MiddleLengthInput, 10, limitMiddleV);
+middleH = updateInput("iMiddleH",MiddleInput, 5, limitMiddleH - 5);
+middleV = updateInput("iMiddleV",MiddleLengthInput, 5, limitMiddleV - 5);
 perspective = updateInput("iPerspective",perspectiveInput, 25, 50);
-material = updateInput("iMaterial", MaterialInput, 15, 50)
+material = updateInput("iMaterial", MaterialInput, 15, 50);
 materialScaled = (Math.ceil(material/5)*5)/10; //in cm und in 5 schritten wandeln   
 
 oversetLiRe =updateInput("iOversetLeRi",OversetLiReInput, 0, 50);
@@ -380,7 +384,7 @@ if (takenDeepth > 150 || takenWidth > 150 || takenHight > 150 ) {
 };
 
 //Preis berechnen
-let trueCount = Object.values(buttonStates).filter(value => value == true).length;
+let trueCount = Object.values(buttonStates).filter(value => value == true).length; //Anzahl schweißpunkte
 
 // Berechnung der Gesamtwerte für Länge, Höhe und Tiefe
 let FullWidth = calculateTotal(buttonStates, takenWidth, ["iFrontTop", "iFrontBottom", "iFrontMiddleCross", "iBackTop", "iBackBottom", "iBackMiddleCross"]);
@@ -388,14 +392,25 @@ let FullHeight = calculateTotal(buttonStates, takenHight, ["iFrontLeft", "iFront
 let FullDepth = calculateTotal(buttonStates, takenDeepth, ["iLeftBottom", "iLeftTop", "iLeftMiddleCross", "iRightBottom", "iRightTop", "iRightMiddleCross", "iTopMiddle"]);
 let Fulllength = (FullWidth + FullHeight + FullDepth)/100 * (material/20); //Für 20mm Quadratrohr kalkuliert
 if (Fulllength > 0) { PricePauschal = PriceDelivery;} else {PricePauschal = 0;};
-Total = Fulllength * PricePerPeace + trueCount * PricePerPeace;
+TotalFrame = Fulllength * PricePerPeace + trueCount * PricePerPeace;
  
+//Berechnung Holzplatte
+
+
+if (addedBoard) {
+  TotalWood = (width + oversetLiRe) * (deepth + oversetFoBa)/10000 * PriceWood;
+} else {
+  TotalWood = 0;
+}
+
+Total = TotalWood + TotalFrame;
 
 //_________________AUSGABEWERTE____________________
 // Den Wert der Variable in das Output-Element einfügen
 
 outDim.textContent = takenWidth + "X" + takenDeepth + "X" + takenHight ;
-outTotalWare.textContent = Total + "€" ;
+outTotalWare.textContent = TotalFrame + "€" ;
+outTotalWood.textContent = TotalWood + "€"
 outDeliv.textContent = delivery ;
 outTotalDel.textContent = PricePauschal + "€";
 });
@@ -423,8 +438,11 @@ add.addEventListener('click', () => {
       width: takenWidth,
       deepth: takenDeepth,
       hight: takenHight,
+      totalWood: TotalWood,
+      totalFrame: TotalFrame,
       total: Total,
-      versand: PricePauschal
+      versand: PricePauschal,
+  
   };
 
 
