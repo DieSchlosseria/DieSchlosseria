@@ -6,4 +6,6 @@ let middleH = localStorage.getItem("iMiddleH") || 50;
 let middleV = localStorage.getItem("iMiddleV") || 50;
 let thick = localStorage.getItem("iMaterial");
 
+let oversetLiRe = localStorage.getItem("iOversetLeRi") || 100;
+let oversetFoBa = localStorage.getItem("iOversetFoBa") || 100;
 

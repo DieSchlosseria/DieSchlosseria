@@ -117,7 +117,9 @@ let trueCount = 0; // Variable zur Zählung der "true"-Werte
   
 //Werte von Inputfeld übernehmen Limitieren und in localStorage  speichern
 function getData() {
-
+  oversetLiRe =updateInput("iOversetLeRi",OversetLiReInput, 0, 50);
+  oversetFoBa =updateInput("iOversetFoBa",OversetFoBaInput, 0, 50);
+  
 width = updateInput("iWidth", widthInput, 5, 200);
 hight = updateInput("iHight", hightInput, 5, 200);
 deepth =  updateInput("iDeepth", deepthInput, 5, 200);
@@ -129,8 +131,6 @@ perspective = updateInput("iPerspective",perspectiveInput, 25, 50);
 material = updateInput("iMaterial", MaterialInput, 15, 50);
 materialScaled = (Math.ceil(material/5)*5)/10; //in cm und in 5 schritten wandeln   
 
-oversetLiRe =updateInput("iOversetLeRi",OversetLiReInput, 0, 50);
-oversetFoBa =updateInput("iOversetFoBa",OversetFoBaInput, 0, 50);
 
 
 

@@ -122,12 +122,12 @@ var woodMaterial = new THREE.MeshStandardMaterial({
 
 // Funktion zur Erstellung der Holzplatte
 
-const widthWood = parseFloat(width) + Thickness;
+const widthWood = parseFloat(width) + Thickness + parseFloat(oversetLiRe);
 const ThicknessWood = 5;
 const hightWood = parseFloat(height) + Thickness * 2;
-const lengthWood = parseFloat(length) + Thickness;
+const lengthWood = parseFloat(length) + Thickness+ parseFloat(oversetFoBa);;
 
-console.log(width);
+console.log(oversetLiRe);
 
 function createWoodenTopPlate() {
     var woodGeometry = new THREE.BoxGeometry(widthWood, 5, lengthWood);
