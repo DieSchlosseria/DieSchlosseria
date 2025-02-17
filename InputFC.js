@@ -127,7 +127,7 @@ let limitMiddleH = hight;
 let limitMiddleV = width;
 middleH = updateInput("iMiddleH",MiddleInput, 5, limitMiddleH - 5);
 middleV = updateInput("iMiddleV",MiddleLengthInput, 5, limitMiddleV - 5);
-perspective = updateInput("iPerspective",perspectiveInput, 25, 50);
+perspective = updateInput("iPerspective",perspectiveInput, 25, 60);
 material = updateInput("iMaterial", MaterialInput, 15, 50);
 materialScaled = (Math.ceil(material/5)*5)/10; //in cm und in 5 schritten wandeln   
 
