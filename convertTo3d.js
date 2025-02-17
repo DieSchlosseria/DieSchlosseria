@@ -9,3 +9,5 @@ let thick = localStorage.getItem("iMaterial");
 let oversetLiRe = localStorage.getItem("iOversetLeRi") || 100;
 let oversetFoBa = localStorage.getItem("iOversetFoBa") || 100;
 
+let addWood = localStorage.getItem("iAddBoard");
+

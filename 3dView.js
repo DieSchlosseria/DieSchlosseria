@@ -135,6 +135,16 @@ function createWoodenTopPlate() {
     
     woodPlate.position.set(0, hightWood / 2, 0);
     cubeGroup.add(woodPlate);
+
+ 
+    console.log(addWood);
+
+    if (addWood == "true") {
+        woodPlate.visible = true;
+    } else {
+        woodPlate.visible = false;
+    }
+
 }
 
 // Holzplatte hinzufügen
