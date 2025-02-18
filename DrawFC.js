@@ -27,6 +27,11 @@ const lines = [
   "iRightBottom", "iRightTop", "iLeftBottom", "iRightMiddleCross", "iLeftMiddleCross"
 ];
 
+//SVG Parameter
+const WindowWidth = 700;
+const WindowHeight = 750;
+const scaleFactor = 1.8;
+
   // Erstelle das Polygon mit Holztextur
   const blade = document.getElementById("polygonGroup");
   const polygon = document.getElementById("iBoardT");;
@@ -91,9 +96,7 @@ function value() {
 
 // Funktion zum Zeichnen der Linien im SVG
 function drawSvg() {
-  const WindowWidth = 700;
-  const WindowHeight = 750;
-  const scaleFactor = 1.8;
+
 
 let hightScaled = hight * scaleFactor;
 let widthScaled = width * scaleFactor;

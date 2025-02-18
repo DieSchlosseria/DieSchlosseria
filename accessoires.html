@@ -17,9 +17,9 @@
   <span class="cLogo"></span>
   <a href="index.html" class="cHome">Home </a>
   <a href="ProduktExamples.html" class="cExamples">Produkte</a>
-  <a href="#" class="cWe">Über uns</a>
+  <a href="UeberUns.html" class="cWe">Über uns</a>
   <a class="cAccessoires">Accessoires</a>
-  <a href="#" class="cContact">Kontakt</a>
+  <a href="Contact.html" class="cContact">Kontakt</a>
   <a class="cIntroVideoPlay"> ▷ </a> <a class="cIntroVideo">Intro-Video</a>
   <a href="Warenkorb.html">
   <img src="images/Warenkorb.png" class="cWare" alt="Warenkorb">
@@ -29,13 +29,15 @@
 
 
 <body>
-
-
+  <div class="cBody">
   <br><br>
-  <div class="cZubehoer1">
-    <div>
-      <img class="imgFix1" src="images/Tischbefestigung.jpg" alt="Tischbefestigung"><br>
+  <div class="cZubehoer">
+    
+    <h2 class="cTextAllgemein" >Allgemein</h2>
+    <div class="cZubehoer1">
+      <img class="imgFix" src="images/Tischbefestigung.jpg" alt="Tischbefestigung"><br>
       <b>Tischbefestigung</b><br>
+      <p>zum befestigen von Holzplatten am Metallrahmen</p>
       <input type="number" class="cFix" value="0" min="0" max="200" id="iFix1">
       <div class="cdropdown">
         <select id="myDropdown1" class="dropdown">
@@ -45,15 +47,17 @@
           <option value="30">30mm</option>
         </select>
       </div>
-      <button id="iFixAdd1" class="cAdd">Add</button><br><br><br>
+      <button id="iFixAdd1" class="cAdd">Add</button>
+      <button id="iClearAdd1" class="cAdd">löschen</button><br><br>
       <b>Total:</b>
       <output id="iPrice1">0 €</output><br><br><br><br>
      
     </div>
 
-    <div>
-      <img class="imgFix1" src="images/Wandbefestigung.jpg" alt="Decken/Wandbefestigung"><br>
-      <b>Decken/Wandbefestigung</h3><br>
+    <div class="cZubehoer2">
+      <img class="imgFix" src="images/Wandbefestigung.jpg" alt="Decken/Wandbefestigung"><br>
+      <b>Decken/Wandbefestigung</b><br>
+      <p>für die Montage des Metallrahmens an der Wand oder Decke</p>
       <input type="number" class="cFix" value="0" min="0" max="200" id="iFix2">
       <div class="cdropdown">
         <select id="myDropdown2" class="dropdown">
@@ -63,14 +67,107 @@
           <option value="30">30mm</option>
         </select><br>
       </div>
-      <button id="iFixAdd2" class="cAdd">Add</button><br><br><br>
+      <button id="iFixAdd2" class="cAdd">Add</button>
+      <button id="iClearAdd2" class="cAdd">löschen</button><br><br>
       <b>Total:</b>
       <output id="iPrice2">0 €</output><br><br>
-
     </div>
-  </div>
 
+  <div class="cZubehoer3">
+    <img class="imgFix" src="images/Filzfuss.jpg" alt="Decken/Wandbefestigung"><br>
+    <b>Filzfüsse</b><br>
+    <p>zum aufstecken auf der Rahmenunterseite. Für stabilen Halt</p>
+    <input type="number" class="cFix" value="0" min="0" max="200" id="iFix3">
+    <div class="cdropdown">
+      <select id="myDropdown3" class="dropdown">
+        <option value="15">15mm</option>
+        <option value="20" selected>20mm</option>
+        <option value="25">25mm</option>
+        <option value="30">30mm</option>
+      </select><br>
+    </div>
+    <button id="iFixAdd3" class="cAdd">Add</button>
+    <button id="iClearAdd3" class="cAdd">löschen</button><br><br>
+    <b>Total:</b>
+    <output id="iPrice3">0 €</output><br><br>
+  </div><br>
+  <h2 class="cTextGaderobe">Gaderobe</h2>
+
+<div class="cZubehoer4">
+  <img class="imgFix" src="images/Kleiderbügel.jpg" alt="Kleiderbügel"><br>
+  <b>Kleiderbügel</b><br>
+  <p>...</p>
+  <input type="number" class="cFix" value="0" min="0" max="200" id="iFix4">
+  <div class="cdropdown">
+    <select id="myDropdown4" class="dropdown">
+      <option value="40">Größe M</option>
+    </select><br>
+  </div>
+  <button id="iFixAdd4" class="cAdd">Add</button>
+  <button id="iClearAdd4" class="cAdd">löschen</button><br><br>
+  <b>Total:</b>
+  <output id="iPrice4">0 €</output><br><br>
+</div>
+
+
+<div class="cZubehoer5">
+  <img class="imgFix" src="images/kleiderhaken.png" alt="Kleiderhaken"><br>
+  <b>Kleiderhaken</b><br>
+  <p>...</p>
+  <input type="number" class="cFix" value="0" min="0" max="200" id="iFix5">
+  <div class="cdropdown">
+    <select id="myDropdown5" class="dropdown">
+      <option value="40">Größe M</option>
+    </select><br>
+  </div>
+  <button id="iFixAdd5" class="cAdd">Add</button>
+  <button id="iClearAdd5" class="cAdd">löschen</button><br><br>
+  <b>Total:</b>
+  <output id="iPrice5">0 €</output><br><br>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
   <!-- Lade das Script nach dem Laden der Seite -->
   <script src="accessoires.js"></script>
+
+  <footer>
+    <div class="cFooterMain">
+    <div class="cFooterL">
+      <div class="cFooter1"><a>Sonderwunsch?</a><br><br>
+        <b>info@dieSchlosseria.de</b><br><br>
+        <a href="#">   <img src="images/pinterest.png" class="cSocialLogo"></a>
+        <a href="#">   <img src="images/Instagram.png" class="cSocialLogo"></a>
+        <a href="#">   <img src="images/linkedIn.png" class="cSocialLogo"></a>
+        <a href="#">   <img src="images/youtube.png" class="cSocialLogo"></a><br><br>
+      </div>
+    </div>
+    <b class="cFooterDownL">produce your metal frame locally</b>
+  
+    <div class="cFooter2">
+      <b>Infos</b><br><br>
+      <p>Impressum</p>
+      <p>AGB</p>
+      <p>Datenschutz</p>
+      <p>Kontakt</p>
+      <p>Hilfe</p>
+    </div>
+  
+    <div class="cFooter3">
+      <b>Bedingungen</b><br><br>
+      <p>Lieferbeding</p>
+      <p>Zahlungsbedingungen</p>
+      <p>Gewährleistung</p>
+    </div>
+  
+    <img class="cFooterLogo" src="images/Logo.png" alt="DieSchlosseria">
+      <p class="cFooterDown">&copy;All rights reserved Copyrights DIE.SCHLOSSERIA GBR 2025.</p>
+  
+  </div>
+  </footer>
 </body>
 </html>

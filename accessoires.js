@@ -1,19 +1,31 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // Prices for each accessory dimension (in €)
-  const accessoryPrices = {
-    "Tischbefestigung": {
-      15: 4,
-      20: 5,
-      25: 6,
-      30: 7
-    },
-    "Decken/Wandbefestigung": {
-      15: 5,
-      20: 6,
-      25: 7,
-      30: 8
-    }
-  };
+// Zubehörpreise pro Artikel und Dimension
+const accessoryPrices = {//muss aktuell hier und im accesoires.js aktualisiert werden --> evtl iwo global erstellen
+  "Tischbefestigung": {
+    15: 4,
+    20: 5,
+    25: 6,
+    30: 7
+  },
+  "Decken/Wandbefestigung": {
+    15: 5,
+    20: 6,
+    25: 7,
+    30: 8
+  },
+  "Tischfuss": {
+    15: 6,
+    20: 7,
+    25: 8,
+    30: 9
+  },
+  "Kleiderbügel": {
+    40: 20,
+  },
+  "Kleiderhaken": {
+    40: 10,
+  }
+};
 
   // Accessory data
   const accessories = [
@@ -30,8 +42,33 @@ document.addEventListener("DOMContentLoaded", function() {
       quantityId: "iFix2",
       dropdownId: "myDropdown2",
       outputId: "iPrice2",
+    },
+    {
+      id: "3",
+      name: "Tischfuss",
+      quantityId: "iFix3",
+      dropdownId: "myDropdown3",
+      outputId: "iPrice3",
+    },
+    {
+      id: "4",
+      name: "Kleiderbügel",
+      quantityId: "iFix4",
+      dropdownId: "myDropdown4",
+      outputId: "iPrice4",
+    },
+    {
+      id: "5",
+      name: "Kleiderhaken",
+      quantityId: "iFix5",
+      dropdownId: "myDropdown5",
+      outputId: "iPrice5",
     }
   ];
+
+
+
+
 
   // Function to calculate the total price
   function calculatePrice(quantity, dimension, accessoryName) {
@@ -56,6 +93,28 @@ document.addEventListener("DOMContentLoaded", function() {
       totalPrice,
     });
   }
+
+// clearAccesoryData
+function clearAccesoryData(accessory) {
+
+  //Anzahl löschen
+  document.getElementById(accessory.quantityId).value = 0;
+  //Daten holen
+  const quantity = parseInt(document.getElementById(accessory.quantityId).value) || 0;
+  const dimension = parseInt(document.getElementById(accessory.dropdownId).value) || 20;
+  const totalPrice = calculatePrice(quantity, dimension, accessory.name);
+
+  // Display price
+   document.getElementById(accessory.outputId).textContent = `${totalPrice} €`;
+
+    // Save accessory data to Local Storage
+    saveToLocalStorage(accessory.id, {
+      name: accessory.name,
+      quantity,
+      dimension,
+      totalPrice,
+    });
+}
 
   // Function to save all accessories to Local Storage
   function saveToLocalStorage(accessoryId, data) {
@@ -86,9 +145,19 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
+    // Add event listeners for Add-Buttons
+    accessories.forEach((accessory) => {
+      const clearButton = document.getElementById(`iClearAdd${accessory.id}`);
+      if (clearButton) {
+        clearButton.addEventListener("click", () => clearAccesoryData(accessory));
+      }
+    });
+
   // Load data from Local Storage when the page is loaded
   loadFromLocalStorage();
 });
+
+
 
 
 

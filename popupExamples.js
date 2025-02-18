@@ -40,14 +40,6 @@ const productConfigurations = [
 ];
 
 
-
-
-
-
-
-
-
-
 function getData(){
 width = localStorage.getItem("iWidth");
 hight = localStorage.getItem("iHight");
@@ -162,14 +154,8 @@ function initializeIds() {
         element.addEventListener("click", () => {
           localStorage.setItem(id, "true");
 
-
-
-
           updateAccessoryBasedOnCondition("iDefined1", "1", 4, 20);
-      
-
-
-
+          updateAccessoryBasedOnCondition("iDefined1", "3", 4, 20);
 
     window.location.href = 'index.html';
 

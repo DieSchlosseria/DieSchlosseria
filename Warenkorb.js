@@ -1,5 +1,5 @@
 // Zubehörpreise pro Artikel und Dimension
-const accessoryPrices = {    //muss aktuell hier und im accesoires.js aktualisiert werden --> evtl iwo global erstellen
+const accessoryPrices = {//muss aktuell hier und im accesoires.js aktualisiert werden --> evtl iwo global erstellen
   "Tischbefestigung": {
     15: 4,
     20: 5,
@@ -11,6 +11,18 @@ const accessoryPrices = {    //muss aktuell hier und im accesoires.js aktualisie
     20: 6,
     25: 7,
     30: 8
+  },
+  "Tischfuss": {
+    15: 6,
+    20: 7,
+    25: 8,
+    30: 9
+  },
+  "Kleiderbügel": {
+    40: 20,
+  },
+  "Kleiderhaken": {
+    40: 10,
   }
 };
 

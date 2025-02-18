@@ -1138,6 +1138,8 @@ form {
 
 
 
+
+
 /*___________________________________ZUBEHÖR_____________________________________*/
 
 .dropdown {
@@ -1168,18 +1170,14 @@ form {
   }
 
   .cAdd{
-    background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     opacity: 1;
-    position: absolute;
-    overflow: hidden;
-
     width: 100%; /* Breite, z.B. 100% des Containers */
-    max-width: 500px; /* Maximale Breite */
+    max-width: 400px; /* Maximale Breite */
     height: 40px; /* Höhe des Eingabefeldes */
     margin-top: 5px;
-    padding: 10px; /* Innenabstand für besseren Komfort */
+ 
     font-size: 16px; /* Schriftgröße */
     border: 2px solid black; /* Rahmenfarbe */
     border-radius: 5px; /* Abgerundete Ecken */
@@ -1198,23 +1196,103 @@ form {
   font-size: 15px;
 }
 
-.cZubehoer1{
-  margin-left: 0px;
-  left: 20px;
-  display: block;
-  float: left;
-  top: 250px;
-  max-width: 250px;
-  height: auto;
+.cZubehoer{
+  top: 140px;
+  left: 80px;
+  width: 800px;
+  height: 800px;
   position: absolute;
+  display: block;
+  margin-left: 0px;
+  float: left;
   }
 
+  .cTextAllgemein{
+    left: 0px;
+    top: 0px;
+    color: #F5F5F5;
+    position: absolute;
+    display: flex;
+   }
 
+  .cZubehoer1{
+    left: 0px;
+    top: 60px;
+    width: 350px;
+    height: 410px;
+    position: absolute;
+    display: block;
+    padding: 10px 10px 10px 10px;
+    float: left;
+    margin-left: 0px;
+    background-color: whitesmoke;
+    }
 
+  .cZubehoer2{
+    left: 400px;
+    top: 60px;
+    width: 350px;
+    height: 410px;
+    position: absolute;
+    display: block;
+    padding: 10px 10px 10px 10px;
+    float: left;
+    margin-left: 0px;
+    background-color: whitesmoke;
+    }
 
+    .cZubehoer3{
+      left: 800px;
+      top: 60px;
+      width: 350px;
+      height: 410px;
+      position: absolute;
+      display: block;
+      padding: 10px 10px 10px 10px;
+      float: left;
+      margin-left: 0px;
+      background-color: whitesmoke;
+      }
 
+    .cTextGaderobe{
+     left: 0px;
+     top: 470px;
+     color: #F5F5F5;
+     position: absolute;
+     display: flex;
+    }
 
+    .cZubehoer4{
+      left: 0px;
+      top: 530px;
+      width: 350px;
+      height: 410px;
+      position: absolute;
+      display: block;
+      padding: 10px 10px 10px 10px;
+      float: left;
+      margin-left: 0px;
+      background-color: whitesmoke;
+      }
 
+    .cZubehoer5{
+      left: 400px;
+      top: 530px;
+      width: 350px;
+      height: 410px;
+      position: absolute;
+      display: block;
+      padding: 10px 10px 10px 10px;
+      float: left;
+      margin-left: 0px;
+      background-color: whitesmoke;
+      }
+
+.imgFix{
+height: 100px;
+width: auto;
+
+}
 
 /*___________________________________Warenkorb__________________________________*/
 
@@ -1225,12 +1303,7 @@ position: static;
 font-weight: bold;
 margin-bottom: 10px;
 margin-top: 0px;
-
-
-
 }
-
-
 
 .extra{
   width: 214px;
@@ -1264,15 +1337,19 @@ margin-top: 0px;
 }
 
 .cForm {
-  background-color:rgb(211, 211, 211);
-  padding: 10px 10px 10px 10px;
+  left: 600px ;
+  top: 260px ;
+
+  min-width: 420px;
+  min-height: 650px;
+
   position: absolute ;
   float: right ;
   font-size: 16px;
-  left: 500px ;
-  top: 260px ;
-  min-width: 420px;
-  min-height: 650px;
+
+  background-color:rgb(211, 211, 211);
+  padding: 10px 10px 10px 10px;
+
   border-color: black;
   border-width: 5px;
   border-style: solid;
@@ -1304,9 +1381,20 @@ input[type="text"], input[type="email"], textarea {
 
 /*____________________________________Produktbeispiele________________________________*/
 
+.cExample1 {
+  top: 190px;
+  left: 100px;
+  width: 700px;
+  height: 410px;
+  position: absolute;
+  display: left;
+  background-color: whitesmoke;
+}
+
+
 .cDifned1{
   position: absolute;
-  top: 300px;
+  top: 0px;
   left: 0px;
   width:250px;
   height:400px;
@@ -1329,6 +1417,30 @@ input[type="text"], input[type="email"], textarea {
 }
 
 
+
+/*________________________REST_____________________*/
+.cUeberUns{
+left: 45px;
+top: 200px;
+width: 800px;
+padding: 20px 20px 20px 20px;
+background-color: #F5F5F5;
+font-size: 18px;
+position: absolute;
+display: block;
+}
+
+.cKontakt{
+  left: 700px;
+  top: 200px;
+  width: 500px;
+  height: 800px;
+  padding: 20px 20px 20px 20px;
+  background-color: #F5F5F5;
+  font-size: 18px;
+  position: absolute;
+  display: block;
+  }
 
 
 

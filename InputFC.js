@@ -26,6 +26,8 @@ let middleH;
 let middleV;
 let oversetLiRe;
 let oversetFoBa;
+let woodWidth;
+let woodDeepth;
 
 let perspective;
 let material;
@@ -395,14 +397,14 @@ if (Fulllength > 0) { PricePauschal = PriceDelivery;} else {PricePauschal = 0;};
 TotalFrame = Fulllength * PricePerPeace + trueCount * PricePerPeace;
  
 //Berechnung Holzplatte
-
-
 if (addedBoard) {
-  TotalWood = (width + oversetLiRe) * (deepth + oversetFoBa)/10000 * PriceWood;
+  woodWidth = (width + oversetLiRe*2);
+  woodDeepth = (deepth + oversetFoBa*2);
+  TotalWood = woodWidth * woodDeepth / 10000 * PriceWood;
+
 } else {
   TotalWood = 0;
 }
-
 Total = TotalWood + TotalFrame;
 
 //_________________AUSGABEWERTE____________________
@@ -442,8 +444,9 @@ add.addEventListener('click', () => {
       totalFrame: TotalFrame,
       total: Total,
       versand: PricePauschal,
-  
-  };
+      widthWood: woodWidth,
+      deepthWood: woodDeepth
+      };
 
 
 if (takenWidth > 0 || takenDeepth > 0 || takenHight > 0) {
