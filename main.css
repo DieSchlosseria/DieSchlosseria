@@ -256,9 +256,9 @@ height: 40px;
 
       .cInputField{
         left: 1100px;
-        top: 190px;
+        top: 160px;
         width: 500px;
-        height: 750px;
+        height: 760px;
         background-color: #F5F5F5;
         padding: 10px 10px 10px 5px;
         position: absolute;
@@ -283,7 +283,7 @@ height: 40px;
 
       .cHoover{
         left: 150px;
-        top: 190px;
+        top: 160px;
         width: 710px;
         height: 760px;
         position: absolute;
