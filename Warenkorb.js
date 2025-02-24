@@ -23,6 +23,9 @@ const accessoryPrices = {//muss aktuell hier und im accesoires.js aktualisiert w
   },
   "Kleiderhaken": {
     40: 10,
+  },
+  "Sockel": {
+    40: 10,
   }
 };
 

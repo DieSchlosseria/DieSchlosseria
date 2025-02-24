@@ -58,7 +58,7 @@ var coordinates = {
 
 // Szene, Kamera und Renderer erstellen
 var scene = new THREE.Scene();
-scene.background = new THREE.Color(0xf4f4f4);
+scene.background = new THREE.Color(0xf5f5f5);
 
 var material = new THREE.MeshStandardMaterial({
     color: 0x404040,

@@ -1,9 +1,4 @@
-
-
-
-
 /*________________ALLGEMEIN________________*/
-
 
 header {
   left: 0px;
@@ -49,7 +44,7 @@ footer {
 /*________________HEADER____________*/
 .cBody{
   position: absolute;
-  height: 1140px;
+  min-height: 1140px;
   width: 1920px;
   background-size: contain; /* Bild wird verkleinert, um vollständig sichtbar zu bleiben */
   background: url("images/Backround.png");
@@ -58,6 +53,7 @@ footer {
   background-position: center; /* Zentriert das Bild */
   z-index: -3; /* Niedrigerer Wert als das andere Element */
 }
+
 
 .cLogo {
   width: 123px;
@@ -144,38 +140,37 @@ footer {
 .cIntroVideoPlay{
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 60px;
+  top: 59px;
   left: 1540px;
   font-weight: bold;
   font-size: 25px;
   opacity: 1;
 }
 
-
 .cWare{
-  width: 60px;
-  height: 60px;
+  top: 52px;
+  left: 1760px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 40px;
-  left: 1760px;
+  opacity: 0.8;
   overflow: hidden;
 }
 
 .cWareAct, .cWare:hover{
-  width: 60px;
-  height: 60px;
+  top: 52px;
+  left: 1760px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  filter: contrast(0.1); 
-  position: absolute;
-  top: 40px;
-  left: 1760px;
   font-weight: 700;
+  opacity: 1.0;
 }
 
 
@@ -255,10 +250,11 @@ height: 40px;
 /*EINGABE*/
 
       .cInputField{
-        left: 1100px;
-        top: 160px;
         width: 500px;
-        height: 760px;
+        height: 710px;
+        top: 20.33vh;
+        left: 70%;
+        transform: translateX(-50%);
         background-color: #F5F5F5;
         padding: 10px 10px 10px 5px;
         position: absolute;
@@ -282,11 +278,16 @@ height: 40px;
 /*Auswahl Linien*/      
 
       .cHoover{
-        left: 150px;
-        top: 160px;
+
         width: 710px;
-        height: 760px;
+        height: 710px;
         position: absolute;
+
+        top: 20.33vh;
+        left: 30%;
+        transform: translateX(-50%);
+
+
         background-color: teal;
         z-index: -1; /* Niedrigerer Wert als das andere Element */
         border-color: black;
@@ -310,7 +311,7 @@ height: 40px;
 
         .cStep1 {
           left: 95px;
-          top:  35px;
+          top:  20px;
           color: rgba(0,0,0,1);
           position: absolute;
           font-weight: medium;
@@ -320,8 +321,8 @@ height: 40px;
         }
 
         .cStep1No {
-          left: 45px;
-          top: 30px;
+          left: 20px;
+          top: 20px;
           color: rgba(0,0,0,1);
           position: absolute;
           font-weight: medium;
@@ -341,7 +342,7 @@ height: 40px;
 
         .cStep2 {
           left: 95px;
-          top:  35px;
+          top:  20px;
           color: rgba(0,0,0,1);
           position: absolute;
           font-weight: medium;
@@ -351,8 +352,8 @@ height: 40px;
         }
         
         .cStep2No {
-          left: 45px;
-          top: 30px;
+          left: 20px;
+          top: 20px;
           color: rgba(0,0,0,1);
           position: absolute;
           font-weight: medium;
@@ -371,7 +372,7 @@ height: 40px;
         }
 
         .cstep3No {
-          left: 45px;
+          left: 20px;
           top: 645px; 
           color: rgba(0,0,0,1);
           position: absolute;
@@ -397,12 +398,12 @@ height: 40px;
         left: 100px;
         position: absolute;
         background-position: center center;
-        opacity: 1;
+   
       }
 
         .cTrash{
-          left: 30px;
-          top: 630px;
+          left: 20px;
+          top: 580px;
           width: 33px;
           height: 40px;
           background-repeat: no-repeat;
@@ -420,39 +421,54 @@ height: 40px;
         }
 
         .cDisplayLine {
-          top: 670px;
-          left: 400px;
+          top: 610px;
+          left: 470px;
           position: absolute;
+          min-width: 210px;
           font-size: 16px;
         }
 
 .cAddBoard{
-  top: 710px;
-  left: 400px;
+  top: 651px;
+  left: 470px;
   position: absolute;
+  min-width: 210px;
   font-size: 16px;
 }
 
 
         
 .cPerspBox{
+  left: 20px;
+  top: 656px; 
   position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 200px;
   font-size: 20px;
-  left: 24px;
-  top: 710px; 
+  margin-left: 0px 0px 0px 0px;
   }
+
+  #iPerspective{
+   width: 100px;
+
+  }
+
+  
+
 
   .cInputView {
     left: 100px;
-    top: 20px;
+    top: 10px;
     position: absolute;
     opacity: 1;
     font-size: 20px;
   }
 
   .cView{
-    left: 250px;
-    top: 670px; 
+    left: 338px;
+    top: 651px; 
     display: flex; 
     position: absolute; 
     color: black;
@@ -979,7 +995,6 @@ position: fixed;
       font-weight:bold;
      }
     
-
      button{
       cursor: pointer;
       color: #000000a8;  
@@ -989,15 +1004,13 @@ position: fixed;
       line-height: normal;
       text-align: center; 
       border: 8px 8px 8px 8px;
-
-
-
-
+      border-radius: 0PX;
+      opacity: 0.9;
      }
 
-  
-
-
+     button:hover{
+      opacity: 1.0;
+    }
 
   textarea{
       width: 350px ;
@@ -1013,7 +1026,7 @@ position: fixed;
   }
   
 
-#iClosePopup {
+.cClosePopup {
   color: #000000a8;
   display: flex;
   flex-direction: column;
@@ -1049,7 +1062,19 @@ position: fixed;
   border: 8px 8px 8px 8px;
 }
 
+.cContent{
+  left: 300px;
+  display: flex; 
+  flex-direction: column; 
+  position: absolute; 
+}
 
+.cCloseButton{
+left: 240px;
+position: absolute;
+
+
+}
   /*________________________für_Popup_Beispiele_____________________*/
 
 
@@ -1316,6 +1341,23 @@ form {
       border-radius: 5px;
       }
 
+      .cZubehoer6{
+        left: 800px;
+        top: 530px;
+        width: 350px;
+        height: 410px;
+        position: absolute;
+        display: block;
+        padding: 10px 10px 10px 10px;
+        float: left;
+        margin-left: 0px;
+        background-color: whitesmoke;
+        border-color: black;
+        border-width: 5px;
+        border-style: solid;
+        border-radius: 5px;
+        }
+
 .imgFix{
 height: 100px;
 width: auto;
@@ -1406,7 +1448,7 @@ input[type="text"], input[type="email"], textarea {
 /*____________________________________Produktbeispiele________________________________*/
 
 .cExample1 {
-  top: 190px;
+  top: 180px;
   left: 100px;
   width: 700px;
   height: 420px;
@@ -1419,7 +1461,6 @@ input[type="text"], input[type="email"], textarea {
   border-radius: 5px;
 }
 
-
 .cDifned1{
   position: absolute;
   top: 0px;
@@ -1427,7 +1468,71 @@ input[type="text"], input[type="email"], textarea {
   width:250px;
   height:400px;
   cursor: pointer;
-  background: url("images/defined1.jpg");
+  background: url("images/products/Sider.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin: 5px 10px 10px 10px;
+  padding-left: 10px 10px 10px 10px;
+  border-style: solid;
+  border-color: black;
+  border-width: 4px;
+}
+
+.cExample2 {
+  top: 180px;
+  left: 1000px;
+  width: 700px;
+  height: 420px;
+  position: absolute;
+  display: left;
+  background-color: whitesmoke;
+  border-color: black;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+.cDifned2{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width:250px;
+  height:400px;
+  cursor: pointer;
+  background: url("images/products/Tisch.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin: 5px 10px 10px 10px;
+  padding-left: 10px 10px 10px 10px;
+  border-style: solid;
+  border-color: black;
+  border-width: 4px;
+}
+
+.cExample3 {
+  top: 640px;
+  left: 100px;
+  width: 700px;
+  height: 420px;
+  position: absolute;
+  display: left;
+  background-color: whitesmoke;
+  border-color: black;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+.cDifned3{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width:250px;
+  height:400px;
+  cursor: pointer;
+  background: url("images/products/Gaderobe.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1444,7 +1549,17 @@ input[type="text"], input[type="email"], textarea {
   border-width: 7px;
 }
 
+.cDifned2:hover {
+  border-style: solid;
+  border-color: black;
+  border-width: 7px;
+}
 
+.cDifned3:hover {
+  border-style: solid;
+  border-color: black;
+  border-width: 7px;
+}
 
 /*________________________REST_____________________*/
 .cUeberUns{
@@ -1478,7 +1593,16 @@ border-radius: 5px;
   border-radius: 5px;
   }
 
+/*__________________________3D_Ansicht__________________________*/
 
+canvas {
+  position: absolute;
+  top: 142px; /* Beispielwert für die vertikale Position */
+  left: 0px; /* Beispielwert für die horizontale Position */
+  width: 1224px;
+  height: 954px;
+  z-index: -2;
+}
 
 
 

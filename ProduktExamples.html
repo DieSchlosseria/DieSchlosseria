@@ -22,7 +22,7 @@
   <a href="Contact.html" class="cContact">Kontakt</a>
   <a class="cIntroVideoPlay"> ▷ </a> <a class="cIntroVideo">Intro-Video</a>
   <a href="Warenkorb.html">
-  <img src="images/Warenkorb.png" class="cWare" alt="Warenkorb">
+  <img src="images/shopping-bag.png" class="cWare" alt="Warenkorb">
   </a>
 </div>
 </header>
@@ -31,8 +31,8 @@
 
 <div class="cBody">
 <div class="cExample1">
-  <button class="cDifned1" id="iShowPopup"></button><br>
-  <div style="display: flex; flex-direction: column; position: absolute; left: 300px;">
+  <button class="cDifned1" id="iShowPopup1"></button><br>
+  <div class="cContent">
 
 
     <h1>Der.Sider</h1>
@@ -46,10 +46,38 @@
 </div>
 </div>
 
+
+<div class="cExample2">
+  <button class="cDifned2" id="iShowPopup2"></button><br>
+  <div class="cContent" style="display: flex; flex-direction: column; position: absolute; left: 300px;">
+    <h1>Der.Tisher</h1>
+    <b>Vorkonfiguriertes Tisch mit Holzplatte</b><br>
+    <ul>
+      <li><b>Metallrahmen:</b> Brüniert und geölt</li>
+      <li><b>Holzplatte:</b> Geölte Eiche</li>
+    </ul>
+  <b>______________________________</b><br>
+  <b>Total: 240.75</b>
+</div>
+</div>
+
+<div class="cExample3">
+  <button class="cDifned3" id="iShowPopup3"></button><br>
+  <div class="cContent" style="display: flex; flex-direction: column; position: absolute; left: 300px;">
+    <h1>Die.Gaderobe</h1>
+    <b>Vorkonfiguriertes Gaderobe</b><br>
+    <ul>
+      <li><b>Metallrahmen:</b> Brüniert und geölt</li>
+    </ul>
+  <b>______________________________</b><br>
+  <b>Total: 240.75</b>
+</div>
+</div>
+
 <!-- POPUP Beispiel 1 -->
-<div class="cOverlay" id="popupOverlay">
-  <div class="cPopup" id="popupContent">
-    <button id="iClosePopup">X</button>
+<div class="cOverlay" id="popupOverlay1">
+  <div class="cPopup" id="popupContent1">
+    <button id="iClosePopup1" class="cClosePopup">X</button>
 
     <div class="TextDefined">
       <h1>Der.Sider</h1><br>
@@ -58,26 +86,48 @@
       <h3>4 x Tischbefestigung</h3><br>
       <h3>4 x Tischfüße</h3><br><br>
       <h3>Möchten Sie diese zum Warenkorb hinzufügen?</h3>
-      <button id="iDefined1j">Ja</button>
-      <button id="iDefined1n">Nein</button>
+      <button id="iDefined1j" aria-pressed="false">Ja</button>
+      <button id="iDefined1n" aria-pressed="false">Nein</button>
     </div>
   </div>
 </div>
 
 <!-- POPUP Beispiel 2 -->
-<div class="cOverlay" id="popupOverlay1">
-  <div class="cPopup" id="popupContent1">
-    <button id="closePopup1">X</button>
-    <h4 class="PopupHeadline">Produktbeispiele</h4>
-    <div class="TextDefined">
-      <h1>Bilderrahmen</h1>
-      <h3>Beschreibung: ...</h3>
-      <h3>Möchten Sie folgende Accessoires hinzufügen?</h3>
-      <h3>2 x Wandbefestigung</h3>
-      <button id="iDefined2j">Ja</button>
-      <button id="iDefined2n">Nein</button>
+<div class="cOverlay" id="popupOverlay2">
+  <div class="cPopup" id="popupContent2">
+
+    <button id="iClosePopup2" class="cClosePopup">X</button>
+    <div class="TextDefined"></div>
+    <h1>Der.Tisher</h1><br>
+    <h3>Beschreibung: ...</h3><br><br><br>
+    <h3>Wir empfehlen folgende Accessoires:</h3><br>
+    <h3>4 x Tischbefestigung</h3><br>
+    <h3>4 x Tischfüße</h3><br><br>
+    <h3>Möchten Sie diese zum Warenkorb hinzufügen?</h3>
+    <button id="iDefined2j">Ja</button>
+    <button id="iDefined2n">Nein</button>
     </div>
   </div>
+
+  <!-- POPUP Beispiel 3 -->
+<div class="cOverlay" id="popupOverlay3">
+  <div class="cPopup" id="popupContent3">
+
+    <button id="iClosePopup3" class="cClosePopup">X</button>
+    <div class="TextDefined"></div>
+    <h1>Die.Gaderobe</h1><br>
+    <h3>Beschreibung: ...</h3><br><br><br>
+    <h3>Wir empfehlen folgende Accessoires:</h3><br>
+    <h3>4 x Filzüße</h3><br>
+    <h3>4 x Kleiderbügel</h3><br>
+    <h3>4 x Kleiderhaken</h3><br><br>
+    <h3>Möchten Sie diese zum Warenkorb hinzufügen?</h3>
+    <button id="iDefined3j">Ja</button>
+    <button id="iDefined3n">Nein</button>
+    </div>
+  </div>
+
+
 </div>
 </div>
 <script src="popupExamples.js"></script>

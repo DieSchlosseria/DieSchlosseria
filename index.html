@@ -22,7 +22,7 @@
     <a href="Contact.html" class="cContact">Kontakt</a>
     <a class="cIntroVideoPlay"> ▷ </a> <a class="cIntroVideo">Intro-Video</a>
     <a href="Warenkorb.html">
-    <img src="images/Warenkorb.png" class="cWare" alt="Warenkorb">
+    <img src="images/shopping-bag.png" class="cWare" alt="Warenkorb">
     </a>
   </div>
 
@@ -34,7 +34,7 @@
         <span class = "cStep1No">1.</span>
         <span class="cStep1">Klicke auf die zu erstellende Linien: </span>
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="700" height="750" viewBox="0 0 700 750">
+    <svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 700 700">
          <!-- Zeichne den Würfel mit Linien -->
         <!--Vorderseite-->
         <line class="cCube-line" id="iFrontTop" x1="50" y1="50" x2="275" y2="50" />
@@ -88,8 +88,8 @@
 </a>
 
 <!--perspective-->
-<div class="cPerspBox" id="iPerspBox" style="display: flex; flex-direction: row; align-items: flex-start; margin-left: 20px; width: 200px;">
-  <label for="iPerspective" style="width: 100%;">Ansicht</label>
+<div class="cPerspBox" id="iPerspBox">
+  <label for="iPerspective">Ansicht</label>
   <input class="cInputView" type="range" min="25" max="60" id="iPerspective" style="width: 100%;">
 </div>
 
@@ -168,7 +168,7 @@
 </div><br>
 
 </div><br>
-<span class = "cstep3No">3</span>
+<span class = "cstep3No">3.</span>
 <button class="cSubmitSub" id="iShowPopup">Zum Warenkorb hinzufügen</button>
 </div><br><br>
  
@@ -178,7 +178,7 @@
  <!--___________________POPUP_____________________-->
  <div class="cOverlay" id="popupOverlay">
  <div class="cPopup" id="popupContent" >
- <button id="iClosePopup">X</button>
+ <button class="cCloseButton" id="iClosePopup">X</button>
  <h4 class="PopupHeadline">Warenkorb</h4><br><br>
  <h4 class="Letter2"> Maße:    </h4>
  <output id="outDim"></output><br><br>

@@ -2,14 +2,19 @@
 // VARIABLEN
 const popups = [
   {
-    showButtonId: 'iShowPopup',
-    overlayId: 'popupOverlay',
-    closeButtonId: 'iClosePopup',
+    showButtonId: 'iShowPopup1',
+    overlayId: 'popupOverlay1',
+    closeButtonId: 'iClosePopup1',
   },
   {
-    showButtonId: 'showPopup1',
-    overlayId: 'popupOverlay1',
-    closeButtonId: 'closePopup1',
+    showButtonId: 'iShowPopup2',
+    overlayId: 'popupOverlay2',
+    closeButtonId: 'iClosePopup2',
+  },
+  {
+    showButtonId: 'iShowPopup3',
+    overlayId: 'popupOverlay3',
+    closeButtonId: 'iClosePopup3',
   },
 ];
 
@@ -21,6 +26,10 @@ const Ids = [
   {
     IdJ: "iDefined2j", // ID des Ja-Buttons
     IdN: "iDefined2n", // ID des Nein-Buttons
+  },
+  {
+    IdJ: "iDefined3j", // ID des Ja-Buttons
+    IdN: "iDefined3n", // ID des Nein-Buttons
   }
 ];
 
@@ -35,9 +44,25 @@ let perspective;
 
 //Konfiguration Produktbeispiele  //siehe funktion productexamples
 const productConfigurations = [
-  { ids: ["iDefined1j", "iDefined1n"], parameters: [120, 110, 50, 50, 50, 40, 20, 1, 0 , 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, "true"]},
-  { ids: ["iDefined2j", "iDefined2n"], parameters: [120, 60, 50, 50, 50, 40, 15, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "false"] }
+  { ids: ["iDefined1j", "iDefined1n"], parameters: [120, 110, 50, 50, 50, 20, 20, 1, 0 , 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, "true"]},
+  { ids: ["iDefined2j", "iDefined2n"], parameters: [80, 180, 90, 40, 90, 30, 30, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 , 0, 10, 5, "true"] },
+  { ids: ["iDefined3j", "iDefined3n"], parameters: [200,50, 150,100,25,25,25,1,1,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,"false"] }
 ];
+
+//Accesoires setzen
+  //Produkte 1
+  updateAccessoryBasedOnCondition("iDefined1j", "1", 4, 20);
+  updateAccessoryBasedOnCondition("iDefined1j", "3", 4, 20);
+
+  //Produkte 1
+  updateAccessoryBasedOnCondition("iDefined2j", "1", 4, 30);
+  updateAccessoryBasedOnCondition("iDefined2j", "3", 4, 30);
+
+  //Produkte 1
+  updateAccessoryBasedOnCondition("iDefined3j", "3", 4, 30);
+  updateAccessoryBasedOnCondition("iDefined3j", "4", 4, 40);
+  updateAccessoryBasedOnCondition("iDefined3j", "5", 4, 40);
+
 
 
 function getData(){
@@ -101,6 +126,7 @@ function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspecti
   middleH = tmiddleH;
   middleV = tmiddleV;
   perspective= tPerspective;
+  material = tMaterial;
   materialScaled = (Math.ceil(tMaterial / 5) * 5) / 10; // in cm und in 5 Schritten wandeln;
   
   oversetLiRe = tOversetLiRe;
@@ -153,11 +179,7 @@ function initializeIds() {
       if (element) {
         element.addEventListener("click", () => {
           localStorage.setItem(id, "true");
-
-          updateAccessoryBasedOnCondition("iDefined1", "1", 4, 20);
-          updateAccessoryBasedOnCondition("iDefined1", "3", 4, 20);
-
-    window.location.href = 'index.html';
+           window.location.href = 'index.html';
 
           productConfigurations.forEach(config => {
             const isActive = config.ids.some(id => localStorage.getItem(id) === "true");
@@ -178,7 +200,14 @@ function initializeIds() {
 function updateAccessoryBasedOnCondition(Button, IdAccessories, countAccessories, dimensionAccessories) {
   const accessoryId = IdAccessories; // ID, die gerade bearbeiten sollte
 
-  if (Button) {
+  const tButton = document.getElementById(Button);
+
+  tButton.addEventListener("click", () => {
+
+
+
+
+
     console.log("test")
     const taccessoriesRaw = localStorage.getItem("accessories");
     const taccessories = taccessoriesRaw ? JSON.parse(taccessoriesRaw) : {};
@@ -211,9 +240,11 @@ function updateAccessoryBasedOnCondition(Button, IdAccessories, countAccessories
     } else {
       console.warn(`Accessoire mit ID '${accessoryId}' nicht gefunden.`);
     }
-  }
-}
+  
 
+  
+});
+}
 
 // Initialisierungen ausführen
 document.addEventListener("DOMContentLoaded", () => {
