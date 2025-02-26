@@ -5,7 +5,6 @@ let Thickness = thick/10; // Materialstärke
 // Sichtbarkeitsvariablen für jede Linie
 let lineVisibility = [];3
 
-
 lineVisibility[0] =  buttonStates["iBackBottom"];
 lineVisibility[1] = buttonStates["iBackRight"];
 lineVisibility[2] = buttonStates["iBackTop"];
@@ -54,11 +53,9 @@ var coordinates = {
     18: [middleV, 0, 0, middleV, height, 0],
 };
 
-
-
 // Szene, Kamera und Renderer erstellen
 var scene = new THREE.Scene();
-scene.background = new THREE.Color(0xf5f5f5);
+scene.background = new THREE.Color(0xf4f4f4);
 
 var material = new THREE.MeshStandardMaterial({
     color: 0x404040,

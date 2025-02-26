@@ -16,8 +16,6 @@ let isButtonClicked = false;
 let hideTimeout; // Timeout-Variable hinzugefügt
 const buttonStates = {};
 
-
-
 //Eingabe Maße
 let width;
 let hight;
@@ -133,9 +131,6 @@ perspective = updateInput("iPerspective",perspectiveInput, 25, 60);
 material = updateInput("iMaterial", MaterialInput, 15, 50);
 materialScaled = (Math.ceil(material/5)*5)/10; //in cm und in 5 schritten wandeln   
 
-
-
-
 ActInput();  
 
 }
@@ -171,9 +166,6 @@ function setData(){
 
 
   }
-
-
-
 
 function getButtons(){
    
@@ -357,7 +349,7 @@ window.onload = function() {
   setData();
   getData();
 
-  
+
   if ( localStorage.getItem("iAddBoard") === "true") {
     addedBoard = true;
   } else {
@@ -423,19 +415,19 @@ for (const id in buttonStates) {
 };
 
 //_________________________________FORMULAR_SENDEN____________________________________
-//Speichere Object
+//save Object
 add.addEventListener('click', () => {
 
   for (const id in buttonStates) {
     if (buttonStates.hasOwnProperty(id)) {
       const status = buttonStates[id];
-      outputText += `ID: ${id}, Status: ${status}\n`;
+      outputText += ` ID: ${id}, vorhanden: ${status}`;
     }
   };
 
-  // Create an object with the current configuration
+  // Create  object mit aktuellen configuration
   const currentConfig = {
-      bitmuster: outputText,
+      Streben: outputText,
       dicke: materialScaled * 10,
       width: takenWidth,
       deepth: takenDeepth,
@@ -451,7 +443,7 @@ add.addEventListener('click', () => {
 
 if (takenWidth > 0 || takenDeepth > 0 || takenHight > 0) {
   
-  // Save the current configuration to the array
+  // Save  current configuration to the array
   configurations[currentIndex] = currentConfig;
 
   // Increment the index for the next configuration

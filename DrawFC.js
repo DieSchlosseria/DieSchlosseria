@@ -28,9 +28,9 @@ const lines = [
 ];
 
 //SVG Parameter
-const WindowWidth = 700;
-const WindowHeight = 700;
-const scaleFactor = 1.7;
+const WindowWidth = 660;
+const WindowHeight = 660;
+const scaleFactor = 1.5;
 
   // Erstelle das Polygon mit Holztextur
   const blade = document.getElementById("polygonGroup");
@@ -110,14 +110,12 @@ let middleHScaled = middleH * scaleFactor;
   var starty = WindowHeight / 2 - hightScaled / 2 + offset1/2; 
   var startx = WindowWidth / 2 - widthScaled / 2 - offset2/2;  
 
-
   // Aktualisierung der Koordinaten
   //Vorne oben
   LineCoord.FrontTop.x1 = startx;
   LineCoord.FrontTop.y1 = starty;
   LineCoord.FrontTop.x2 = startx + widthScaled;
   LineCoord.FrontTop.y2 = starty;
-
 
   //Top mitte
   LineCoord.TopMiddle.x1 = startx + middleVScaled;
@@ -215,39 +213,30 @@ let middleHScaled = middleH * scaleFactor;
   LineCoord.LeftMiddleCross.x2 = startx + offset2;
   LineCoord.LeftMiddleCross.y2 = starty  + hightScaled - middleHScaled - offset1;
 
-
   DrawLine(LineCoord.FrontTop, "iFrontTop");
   DrawLine(LineCoord.FrontBottom, "iFrontBottom");
   DrawLine(LineCoord.FrontRight, "iFrontRight");
   DrawLine(LineCoord.FrontLeft, "iFrontLeft");
-
   DrawLine(LineCoord.BackTop, "iBackTop");
   DrawLine(LineCoord.BackBottom, "iBackBottom");
   DrawLine(LineCoord.BackRight, "iBackRight");
   DrawLine(LineCoord.BackLeft, "iBackLeft");
-
   DrawLine(LineCoord.LeftTop, "iLeftTop");
   DrawLine(LineCoord.LeftBottom, "iLeftBottom");
   DrawLine(LineCoord.RightTop, "iRightTop");
   DrawLine(LineCoord.RightBottom, "iRightBottom");
-
   DrawLine(LineCoord.FrontMiddleCross, "iFrontMiddleCross");
   DrawLine(LineCoord.FrontMiddleLength,  "iFrontMiddleLenght");
-
   DrawLine(LineCoord.BackMiddleCross, "iBackMiddleCross");
   DrawLine(LineCoord.BackMiddleLenght, "iBackMiddleLenght");
-
   DrawLine(LineCoord.RightMiddleCross,  "iRightMiddleCross");
   DrawLine(LineCoord.LeftMiddleCross,  "iLeftMiddleCross");
-
   DrawLine(LineCoord.TopMiddle, "iTopMiddle");
-
 
       //Skalierung perspektive + übermaß Holzplatte
       let offset10 = (1 - Math.sin(perspective * (Math.PI / 180))) * oversetFoBa;
       let offset20 = (  Math.sin(perspective * (Math.PI / 180))) * oversetFoBa;
     
-
     const Thickness = -10;
 
     const p1X = LineCoord.FrontTop.x1 - oversetLiRe - offset20;
@@ -270,8 +259,6 @@ let middleHScaled = middleH * scaleFactor;
       const f4X = LineCoord.FrontTop.x1 - oversetLiRe - offset20;
       const f4Y = LineCoord.FrontTop.y1 + offset10 + Thickness;
 
-
-
       polygonF.setAttribute("points", `${f1X},${f1Y} ${f2X},${f2Y} ${f3X},${f3Y} ${f4X},${f4Y}`);
 
       const l1X = LineCoord.FrontTop.x2 + oversetLiRe - offset20 ;
@@ -284,8 +271,6 @@ let middleHScaled = middleH * scaleFactor;
       const l3Y = LineCoord.BackTop.y2 - offset10 ;
       const l4X = LineCoord.BackTop.x2 + oversetLiRe + offset20 ;
       const l4Y = LineCoord.BackTop.y2 - offset10 + Thickness;
-
-
 
       polygonR.setAttribute("points", `${l1X},${l1Y} ${l2X},${l2Y} ${l3X},${l3Y} ${l4X},${l4Y}`);
   }

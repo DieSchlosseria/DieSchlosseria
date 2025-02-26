@@ -1,37 +1,3 @@
-// Zubehörpreise pro Artikel und Dimension
-const accessoryPrices = {//muss aktuell hier und im accesoires.js aktualisiert werden --> evtl iwo global erstellen
-  "Tischbefestigung": {
-    15: 4,
-    20: 5,
-    25: 6,
-    30: 7
-  },
-  "Decken/Wandbefestigung": {
-    15: 5,
-    20: 6,
-    25: 7,
-    30: 8
-  },
-  "Tischfuss": {
-    15: 6,
-    20: 7,
-    25: 8,
-    30: 9
-  },
-  "Kleiderbügel": {
-    40: 20,
-  },
-  "Kleiderhaken": {
-    40: 10,
-  },
-  "Sockel": {
-    40: 10,
-  }
-};
-
-// Globale Konfigurationen und Variablen
-const START_WERT_COUNT = 0;
-const START_WERT_DIMENSION = 20;
 
 // Accessory data 
 var outExtra1 = document.getElementById("outExtra1");
@@ -150,6 +116,9 @@ document.getElementById("emailForm").addEventListener("submit", function (e) {
     Zubehör: ${accessoriesData}
     Konfigurationen: ${configurationsData}
   `;
+
+
+ 
 
   const additionalDataField = document.createElement("input");
   additionalDataField.type = "hidden";

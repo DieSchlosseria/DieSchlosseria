@@ -1,3 +1,34 @@
+document.addEventListener("DOMContentLoaded", function() {
+  loadFromLocalStorage(); // Local Storage prüfen und ggf. initialisieren
+
+});
+
+function loadFromLocalStorage() {    //Wenn accessories noch nicht vorhanden im localstorage hier erzeugen
+  let savedData = JSON.parse(localStorage.getItem("accessories")) || {};
+
+  // Falls noch keine Daten existieren, initialisieren
+  if (Object.keys(savedData).length === 0) {
+    console.log("Local Storage leer, initialisiere mit Standardwerten...");
+    accessories.forEach((accessory) => {
+      savedData[accessory.id] = { 
+        name: accessory.name, 
+        quantity: 0, 
+        dimension: 20, 
+        totalPrice: 0 
+      };
+    });
+    localStorage.setItem("accessories", JSON.stringify(savedData));
+  }
+
+  // Daten ins UI laden
+  accessories.forEach((accessory) => {
+    if (savedData[accessory.id]) {
+      document.getElementById(accessory.quantityId).value = savedData[accessory.id].quantity;
+      document.getElementById(accessory.dropdownId).value = savedData[accessory.id].dimension;
+      document.getElementById(accessory.outputId).textContent = `${savedData[accessory.id].totalPrice} €`;
+    }
+  });
+}
 
 // VARIABLEN
 const popups = [
