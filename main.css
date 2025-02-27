@@ -35,7 +35,7 @@ html, body {
 
 footer {
   position: absolute;
-  top: 100%;
+  top: 1000px;
   left: 0px;
   font-family: 'Rubik', sans-serif;
   color: white;
@@ -1558,7 +1558,7 @@ canvas {
 
   footer {
     position: absolute;
-    top: 250%;
+    top: 1800px;
     left: 0px;
     font-family: 'Rubik', sans-serif;
     color: white;
