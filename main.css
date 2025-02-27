@@ -1,6 +1,8 @@
 /*________________ALLGEMEIN________________*/
 
 header {
+  width: 100%;
+  min-width: 900px;
   left: 0px;
   top: 0px;
   height: 100%;
@@ -10,7 +12,8 @@ header {
 }
 
 .cHead {
-  width: 1895px;
+  width: 100%;
+  min-width: 900px;
   height: 142px; /* Setzt die Höhe des Elements auf 100% der Ansichtshöhe (Viewport-Höhe) */
   margin: 0 0 0 0;
   background-color: #F5F5F5;
@@ -20,13 +23,14 @@ header {
 }
 
 html, body {
-  background-color: lightgray;
   width: 100%;
+  min-width: 900px;
   min-height: 100%;
   margin: 0 0 0 0;
   font-family: 'Rubik', sans-serif; 
   display: flex;
   flex-direction: column;
+  background-color: gray;
 }
 
 footer {
@@ -43,6 +47,8 @@ footer {
 
 /*________________HEADER____________*/
 .cBody{
+  width: 100%;
+  min-width: 900px;
   position: absolute;
   background: url("images/backrounds/backround5.jpg");
   background-repeat: repeat-y; /* Verhindert Wiederholung des Bildes */
@@ -50,7 +56,6 @@ footer {
   background-size: cover; 
   margin: 0px;
   height: 100%;
-  width: 100%;
   top: 100px;
   min-height: 1150px;
   z-index: -3; /* Niedrigerer Wert als das andere Element */
