@@ -53,17 +53,25 @@ const OversetLeRiOutput = document.getElementById("iOversetLeRiOutput");
 const OversetFoBaOutput = document.getElementById("iOversetFoBaOutput");
 
 const perspectiveOutput = document.getElementById("iPerspectiveOutput");
+const add = document.getElementById("iAdd");
+
+//Show
+let takenWidth;
+let takenHight;
+let takenDeepth;
 
 //Preis
 let Total = 0;
 let TotalFrame = 0;
 let TotalWood = 0;
+
+
+//KONSTANTEN
 const PricePerMeter = 8; //Preis pro Meter bei einem 20mm Quadratrohr
 const PricePerPeace = 10; //Für ABschnitt zusammenschweißen usw.
 const PriceDelivery = 30; // Versand etc.
 const PriceWood = 100; //Price pro Quadratmeter
 
-const add = document.getElementById("iAdd");
 
 
 //______________________TEST_________________________
@@ -75,13 +83,8 @@ const add = document.getElementById("iAdd");
   addBoard.addEventListener("click", function () {
     addedBoard = !addedBoard; // Toggle der Variable
     localStorage.setItem("iAddBoard", addedBoard);
-    console.log("TEst");
   });
 
-
-let takenWidth;
-let takenHight;
-let takenDeepth;
 
 //Eingabe Slider --> führt Input aus
 MaterialInput.addEventListener("input", getData);
@@ -92,9 +95,9 @@ MiddleInput.addEventListener("input", getData);
 MiddleLengthInput.addEventListener("input", getData);
 OversetLiReInput.addEventListener("input", getData);
 OversetFoBaInput.addEventListener("input", getData);
-
 perspectiveInput.addEventListener("input", getData);
 
+//Werte übernehmen und limitieren
 function updateInput(id, input, min, max) {
   let value = parseInt(input.value);
   value = Math.max(min, Math.min(value, max)); // Begrenze auf min/max
@@ -106,8 +109,8 @@ function updateInput(id, input, min, max) {
 function draw(){
 
 //______________________________TEST_______________________________
+//Knotenpunkte
 let trueCount = 0; // Variable zur Zählung der "true"-Werte
-      
       for (const key in buttonStates) {
         if (buttonStates.hasOwnProperty(key) && buttonStates[key] === true) {
           trueCount++; // Erhöhe die Zählvariable, wenn der Wert "true" ist
@@ -209,71 +212,105 @@ function FuncClear(){
   PreConfigDesign(100, 150, 100, 80, 65, 26, 40,  0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,false);  
 }
 
-//Für Hoover Würfel
-function funcHooverButton(){
-  const button = document.getElementById("iHoverButton");
-  const svg = document.querySelector("svg");             
-  // Event-Listener für Klick
-  button.addEventListener("click", function () {
-    const lineId = button.getAttribute("data-line-id");
- // Toggle den Status des Buttons
-    buttonStates[lineId] = !buttonStates[lineId]; // Invertiere den aktuellen Status
-setButtons();
-  });
 
-   // Funktion zum Aktualisieren der Button-Position
-  function updateButtonPosition(x, y) {
-    button.style.left = x - 5 + "px";
-    button.style.top = y - 5 + "px";
-  }
+
+// Funktion zum Aktualisieren der Button-Position unter Berücksichtigung des Scrollens
+function updateButtonPosition(x, y) {
+  const button = document.getElementById("iHoverButton");
+  // Scrollversatz mit einberechnen
+  const scrollX = window.scrollX;
+  const scrollY = window.scrollY;
+
+  // Button-Position anpassen
+  button.style.left = (x - 5 + scrollX) + "px";
+  button.style.top = (y - 5 + scrollY) + "px";
+}
+
+
+// Funktion, um den Button bei Mausbewegung auf der Linie anzuzeigen und zu positionieren
+function funcHooverButton() {
+  const button = document.getElementById("iHoverButton");
+  const svg = document.querySelector("svg");
 
   svg.addEventListener("mousemove", function (e) {
-    
-   const mouseX = e.clientX;
-    const mouseY = e.clientY;
-    const svgRect = svg.getBoundingClientRect(); // Das SVG-Element Rechteck erhalten
-   const relativeX = mouseX - svgRect.left; // Relative X-Position innerhalb des SVG
-    const relativeY = mouseY - svgRect.top; // Relative Y-Position innerhalb des SVG
-  
-    let closestLine = null;
-    let closestDistance = Number.MAX_SAFE_INTEGER;
-  
-    const lines = document.querySelectorAll(".cCube-line");
-  
-    lines.forEach((line) => {
-      const lineBox = line.getBBox();
-      const lineX = (lineBox.x + lineBox.x + lineBox.width) / 2;
-      const lineY = (lineBox.y + lineBox.y + lineBox.height) / 2;
-      const distance = Math.sqrt(
-        Math.pow(relativeX - lineX, 2) + Math.pow(relativeY - lineY, 2)
-      );
-  
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestLine = line;
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      const svgRect = svg.getBoundingClientRect(); // Das SVG-Element Rechteck erhalten
+      const relativeX = mouseX - svgRect.left; // Relative X-Position innerhalb des SVG
+      const relativeY = mouseY - svgRect.top; // Relative Y-Position innerhalb des SVG
+
+      let closestLine = null;
+      let closestDistance = Number.MAX_SAFE_INTEGER;
+
+      const lines = document.querySelectorAll(".cCube-line");
+
+      // Finden der nächsten Linie zur Mausposition
+      lines.forEach((line) => {
+          const lineBox = line.getBBox();
+          const lineX = (lineBox.x + lineBox.x + lineBox.width) / 2;
+          const lineY = (lineBox.y + lineBox.y + lineBox.height) / 2;
+          const distance = Math.sqrt(
+              Math.pow(relativeX - lineX, 2) + Math.pow(relativeY - lineY, 2)
+          );
+
+          if (distance < closestDistance) {
+              closestDistance = distance;
+              closestLine = line;
+          }
+      });
+
+      // Wenn eine Linie gefunden wurde, Button anzeigen und positionieren
+      lines.forEach((line) => {
+          line.classList.remove("hovered");
+      });
+
+      if (closestLine) {
+          closestLine.classList.add("hovered");
+          button.style.display = "block"; // Button anzeigen
+          updateButtonPosition(mouseX, mouseY); // Button-Position aktualisieren
+          button.setAttribute("data-line-id", closestLine.id);
+      } else {
+          button.style.display = "none"; // Button ausblenden, wenn keine Linie in der Nähe
       }
-    });
-  
-    lines.forEach((line) => {
-      line.classList.remove("hovered");
-    });
-  
-    if (closestLine) {
-      closestLine.classList.add("hovered");
-      button.style.display = "block";
-      updateButtonPosition(mouseX, mouseY); // Button-Position aktualisieren
-      button.setAttribute("data-line-id", closestLine.id);
-    
-      isButtonClicked = false;
-      clearTimeout(hideTimeout);
-    } else {
-      hideTimeout = setTimeout(() => {
-        button.style.display = "none";
-      
-      }, 200);
-    }
+  });
+
+  // Event-Listener für den Button-Klick
+  button.addEventListener("click", function () {
+      const lineId = button.getAttribute("data-line-id");
+      if (lineId) {
+          // Toggle den Status der Linie im buttonStates-Objekt
+          buttonStates[lineId] = !buttonStates[lineId];
+          setButtons();
+          console.log(buttonStates); // Den aktuellen Zustand im Konsolenlog ausgeben
+      }
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Produktbeispiele bzw konfiguration vorbestimmen
  function PreConfigDesign(tHight, tWidth, tDeepth, tmiddleH, tmiddleV, tPerspective, tMaterial ,tFrontTop, tFrontBottom , tLeftTop, tRightTop, tTopMiddle, tBackTop, tBackBottom, tFrontRight, tBackRight, tFrontLeft, tBackLeft, tRightBottom, tLeftBottom, tFrontMiddleCross, tFrontMiddleLength, tBackMiddleCross, tBackMiddleLength, tRightMiddleCross, tLeftMiddleCross, tOversetLiRe, tOversetFoBa, tAddBoard ) {
