@@ -35,7 +35,7 @@ footer {
   color: white;
   text-align: center;
   padding: 10px 0;
-  width: 100%;
+  width: 1895px;
   height: 380px;
   background-color: #555555;
 }
@@ -43,14 +43,14 @@ footer {
 /*________________HEADER____________*/
 .cBody{
   position: absolute;
-  background: url("images/Backround.png");
+  background: url("images/backrounds/backround5.jpg");
   background-repeat: no-repeat; /* Verhindert Wiederholung des Bildes */
   background-position: center center; /* Zentriert das Bild */
   background-size: cover; 
   margin: 0px;
   height: 100%;
   width: 1895px;
-  top: 138px;
+  top: 100px;
   min-height: 1150px;
   z-index: -3; /* Niedrigerer Wert als das andere Element */
 }
@@ -127,25 +127,17 @@ footer {
 }
 
 .cIntroVideo{
-  width: 111px;
-  color: rgba(0,0,0,1);
   position: absolute;
   top: 64px;
-  left: 1565px;
-  font-weight: Light;
-  font-size: 16px;
+  left: 1500px;
+  width: auto;
+  color: rgba(0,0,0,1);
+  font-weight: bold;
+  font-size: 20px;
   opacity: 1;
+  cursor: pointer;
 }
 
-.cIntroVideoPlay{
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 59px;
-  left: 1540px;
-  font-weight: bold;
-  font-size: 25px;
-  opacity: 1;
-}
 
 .cWare{
   top: 52px;
